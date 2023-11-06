@@ -1,0 +1,16 @@
+package com.fortunatis.staticservice.pojo.response;
+
+import lombok.Getter;
+import lombok.Setter;
+
+import java.util.UUID;
+
+@Getter
+@Setter
+public class FeaturesResponseDTO {
+    private UUID id;
+    private String featuresTitle;
+    private String featuresTitleDe;
+    private String featuresTitleFr;
+    private String featuresTitleIt;
+}

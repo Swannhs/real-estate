@@ -1,0 +1,43 @@
+version: "3"
+
+services:
+  postgres:
+    container_name: postgres
+    image: postgres
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      PGDATA: /data/postgres
+    volumes:
+      - ./data/postgres:/data/postgres
+      - ./database/postgres/init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - 5432:5432
+    restart: always
+    networks:
+      - fortunatis
+
+  static-service:
+    container_name: static-service
+    image: static-service
+    build:
+      context: static-service
+      dockerfile: Dockerfile
+    depends_on:
+      - postgres
+    environment:
+      SPRING_PROFILES_ACTIVE: 'docker'
+    ports:
+      - "8181:8181"
+    volumes:
+      - ./static-service:/app
+      - ~/.m2:/root/.m2
+    networks:
+      - fortunatis
+
+networks:
+  fortunatis:
+    driver: bridge
+volumes:
+  gradle_cache:
+    driver: local
