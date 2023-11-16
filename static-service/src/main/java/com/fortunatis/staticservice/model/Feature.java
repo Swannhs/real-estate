@@ -18,8 +18,9 @@ import java.util.UUID;
 @NoArgsConstructor
 @Getter
 @Setter
-public class Features {
+public class Feature {
     @Id
+    @Column(name = "id")
     private UUID id = UUID.randomUUID();
 
     @Column(name = "features_title")

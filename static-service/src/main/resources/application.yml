@@ -1,7 +1,8 @@
-
 spring:
   application:
     name: static-data-service
+  profiles:
+    active: dev
   datasource:
     url: jdbc:postgresql://localhost:5432/static-data-service
     username: root
@@ -18,6 +19,11 @@ spring:
     user: root
     password: root
     drop-first: false
+  security:
+    oauth2:
+      resource-server:
+        jwt:
+          issuer-uri: http://localhost:8080/realms/fortunatishomes
 server:
   port: 8181
 
@@ -28,6 +34,9 @@ springfox:
   swagger-ui:
     base-url: /swagger-ui/  # URL to access swagger UI
 
+
 logging:
   level:
     root: INFO
+springdoc:
+  show-actuator: true

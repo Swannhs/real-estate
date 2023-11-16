@@ -1,2 +1,11 @@
+-- Create the "static-data-service" database (errors if it already exists)
 CREATE DATABASE "static-data-service";
-GRANT ALL PRIVILEGES ON DATABASE "static-data-service" TO root;
+
+-- Create the role "fortunatis" with a password (errors if it already exists)
+CREATE ROLE fortunatis WITH LOGIN PASSWORD 'fortunatis';
+
+-- Grant all privileges on the "static-data-service" database to "fortunatis"
+GRANT ALL PRIVILEGES ON DATABASE "static-data-service" TO fortunatis;
+
+-- Grant privileges on all future tables within the "static-data-service" schema to "fortunatis"
+ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL PRIVILEGES ON TABLES TO fortunatis;

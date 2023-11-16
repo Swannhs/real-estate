@@ -7,4 +7,4 @@ WORKDIR /app
 EXPOSE 8181
 
 # Command to run the application using Spring Boot Maven plugin with specific configuration
-CMD ["mvn", "spring-boot:run", "-Dspring.config.location=classpath:/,file:/app/src/main/resources/application-docker.yml"]
+CMD ["mvn", "spring-boot:run"]
