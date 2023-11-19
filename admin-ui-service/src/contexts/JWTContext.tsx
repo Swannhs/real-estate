@@ -13,6 +13,7 @@ import Loader from 'components/Loader';
 import axios from 'utils/axios';
 import { KeyedObject } from 'types/root';
 import { AuthProps, JWTContextType } from 'types/auth';
+import keycloakAxios from '../utils/keycloakAxios';
 
 const chance = new Chance();
 
@@ -58,14 +59,12 @@ export const JWTProvider = ({ children }: { children: ReactElement }) => {
         const serviceToken = localStorage.getItem('serviceToken');
         if (serviceToken && verifyToken(serviceToken)) {
           setSession(serviceToken);
-          const response = await axios.get('/api/account/me');
-          const { user } = response.data;
 
           dispatch({
             type: LOGIN,
             payload: {
               isLoggedIn: true,
-              user
+              user: jwtDecode(serviceToken)
             }
           });
         } else {
@@ -84,17 +83,34 @@ export const JWTProvider = ({ children }: { children: ReactElement }) => {
     init();
   }, []);
 
-  const login = async (email: string, password: string) => {
-    const response = await axios.post('/api/account/login', { email, password });
-    const { serviceToken, user } = response.data;
-    setSession(serviceToken);
-    dispatch({
-      type: LOGIN,
-      payload: {
-        isLoggedIn: true,
-        user
-      }
-    });
+  const login = async (code: string) => {
+    const params = new URLSearchParams();
+    params.append('code', code);
+    params.append('grant_type', 'authorization_code');
+    params.append('client_id', process.env.REACT_APP_KEYCLOAK_CLIENT_ID as string);
+    params.append('redirect_uri', process.env.REACT_APP_KEYCLOAK_REDIRECT_URI as string);
+    params.append('client_secret', process.env.REACT_APP_KEYCLOAK_CLIENT_SECRET as string);
+
+    keycloakAxios
+      .post(`/realms/${process.env.REACT_APP_KEYCLOAK_REALM}/protocol/openid-connect/token`, params)
+      .then((response) => {
+        const { access_token } = response.data;
+        setSession(access_token);
+        dispatch({
+          type: LOGIN,
+          payload: {
+            isLoggedIn: true,
+            keycloak: response.data,
+            user: jwtDecode(access_token)
+          }
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+        logout();
+        // Redirect to login page
+        window.location.href = '/login';
+      });
   };
 
   const register = async (email: string, password: string, firstName: string, lastName: string) => {
@@ -130,18 +146,15 @@ export const JWTProvider = ({ children }: { children: ReactElement }) => {
     dispatch({ type: LOGOUT });
   };
 
-  const resetPassword = async (email: string) => {
-  };
+  const resetPassword = async (email: string) => {};
 
-  const updateProfile = () => {
-  };
+  const updateProfile = () => {};
 
   if (state.isInitialized !== undefined && !state.isInitialized) {
     return <Loader />;
   }
 
-  return <JWTContext.Provider
-    value={{ ...state, login, logout, register, resetPassword, updateProfile }}>{children}</JWTContext.Provider>;
+  return <JWTContext.Provider value={{ ...state, login, logout, register, resetPassword, updateProfile }}>{children}</JWTContext.Provider>;
 };
 
 export default JWTContext;

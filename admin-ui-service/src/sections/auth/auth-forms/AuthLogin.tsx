@@ -5,8 +5,6 @@ import * as Yup from 'yup';
 import { Formik } from 'formik';
 
 // project-imports
-import useAuth from 'hooks/useAuth';
-import useScriptRef from 'hooks/useScriptRef';
 import AnimateButton from 'components/@extended/AnimateButton';
 
 // ============================|| JWT - LOGIN ||============================ //
@@ -23,8 +21,8 @@ const KEYCLOAK_AUTH_URL =
   '&response_type=code&scope=openid';
 
 const AuthLogin = () => {
-  const { login } = useAuth();
-  const scriptedRef = useScriptRef();
+  // const { login } = useAuth();
+  // const scriptedRef = useScriptRef();
 
   return (
     <>
@@ -39,20 +37,20 @@ const AuthLogin = () => {
           password: Yup.string().max(255).required('Password is required')
         })}
         onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
-          try {
-            await login(values.email, values.password);
-            if (scriptedRef.current) {
-              setStatus({ success: true });
-              setSubmitting(false);
-            }
-          } catch (err: any) {
-            console.error(err);
-            if (scriptedRef.current) {
-              setStatus({ success: false });
-              setErrors({ submit: err.message });
-              setSubmitting(false);
-            }
-          }
+          // try {
+          //   await login(values.email, values.password);
+          //   if (scriptedRef.current) {
+          //     setStatus({ success: true });
+          //     setSubmitting(false);
+          //   }
+          // } catch (err: any) {
+          //   console.error(err);
+          //   if (scriptedRef.current) {
+          //     setStatus({ success: false });
+          //     setErrors({ submit: err.message });
+          //     setSubmitting(false);
+          //   }
+          // }
         }}
       >
         <Grid container spacing={3}>
