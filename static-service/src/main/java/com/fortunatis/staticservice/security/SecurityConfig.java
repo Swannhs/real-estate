@@ -1,46 +1,69 @@
 package com.fortunatis.staticservice.security;
 
+import com.fortunatis.staticservice.converter.KeycloakRoleConverter;
+import com.fortunatis.staticservice.filter.CsrfCookieFilter;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.oauth2.jwt.JwtDecoder;
-import org.springframework.security.oauth2.jwt.JwtDecoders;
+import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
+import org.springframework.security.web.csrf.CsrfTokenRequestAttributeHandler;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.cors.CorsConfigurationSource;
 
-import static com.fortunatis.staticservice.util.Constants.PUBLIC_URL_PREFIX;
+import java.util.Collections;
+import java.util.List;
+
+import static com.fortunatis.staticservice.route.RouteConstant.*;
 
 @Configuration
 @EnableWebSecurity
 @Slf4j
 public class SecurityConfig {
-    @Value("${spring.security.oauth2.resource-server.jwt.issuer-uri}")
-    private String jwtIssuerUri;
-
-    private final String[] AUTH_WHITELIST = {
-            "/swagger-ui/**",
-            "/v3/api-docs/**",
-            "/actuator/**",
-            PUBLIC_URL_PREFIX + "/**"
-    };
 
     @Bean
-    public SecurityFilterChain configure(HttpSecurity http) throws Exception {
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration config = new CorsConfiguration();
+        config.setAllowedOrigins(Collections.singletonList("*"));
+        config.setAllowedMethods(Collections.singletonList("*"));
+        config.setAllowCredentials(true);
+        config.setAllowedHeaders(Collections.singletonList("*"));
+        config.setExposedHeaders(List.of("Authorization"));
+        config.setMaxAge(3600L);
+
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", config);
+        return source;
+    }
+
+    @Bean
+    public SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
         http
-                .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(AUTH_WHITELIST).permitAll()
-                        .anyRequest().authenticated()
-                )
-                .oauth2ResourceServer(oauth2 -> oauth2
-                        .jwt(jwtConfigurer -> jwtConfigurer.decoder(jwtDecoder()))
-                );
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .cors(corsCustomizer -> corsCustomizer.configurationSource(corsConfigurationSource()))
+                .csrf(csrf -> csrf.csrfTokenRequestHandler(new CsrfTokenRequestAttributeHandler() {{
+                            setCsrfRequestAttributeName("_csrf");
+                        }})
+                        .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()))
+                .addFilterAfter(new CsrfCookieFilter(), BasicAuthenticationFilter.class)
+                .authorizeHttpRequests(requests -> requests
+                        .requestMatchers(PUBLIC_ROUTES).permitAll()
+                        .requestMatchers(USER_ROUTES).hasRole("USER")
+                        .requestMatchers(ADMIN_ROUTES).hasRole("ADMIN")
+                        .anyRequest().authenticated())
+                .oauth2ResourceServer(oauth2ResourceServerCustomizer ->
+                        oauth2ResourceServerCustomizer.jwt(jwtCustomizer ->
+                                jwtCustomizer.jwtAuthenticationConverter(new JwtAuthenticationConverter() {{
+                                    setJwtGrantedAuthoritiesConverter(new KeycloakRoleConverter());
+                                }})));
+
         return http.build();
     }
 
-    @Bean
-    public JwtDecoder jwtDecoder() {
-        return JwtDecoders.fromIssuerLocation(jwtIssuerUri);
-    }
 }
