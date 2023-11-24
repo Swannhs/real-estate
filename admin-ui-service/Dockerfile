@@ -5,7 +5,7 @@ FROM node:18 AS builder
 WORKDIR /app
 
 # Expose the port for development server
-EXPOSE 3000
+EXPOSE 3001
 
 # Command to start the app in development mode
 CMD ["npm", "start"]

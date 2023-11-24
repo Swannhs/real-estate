@@ -8,4 +8,4 @@ WORKDIR /app
 EXPOSE 3000
 
 # Command to start the app in development mode
-CMD ["npm", "start"]
+CMD ["npm", "run", "dev"]
