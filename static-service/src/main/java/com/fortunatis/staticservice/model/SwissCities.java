@@ -1,9 +1,6 @@
 package com.fortunatis.staticservice.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,7 +16,8 @@ import java.util.UUID;
 @Setter
 public class SwissCities {
     @Id
-    private UUID id =  UUID.randomUUID();
+    @Column(name = "id", updatable = false, nullable = false, columnDefinition = "uuid default uuid_generate_v4()")
+    private UUID id;
 
     @Column(name = "address_en")
     private String addressEn;

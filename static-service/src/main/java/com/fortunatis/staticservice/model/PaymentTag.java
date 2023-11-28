@@ -1,5 +1,6 @@
 package com.fortunatis.staticservice.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,25 +10,29 @@ import lombok.Setter;
 import java.util.UUID;
 
 @Entity
-@Table(name = "currencies")
+@Table(name = "payment_tag")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-public class Currency {
+public class PaymentTag {
     @Id
     @Column(name = "id", updatable = false, nullable = false, columnDefinition = "uuid default uuid_generate_v4()")
     private UUID id;
 
-    @Column(name = "currency")
-    private String currency;
-
-    @Column(name = "currency_name")
-    private String currencyName;
+    @Column(name = "name")
+    private String name;
 
     @Column(name = "is_active")
     private Boolean isActive;
 
-    @Column(name = "priority")
-    private Long priority;
+    @Column(name = "color")
+    private String color;
+
+    @Column(name = "border_color")
+    private String borderColor;
+
+    @OneToOne(mappedBy = "paymentTag")
+    @JsonBackReference
+    private PaymentPackage paymentPackage;
 }

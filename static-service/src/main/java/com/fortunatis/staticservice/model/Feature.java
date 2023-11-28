@@ -1,10 +1,7 @@
 package com.fortunatis.staticservice.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,8 +17,8 @@ import java.util.UUID;
 @Setter
 public class Feature {
     @Id
-    @Column(name = "id")
-    private UUID id = UUID.randomUUID();
+    @Column(name = "id", updatable = false, nullable = false, columnDefinition = "uuid default uuid_generate_v4()")
+    private UUID id;
 
     @Column(name = "features_title")
     private String featuresTitle;

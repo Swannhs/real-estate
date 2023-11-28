@@ -18,7 +18,8 @@ import java.util.UUID;
 @Setter
 public class Country {
     @Id
-    private UUID id = UUID.randomUUID();
+    @Column(name = "id", updatable = false, nullable = false, columnDefinition = "uuid default uuid_generate_v4()")
+    private UUID id;
 
     @Column(name = "country_name")
     private String countryName;

@@ -15,3 +15,5 @@ CREATE DATABASE "estate-service";
 
 -- Grant all privileges on the "estate-service" database to "fortunatis"
 GRANT ALL PRIVILEGES ON DATABASE "estate-service" TO fortunatis;
+
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";

@@ -16,7 +16,9 @@ import java.util.UUID;
 @Setter
 public class City {
     @Id
-    private UUID id = UUID.randomUUID();
+    @Column(name = "id", updatable = false, nullable = false, columnDefinition = "uuid default uuid_generate_v4()")
+    private UUID id;
+
     @Column(name = "zip_code")
     private String zipCode;
 

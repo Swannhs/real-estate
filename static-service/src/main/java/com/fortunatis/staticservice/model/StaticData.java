@@ -1,6 +1,5 @@
 package com.fortunatis.staticservice.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fortunatis.staticservice.enums.StaticDataType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -8,7 +7,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.Type;
 
 import java.util.Date;
 import java.util.UUID;
@@ -21,7 +19,8 @@ import java.util.UUID;
 @Setter
 public class StaticData {
     @Id
-    private UUID id = UUID.randomUUID();
+    @Column(name = "id", updatable = false, nullable = false, columnDefinition = "uuid default uuid_generate_v4()")
+    private UUID id;
 
     @Column(name = "keyword")
     private String keyword;
@@ -48,4 +47,7 @@ public class StaticData {
     @Column(name = "creation_date", nullable = false, updatable = false)
     @CreationTimestamp
     private Date creationDate;
+
+    @Column(name = "updated_by")
+    private UUID updatedBy;
 }
