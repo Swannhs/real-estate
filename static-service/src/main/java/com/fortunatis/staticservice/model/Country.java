@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Set;
-import java.util.UUID;
 
 @Entity
 @Table(name = "countrys")
@@ -18,8 +17,8 @@ import java.util.UUID;
 @Setter
 public class Country {
     @Id
-    @Column(name = "id", updatable = false, nullable = false, columnDefinition = "uuid default uuid_generate_v4()")
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @Column(name = "country_name")
     private String countryName;

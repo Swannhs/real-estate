@@ -22,10 +22,8 @@ spring:
     url: jdbc:postgresql://localhost:5432/estate-service
     username: root
     password: root
-    jpa:
-      hibernate:
-        ddl-auto: update
-        show-sql: true
+  jpa:
+    show-sql: true
   security:
     oauth2:
       resourceserver:

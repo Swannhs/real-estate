@@ -32,7 +32,7 @@ public class PaymentTag {
     @Column(name = "border_color")
     private String borderColor;
 
-    @OneToOne(mappedBy = "paymentTag")
+    @OneToOne(mappedBy = "paymentTag", cascade = CascadeType.ALL)
     @JsonBackReference
     private PaymentPackage paymentPackage;
 }

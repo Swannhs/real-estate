@@ -30,8 +30,7 @@ public class PaymentFeatures {
     @Column(name = "is_active")
     private Boolean isActive;
 
-    @ManyToMany(mappedBy = "paymentFeatures")
+    @ManyToMany(mappedBy = "paymentFeatures", fetch = FetchType.LAZY)
     @JsonBackReference
     private List<PaymentPackage> paymentPackages;
-
 }

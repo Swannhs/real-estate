@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/v1/static/manage")
 @RequiredArgsConstructor
-@Tag(name = "Static Data", description = "Public Static Data Resources")
+@Tag(name = "Manage Static Data", description = "Public Static Data Resources")
 public class StaticDataManageController {
     private final UserService userService;
 

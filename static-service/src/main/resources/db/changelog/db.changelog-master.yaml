@@ -3,11 +3,11 @@ databaseChangeLog:
       file: db/changelog/changes/V1_master_schema.sql
   - include:
       file: db/changelog/changes/static-data.sql
-#  - include:TODO: need to fix city id
-#      file: db/changelog/changes/city_data.sql
 #  - include:
 #      file: db/changelog/changes/cookie_policy_data.sql
-#  - include:
-#      file: db/changelog/changes/country_data.sql
+  - include:
+      file: db/changelog/changes/country_data.sql
+  - include:
+      file: db/changelog/changes/city_data.sql
   - include:
       file: db/changelog/changes/currency_data.sql

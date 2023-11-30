@@ -1,4 +1,4 @@
-INSERT INTO public.country (alpha_2, country_code, country_name, is_active, region, sub_region)
+INSERT INTO public.countrys (alpha_2, country_code, country_name, is_active, region, sub_region)
 VALUES ('AF', '004', 'Afghanistan', false, 'Asia', 'Southern Asia'),
        ('AX', '248', 'Åland Islands', false, 'Europe', 'Northern Europe'),
        ('AL', '008', 'Albania', false, 'Europe', 'Southern Europe'),
