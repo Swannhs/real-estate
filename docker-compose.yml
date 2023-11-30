@@ -143,13 +143,13 @@ services:
     restart: on-failure
     network_mode: "host"
 
-  client-service:
-    container_name: client-service
+  client-ui-service:
+    container_name: client-ui-service
     build:
-      context: ./client-service
+      context: ./client-ui-service
       dockerfile: Dockerfile
     volumes:
-      - ./client-service:/app
+      - ./client-ui-service:/app
     depends_on:
       - keycloak
     network_mode: "host"
