@@ -1,19 +1,17 @@
 package com.fortunatis.estateservice.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fortunatis.estateservice.enums.EstateAmountType;
+import jakarta.persistence.*;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import java.util.Date;
-import java.util.UUID;
+import java.io.Serializable;
+import java.util.*;
 
 @Entity
 @Table(name = "estate")
@@ -21,9 +19,15 @@ import java.util.UUID;
 @NoArgsConstructor
 @Getter
 @Setter
-public class Estate {
+public class Estate implements Serializable {
     @Id
-    private UUID id = UUID.randomUUID();
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(
+            name = "UUID",
+            strategy = "org.hibernate.id.UUIDGenerator"
+    )
+    @Column(name = "id", updatable = false, nullable = false, columnDefinition = "uuid default uuid_generate_v4()")
+    private UUID id;
 
     @Column(name = "estate_advertiser")
     private String estateAdvertiser;
@@ -47,8 +51,12 @@ public class Estate {
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date estateWillBeAvailable;
 
-//    @Column(name = "estate_price_currency")
-//    private EstateAmountType estatePriceType;
+    @Column(name = "estate_will_be_available_to")
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private Date estateWillBeAvailableTo;
+
+    @Column(name = "estate_price_currency")
+    private EstateAmountType estatePriceType;
 
     @Column(name = "estate_price")
     private Double estatePrice;
@@ -106,36 +114,32 @@ public class Estate {
     @Column(name = "user_id")
     private String userId;
 
-//    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-//    @ToString.Exclude
-//    @JoinColumn(name = "estate_contact_id", referencedColumnName = "id", unique = true)
-//    @JsonManagedReference
-//    private EstateContact contact;
-//
-//    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-//    @JoinColumn(name = "location_id", referencedColumnName = "id", unique = true)
-//    @JsonManagedReference
-//    @ToString.Exclude
-//    private EstateLocation location;
-//
-//
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ToString.Exclude
+    @JoinColumn(name = "estate_contact_id", referencedColumnName = "id", unique = true)
+    @JsonManagedReference
+    private EstateContact contact;
+
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "location_id", referencedColumnName = "id", unique = true)
+    @JsonManagedReference
+    @ToString.Exclude
+    private EstateLocation location;
 //
 //    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 //    @JoinColumn(name = "estate_search_priority_id", columnDefinition = "bigint default 1")
 //    @ToString.Exclude
 //    private EstateSearchPriority estateSearchPriority;
 //
-//    @OneToOne
-//    @JoinColumn(name = "country_id")
-//    private Country country;
-//
-//    @OneToMany(mappedBy = "galleryEstate", cascade = CascadeType.ALL)
-//    @JsonManagedReference
-//    @EqualsAndHashCode.Exclude
-//    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-//    @LazyCollection(org.hibernate.annotations.LazyCollectionOption.FALSE)
-//    @ToString.Exclude
-//    private List<EstateGallery> estateGalleries = new ArrayList<>();
+    @Column(name = "country")
+    private String country;
+
+    @OneToMany(mappedBy = "galleryEstate", cascade = CascadeType.ALL)
+    @JsonManagedReference
+    @EqualsAndHashCode.Exclude
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    @ToString.Exclude
+    private List<EstateGallery> estateGalleries = new ArrayList<>();
 //
 //    @OneToMany(mappedBy = "documentEstate", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 //    @JsonManagedReference
@@ -143,19 +147,16 @@ public class Estate {
 //    @ToString.Exclude
 //    private List<EstateDocument> estateDocuments = new ArrayList<>();
 //
-//    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-//    @JoinTable(name = "estate_features",
-//            inverseJoinColumns = {@JoinColumn(name = "feature_id")})
-//    @JsonManagedReference
-//    @ToString.Exclude
-//    private List<Features> estateFeatures = new ArrayList<>();
-//
-//    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-//    @JoinTable(name = "estate_stickers",
-//            inverseJoinColumns = {@JoinColumn(name = "sticker_id")})
-//    @JsonManagedReference
-//    @ToString.Exclude
-//    private List<EstateSticker> estateStickers = new ArrayList<>();
+    @ElementCollection
+    @CollectionTable(name = "estate_features", joinColumns = @JoinColumn(name = "estate_id"))
+    @Column(name = "feature_id")
+    private Set<UUID> estateFeatures = new HashSet<>();
+
+    @ElementCollection
+    @CollectionTable(name = "estate_stickers", joinColumns = @JoinColumn(name = "estate_id"))
+    @Column(name = "sticker")
+    @ToString.Exclude
+    private Set<UUID> estateStickers = new HashSet<>();
 //
 //    @PrePersist
 //    public void prePersist() {

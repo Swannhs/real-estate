@@ -1,0 +1,18 @@
+package com.fortunatis.estateservice.validators;
+
+import jakarta.validation.Constraint;
+import org.springframework.messaging.handler.annotation.Payload;
+
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
+@Target({ElementType.TYPE, ElementType.ANNOTATION_TYPE})
+@Retention(RetentionPolicy.RUNTIME)
+@Constraint(validatedBy = AddEstateValidator.class)
+public @interface AddEstateValidation {
+    String message() default "Invalid estate details";
+    Class<?>[] groups() default {};
+    Class<? extends Payload>[] payload() default {};
+}
