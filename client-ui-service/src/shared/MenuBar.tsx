@@ -1,3 +1,5 @@
+"use client";
+
 import React, {useState, Fragment, useEffect} from "react";
 import {Transition, Dialog} from "@headlessui/react";
 import {useLocation} from "react-use";

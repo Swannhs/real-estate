@@ -10,7 +10,7 @@ import {
     isInclusivelyAfterDay,
 } from "react-dates";
 import ButtonPrimary from "@/shared/ButtonPrimary";
-import {DateRage} from "@/app/(client-components)/(HeroSearchForm)/StaySearchForm";
+import {DateRage} from "@/theme-pages/(client-components)/(HeroSearchForm)/StaySearchForm";
 
 interface ModalSelectDateProps {
     onClose?: () => void;
