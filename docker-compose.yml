@@ -165,16 +165,16 @@ services:
       - keycloak
     network_mode: "host"
 
-  admin-ui-service:
-    container_name: admin-ui-service
-    build:
-      context: ./admin-ui-service
-      dockerfile: Dockerfile
-    volumes:
-      - ./admin-ui-service:/app
-    depends_on:
-      - keycloak
-    network_mode: "host"
+#  admin-ui-service:
+#    container_name: admin-ui-service
+#    build:
+#      context: ./admin-ui-service
+#      dockerfile: Dockerfile
+#    volumes:
+#      - ./admin-ui-service:/app
+#    depends_on:
+#      - keycloak
+#    network_mode: "host"
 
 networks:
   swann_network:
