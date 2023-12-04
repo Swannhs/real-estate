@@ -45,12 +45,11 @@ public class StaticDataServiceImpl implements StaticDataService {
     @Cacheable(value = "paymentPackages", key = "'publicPaymentPackages'", unless = "#result == null")
     public List<PaymentPackageResponseDto> getPublicPaymentPackages() {
         List<PaymentPackage> packages = paymentPackageRepository.findAllActiveWithFeatures();
-        return modelMapper.map(packages, new TypeToken<List<PaymentPackageResponseDto>>() {
-        }.getType());
+        return modelMapper.map(packages, new TypeToken<List<PaymentPackageResponseDto>>() {}.getType());
     }
 
     @Override
-//    @Cacheable(value = "paymentPackage", key = "'publicPaymentPackage:' + #id", unless = "#result == null")
+    @Cacheable(value = "paymentPackage", key = "'publicPaymentPackage:' + #id", unless = "#result == null")
     public PaymentPackageResponseDto getPublicPaymentPackage(UUID id) {
         Optional<PaymentPackage> paymentPackageOptional = paymentPackageRepository.findByIdWithFeatures(id);
 
@@ -65,7 +64,7 @@ public class StaticDataServiceImpl implements StaticDataService {
     }
 
     @Override
-//    @Cacheable(value = "country", key = "'publicCountry:' + #id", unless = "#result == null")
+    @Cacheable(value = "country", key = "'publicCountry:' + #id", unless = "#result == null")
     public CountryResponseDto getPublicCountry(Long id) {
         Optional<Country> countryOptional = countryRepository.findById(id);
         return countryOptional.map(country -> modelMapper.map(country, CountryResponseDto.class))
