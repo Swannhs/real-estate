@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.GenericGenerator;
 
 import java.io.Serializable;
 import java.util.List;
@@ -19,6 +20,11 @@ import java.util.UUID;
 @Setter
 public class PaymentPackage implements Serializable {
     @Id
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(
+            name = "UUID",
+            strategy = "org.hibernate.id.UUIDGenerator"
+    )
     @Column(name = "id", updatable = false, nullable = false, columnDefinition = "uuid default uuid_generate_v4()")
     private UUID id;
 
@@ -53,5 +59,5 @@ public class PaymentPackage implements Serializable {
             joinColumns = @JoinColumn(name = "payment_package_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "payment_features_id", referencedColumnName = "id"))
     @JsonManagedReference
-    private List<PaymentFeatures> paymentFeatures;
+    private List<PaymentFeature> paymentFeatures;
 }

@@ -24,7 +24,7 @@ public class SwaggerConfig {
                                 .name("Authorization")))
                 .info(new Info().title("Fortunatis Static Service API")
                         .description("Under fortunatis real estate e it's provide api for fortunatis real estate")
-                        .version("v0.0.1")
+                        .version("v1.0.1")
                         .contact(new Contact().email("alan@fortunatis.ch").url("www.fortunatis.ch").name("Alan Douard"))
                         .license(new License().name("Fortunatis GmbH 2022")))
                 .addSecurityItem(new SecurityRequirement().addList("jwt-bearer"));

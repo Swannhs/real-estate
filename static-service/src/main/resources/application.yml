@@ -59,3 +59,5 @@ logging:
 springdoc:
   show-actuator: true
   enable-kotlin: false
+  swagger-ui:
+    doc-expansion: none
