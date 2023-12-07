@@ -3,7 +3,7 @@ package com.fortunatis.staticservice.sevices.impl;
 import com.fortunatis.staticservice.model.PaymentFeature;
 import com.fortunatis.staticservice.model.PaymentPackage;
 import com.fortunatis.staticservice.model.PaymentTag;
-import com.fortunatis.staticservice.pojo.request.admin.PaymentTagRequestDto;
+import com.fortunatis.staticservice.pojo.request.admin.payment.PaymentTagRequestDto;
 import com.fortunatis.staticservice.pojo.request.admin.payment.PaymentFeatureRequestDto;
 import com.fortunatis.staticservice.pojo.request.admin.payment.PaymentPackageRequestDto;
 import com.fortunatis.staticservice.pojo.response.admin.payment.PaymentFeaturesResponseDto;

@@ -14,4 +14,6 @@ import java.util.UUID;
 public interface StaticDataRepository extends JpaRepository<StaticData, UUID> {
     @Query("SELECT s FROM StaticData s WHERE s.dataType = :dataType")
     List<StaticData> findAllByDataType(@Param("dataType") StaticDataType dataType);
+
+    StaticData findFirstByDataTypeAndIsDeletedFalse(StaticDataType staticDataType);
 }

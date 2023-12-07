@@ -1,4 +1,4 @@
-package com.fortunatis.staticservice.pojo.request.admin;
+package com.fortunatis.staticservice.pojo.request.admin.payment;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;

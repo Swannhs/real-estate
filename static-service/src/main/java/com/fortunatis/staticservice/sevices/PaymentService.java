@@ -1,6 +1,6 @@
 package com.fortunatis.staticservice.sevices;
 
-import com.fortunatis.staticservice.pojo.request.admin.PaymentTagRequestDto;
+import com.fortunatis.staticservice.pojo.request.admin.payment.PaymentTagRequestDto;
 import com.fortunatis.staticservice.pojo.request.admin.payment.PaymentFeatureRequestDto;
 import com.fortunatis.staticservice.pojo.request.admin.payment.PaymentPackageRequestDto;
 import com.fortunatis.staticservice.pojo.response.admin.payment.PaymentFeaturesResponseDto;

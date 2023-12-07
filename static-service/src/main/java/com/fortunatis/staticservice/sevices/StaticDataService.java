@@ -1,9 +1,6 @@
 package com.fortunatis.staticservice.sevices;
 
-import com.fortunatis.staticservice.pojo.response.CountryResponseDto;
-import com.fortunatis.staticservice.pojo.response.FeaturesResponseDTO;
-import com.fortunatis.staticservice.pojo.response.PaymentPackageResponseDto;
-import com.fortunatis.staticservice.pojo.response.StaticDataResponseDto;
+import com.fortunatis.staticservice.pojo.response.*;
 import org.springframework.cache.annotation.Cacheable;
 
 import java.util.List;
@@ -17,4 +14,8 @@ public interface StaticDataService {
     CountryResponseDto getPublicCountry(Long id);
     List<StaticDataResponseDto> getPublicEstateAdvertisingTypes();
     List<StaticDataResponseDto> getPublicEstateCategoryTypes();
+    NoticeResponseDto getCookiePolicy();
+    NoticeResponseDto getPrivacyPolicy();
+    NoticeResponseDto getLegalNotice();
+    NoticeResponseDto getGeneralTermsAndConditions();
 }

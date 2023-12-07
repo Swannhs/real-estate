@@ -62,4 +62,28 @@ public class StaticDataController {
     public ResponseEntity<?> getPublicEstateCategoryTypes() {
         return ResponseEntity.ok(staticDataService.getPublicEstateCategoryTypes());
     }
+
+    @GetMapping("/cookie-policy")
+    @Operation(summary = "Get cookie policy")
+    public ResponseEntity<?> getCookiePolicy() {
+        return ResponseEntity.ok(staticDataService.getCookiePolicy());
+    }
+
+    @GetMapping("/privacy-policy")
+    @Operation(summary = "Get privacy policy")
+    public ResponseEntity<?> getPrivacyPolicy() {
+        return ResponseEntity.ok(staticDataService.getPrivacyPolicy());
+    }
+
+    @GetMapping("/legal-notice")
+    @Operation(summary = "Get legal notice")
+    public ResponseEntity<?> getLegalNotice() {
+        return ResponseEntity.ok(staticDataService.getLegalNotice());
+    }
+
+    @GetMapping("/general-terms-and-conditions")
+    @Operation(summary = "Get general terms and conditions")
+    public ResponseEntity<?> getGeneralTermsAndConditions() {
+        return ResponseEntity.ok(staticDataService.getGeneralTermsAndConditions());
+    }
 }

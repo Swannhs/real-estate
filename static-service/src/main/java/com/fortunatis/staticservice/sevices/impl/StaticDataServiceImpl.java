@@ -4,14 +4,12 @@ import com.fortunatis.staticservice.enums.StaticDataType;
 import com.fortunatis.staticservice.model.Country;
 import com.fortunatis.staticservice.model.Feature;
 import com.fortunatis.staticservice.model.PaymentPackage;
-import com.fortunatis.staticservice.pojo.response.CountryResponseDto;
-import com.fortunatis.staticservice.pojo.response.FeaturesResponseDTO;
-import com.fortunatis.staticservice.pojo.response.PaymentPackageResponseDto;
-import com.fortunatis.staticservice.pojo.response.StaticDataResponseDto;
+import com.fortunatis.staticservice.pojo.response.*;
 import com.fortunatis.staticservice.repository.CountryRepository;
 import com.fortunatis.staticservice.repository.FeaturesRepository;
 import com.fortunatis.staticservice.repository.PaymentPackageRepository;
 import com.fortunatis.staticservice.repository.StaticDataRepository;
+import com.fortunatis.staticservice.sevices.NoticeService;
 import com.fortunatis.staticservice.sevices.StaticDataService;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -28,6 +26,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class StaticDataServiceImpl implements StaticDataService {
     private final ModelMapper modelMapper;
+    private final NoticeService noticeService;
     private final FeaturesRepository featuresRepository;
     private final PaymentPackageRepository paymentPackageRepository;
     private final CountryRepository countryRepository;
@@ -81,5 +80,25 @@ public class StaticDataServiceImpl implements StaticDataService {
     @Cacheable(value = "estateCategoryTypes", key = "'publicEstateCategoryTypes'", unless = "#result == null")
     public List<StaticDataResponseDto> getPublicEstateCategoryTypes() {
         return modelMapper.map(staticDataRepository.findAllByDataType(StaticDataType.ESTATE_TYPE), new TypeToken<List<StaticDataResponseDto>>() {}.getType());
+    }
+
+    @Override
+    public NoticeResponseDto getCookiePolicy() {
+        return modelMapper.map(noticeService.getCookiePolicy(), NoticeResponseDto.class);
+    }
+
+    @Override
+    public NoticeResponseDto getPrivacyPolicy() {
+        return modelMapper.map(noticeService.getPrivacyPolicy(), NoticeResponseDto.class);
+    }
+
+    @Override
+    public NoticeResponseDto getLegalNotice() {
+        return modelMapper.map(noticeService.getLegalNotice(), NoticeResponseDto.class);
+    }
+
+    @Override
+    public NoticeResponseDto getGeneralTermsAndConditions() {
+        return modelMapper.map(noticeService.getGeneralTermsAndConditions(), NoticeResponseDto.class);
     }
 }
