@@ -46,6 +46,15 @@ spring:
 server:
   port: 8181
 
+service:
+  param:
+    keycloak:
+      base-url: http://localhost:8181
+      realm: fortunatishomes
+      client-id: static-service
+      client-secret: XuCIzeFc43F3NqBYqpaAYoab7NBD08et
+      grant-type: client_credentials
+
 springfox:
   documentation:
     type: swagger_2

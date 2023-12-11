@@ -1,7 +1,7 @@
 package com.fortunatis.staticservice.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fortunatis.staticservice.pojo.response.FeaturesResponseDTO;
+import com.fortunatis.staticservice.pojo.response.FeaturesResponseDto;
 import com.fortunatis.staticservice.sevices.StaticDataService;
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
@@ -35,7 +35,7 @@ public class StaticDataControllerTest {
 
     @Test
     public void testGetPublicFeatures() throws Exception {
-        when(staticDataService.getPublicFeatures()).thenReturn(Collections.singletonList(new FeaturesResponseDTO()));
+        when(staticDataService.getPublicFeatures()).thenReturn(Collections.singletonList(new FeaturesResponseDto()));
         mockMvc.perform(get("/public/api/v1/static/features"))
                 .andExpect(status().isOk());
     }

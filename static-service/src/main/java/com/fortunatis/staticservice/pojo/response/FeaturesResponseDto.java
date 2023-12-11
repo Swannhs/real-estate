@@ -8,7 +8,7 @@ import java.util.UUID;
 
 @Getter
 @Setter
-public class FeaturesResponseDTO implements Serializable {
+public class FeaturesResponseDto implements Serializable {
     private UUID id;
     private String featuresTitle;
     private String featuresTitleDe;

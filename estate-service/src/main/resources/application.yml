@@ -32,6 +32,12 @@ spring:
 server:
   port: 8182
 
+service:
+  param:
+    static-service:
+      base-url: http://localhost:8181
+      enpoint-prefix: ${service.param.static-service.base-url}/public/api/v1/static
+
 springfox:
   documentation:
     type: swagger_2

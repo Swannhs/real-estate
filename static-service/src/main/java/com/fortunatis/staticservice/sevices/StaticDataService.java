@@ -1,13 +1,12 @@
 package com.fortunatis.staticservice.sevices;
 
 import com.fortunatis.staticservice.pojo.response.*;
-import org.springframework.cache.annotation.Cacheable;
 
 import java.util.List;
 import java.util.UUID;
 
 public interface StaticDataService {
-    List<FeaturesResponseDTO> getPublicFeatures();
+    List<FeaturesResponseDto> getPublicFeatures();
     List<PaymentPackageResponseDto> getPublicPaymentPackages();
     PaymentPackageResponseDto getPublicPaymentPackage(UUID id);
     List<CountryResponseDto> getPublicCountries();

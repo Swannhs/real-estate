@@ -69,3 +69,8 @@ INSERT INTO static_data (keyword, description_en, description_de, description_fr
                          creation_date, updated_by)
 VALUES ('Rent', 'Rent', 'Huur', 'Louer', 'Affitto', 'ESTATE_ADVERTISE_PURPOSE', false, now(), null),
        ('Sell', 'Sell', 'Verkopen', 'Vendre', 'Vendre', 'ESTATE_ADVERTISE_PURPOSE', false, now(), null);
+
+INSERT INTO static_data (keyword, description_en, description_de, description_fr, description_it, data_type, is_deleted,
+                         creation_date, updated_by)
+VALUES ('CookiePolicy', 'CookiePolicy', 'CookiePolicy', 'CookiePolicy', 'CookiePolicy', 'COOKIE_POLICY', false, now(), null),
+       ('PrivacyPolicy', 'PrivacyPolicy', 'PrivacyPolicy', 'PrivacyPolicy', 'PrivacyPolicy', 'PRIVACY_POLICY', false, now(), null);

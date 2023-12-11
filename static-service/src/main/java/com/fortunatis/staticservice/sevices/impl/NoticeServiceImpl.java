@@ -4,7 +4,7 @@ import com.fortunatis.staticservice.enums.StaticDataType;
 import com.fortunatis.staticservice.model.GeneralTermsAndConditions;
 import com.fortunatis.staticservice.model.LegalNotice;
 import com.fortunatis.staticservice.model.StaticData;
-import com.fortunatis.staticservice.pojo.request.admin.staticData.StaticDataRequestDto;
+import com.fortunatis.staticservice.pojo.request.admin.static_data.StaticDataRequestDto;
 import com.fortunatis.staticservice.repository.GeneralTermsAndConditionsRepository;
 import com.fortunatis.staticservice.repository.LegalNoticeRepository;
 import com.fortunatis.staticservice.repository.StaticDataRepository;

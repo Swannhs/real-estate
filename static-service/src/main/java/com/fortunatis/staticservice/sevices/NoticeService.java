@@ -3,7 +3,7 @@ package com.fortunatis.staticservice.sevices;
 import com.fortunatis.staticservice.model.GeneralTermsAndConditions;
 import com.fortunatis.staticservice.model.LegalNotice;
 import com.fortunatis.staticservice.model.StaticData;
-import com.fortunatis.staticservice.pojo.request.admin.staticData.StaticDataRequestDto;
+import com.fortunatis.staticservice.pojo.request.admin.static_data.StaticDataRequestDto;
 
 public interface NoticeService {
     GeneralTermsAndConditions getGeneralTermsAndConditions();

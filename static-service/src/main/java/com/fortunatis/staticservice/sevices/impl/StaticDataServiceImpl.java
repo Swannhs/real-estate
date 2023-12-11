@@ -34,9 +34,9 @@ public class StaticDataServiceImpl implements StaticDataService {
 
     @Override
     @Cacheable(value = "features", key = "'publicFeatures'")
-    public List<FeaturesResponseDTO> getPublicFeatures() {
+    public List<FeaturesResponseDto> getPublicFeatures() {
         List<Feature> features = featuresRepository.findAllByIsActiveTrue();
-        return modelMapper.map(features, new TypeToken<List<FeaturesResponseDTO>>() {
+        return modelMapper.map(features, new TypeToken<List<FeaturesResponseDto>>() {
         }.getType());
     }
 
