@@ -1,6 +1,6 @@
 package com.fortunatis.staticservice.controller;
 
-import com.fortunatis.staticservice.security.service.UserService;
+import com.fortunatis.staticservice.sevices.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;

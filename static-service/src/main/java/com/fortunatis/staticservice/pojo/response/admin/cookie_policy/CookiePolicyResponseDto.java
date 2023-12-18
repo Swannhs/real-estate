@@ -1,4 +1,4 @@
-package com.fortunatis.staticservice.pojo.response.admin.privacy_policy;
+package com.fortunatis.staticservice.pojo.response.admin.cookie_policy;
 
 import com.fortunatis.staticservice.enums.StaticDataType;
 import lombok.Getter;
@@ -10,7 +10,7 @@ import java.util.UUID;
 
 @Getter
 @Setter
-public class PrivacyPolicyResponseDto implements Serializable {
+public class CookiePolicyResponseDto implements Serializable {
     UUID id;
     String keyword;
     String descriptionEn;
