@@ -6,16 +6,18 @@ import com.fortunatis.estateservice.pojo.request.EstateAddDto;
 import com.fortunatis.estateservice.pojo.request.EstateAddGalleryDto;
 import com.fortunatis.estateservice.pojo.request.EstateSearchDto;
 import com.fortunatis.estateservice.pojo.response.EstateResponseDto;
+import com.fortunatis.estateservice.pojo.response.EstateSingleResponseDto;
+import com.fortunatis.estateservice.pojo.response.staticService.FeaturesResponseDto;
 import com.fortunatis.estateservice.repository.CantonNameVariationsRepository;
 import com.fortunatis.estateservice.repository.EstateRepository;
 import com.fortunatis.estateservice.service.CustomDAOService;
 import com.fortunatis.estateservice.service.EstateService;
+import com.fortunatis.estateservice.service.StaticApiService;
 import com.fortunatis.estateservice.util.UtilityService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.modelmapper.ModelMapper;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
@@ -32,6 +34,7 @@ import static com.fortunatis.estateservice.util.ApplicationConstants.ENTRIES_PER
 @Slf4j
 public class EstateServiceImpl implements EstateService {
     private final ModelMapper modelMapper;
+    private final StaticApiService staticApiService;
     private final CustomDAOService customDAOService;
     private final EstateRepository estateRepository;
     private final CantonNameVariationsRepository cantonNameVariationsRepository;
@@ -66,8 +69,19 @@ public class EstateServiceImpl implements EstateService {
     }
 
     @Override
-    public EstateResponseDto getEstateById(UUID id) {
-        return modelMapper.map(estateRepository.findById(id), EstateResponseDto.class);
+    public EstateSingleResponseDto getEstateById(UUID id) {
+        Estate estate = estateRepository.findById(id).orElseThrow(() -> new RuntimeException("Estate not found"));
+        EstateSingleResponseDto estateResponseDto = modelMapper.map(estate, EstateSingleResponseDto.class);
+        if (!estate.getEstateFeatures().isEmpty()) {
+            List<FeaturesResponseDto> featuresResponseDtos = staticApiService.getEstateFeatures();
+            List<FeaturesResponseDto> estateFeatures = estate.getEstateFeatures().stream()
+                    .map(estateFeatureId -> featuresResponseDtos.stream()
+                            .filter(featuresResponseDto -> featuresResponseDto.getId().equals(estateFeatureId))
+                            .findFirst().orElse(null))
+                    .collect(Collectors.toList());
+            estateResponseDto.setEstateFeatures(estateFeatures);
+        }
+        return estateResponseDto;
     }
 
     @Override
@@ -76,7 +90,7 @@ public class EstateServiceImpl implements EstateService {
             throw new RuntimeException("Invalid filter");
         }
         Meta meta = new Meta();
-        if(!StringUtils.isEmpty(estateSearchDto.getSearchKeywords())){
+        if (!StringUtils.isEmpty(estateSearchDto.getSearchKeywords())) {
             estateSearchDto.setSearchKeywords(getCantonVariationsFromSearchKeywords(estateSearchDto.getSearchKeywords()));
         }
         String generatedSql = UtilityService.buildSearchQueryForPublicEstateSearch(estateSearchDto);
@@ -102,9 +116,6 @@ public class EstateServiceImpl implements EstateService {
 
     /**
      * Find the match in canton variation table using keyword and prolong the keyword with matching words from db
-     *
-     * @param searchKeywords
-     * @return
      */
     public String getCantonVariationsFromSearchKeywords(String searchKeywords) {
         if (StringUtils.isEmpty(searchKeywords)) {

@@ -1,27 +1,27 @@
-package com.fortunatis.estateservice.pojo.request;
+package com.fortunatis.estateservice.pojo.response;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fortunatis.estateservice.enums.EstateAmountType;
+import com.fortunatis.estateservice.pojo.response.staticService.FeaturesResponseDto;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 @Getter
 @Setter
-public class EstateAddDto implements Serializable {
+public class EstateSingleResponseDto implements Serializable {
+    UUID id;
     String estateAdvertiser;
     String estateType;
     String estateAdvertisePurpose;
     Double rooms;
     Double livingArea;
     String estateAvailabilityPolicy;
-    @JsonFormat(pattern = "yyyy-MM-dd")
     Date estateWillBeAvailable;
-    @JsonFormat(pattern = "yyyy-MM-dd")
     Date estateWillBeAvailableTo;
     EstateAmountType estatePriceType;
     Double estatePrice;
@@ -36,9 +36,13 @@ public class EstateAddDto implements Serializable {
     String videoUrl;
     String title;
     String description;
-    EstateAddContactDto contact;
-    EstateAddLocationDto location;
+    Date creationDate;
+    Date lastModified;
+    String userId;
+    EstateResponseContactDto contact;
+    EstateResponseLocationDto location;
     String country;
-    List<EstateAddGalleryDto> estateGalleries;
-    List<UUID> estateFeatures;
+    List<EstateResponseGalleryDto> estateGalleries;
+    List<FeaturesResponseDto> estateFeatures;
+    Set<UUID> estateStickers;
 }

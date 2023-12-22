@@ -11,7 +11,8 @@ public interface StaticDataService {
     PaymentPackageResponseDto getPublicPaymentPackage(UUID id);
     List<CountryResponseDto> getPublicCountries();
     CountryResponseDto getPublicCountry(Long id);
-    List<StaticDataResponseDto> getPublicEstateAdvertisingTypes();
+    List<StaticDataResponseDto> getPublicEstateAdvertisePurpose();
+    List<StaticDataResponseDto> getPublicEstateAdvertisers();
     List<StaticDataResponseDto> getPublicEstateCategoryTypes();
     NoticeResponseDto getCookiePolicy();
     NoticeResponseDto getPrivacyPolicy();

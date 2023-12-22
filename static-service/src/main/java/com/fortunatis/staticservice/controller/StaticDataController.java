@@ -51,10 +51,16 @@ public class StaticDataController {
         return ResponseEntity.ok(staticDataService.getPublicCountry(id));
     }
 
-    @GetMapping("/estate-advertising-types")
-    @Operation(summary = "Get all public estate advertising types")
+    @GetMapping("/estate-advertise-purpose")
+    @Operation(summary = "Get all public estate advertise purpose")
+    public ResponseEntity<?> getPublicEstateAdvertisePurpose() {
+        return ResponseEntity.ok(staticDataService.getPublicEstateAdvertisePurpose());
+    }
+
+    @GetMapping("/estate-advertiser")
+    @Operation(summary = "Get all public estate advertisers")
     public ResponseEntity<?> getPublicEstateAdvertisingTypes() {
-        return ResponseEntity.ok(staticDataService.getPublicEstateAdvertisingTypes());
+        return ResponseEntity.ok(staticDataService.getPublicEstateAdvertisers());
     }
 
     @GetMapping("/estate-category-types")

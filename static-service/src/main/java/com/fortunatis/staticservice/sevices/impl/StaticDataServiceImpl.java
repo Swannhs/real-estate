@@ -71,9 +71,15 @@ public class StaticDataServiceImpl implements StaticDataService {
     }
 
     @Override
-    @Cacheable(value = "estateAdvertisingTypes", key = "'publicEstateAdvertisingTypes'", unless = "#result == null")
-    public List<StaticDataResponseDto> getPublicEstateAdvertisingTypes() {
+    @Cacheable(value = "estateAdvertisers", key = "'publicEstateAdvertisers'", unless = "#result == null")
+    public List<StaticDataResponseDto> getPublicEstateAdvertisers() {
         return modelMapper.map(staticDataRepository.findAllByDataType(StaticDataType.ADVERTISER), new TypeToken<List<StaticDataResponseDto>>() {}.getType());
+    }
+
+    @Override
+    @Cacheable(value = "estateAdvertisePurpose", key = "'publicEstateAdvertisePurpose'", unless = "#result == null")
+    public List<StaticDataResponseDto> getPublicEstateAdvertisePurpose() {
+        return modelMapper.map(staticDataRepository.findAllByDataType(StaticDataType.ESTATE_ADVERTISE_PURPOSE), new TypeToken<List<StaticDataResponseDto>>() {}.getType());
     }
 
     @Override

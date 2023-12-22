@@ -1,4 +1,4 @@
-package com.fortunatis.staticservice.pojo.response;
+package com.fortunatis.estateservice.pojo.response.staticService;
 
 import lombok.Getter;
 import lombok.Setter;
