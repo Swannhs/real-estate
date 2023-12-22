@@ -13,6 +13,10 @@ services:
     depends_on:
       - postgres
       - keycloak
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.estate-service.rule=Host(`estate-service.domain.com`)"
+      - "traefik.http.routers.estate-service.entrypoints=web"
     restart: on-failure
     network_mode: "host"
 
@@ -34,7 +38,22 @@ services:
     restart: on-failure
     network_mode: "host"
 
-
+  user-service:
+    container_name: user-service
+    image: user-service
+    build:
+      context: user-service
+      dockerfile: Dockerfile
+    environment:
+      SPRING_PROFILES_ACTIVE: 'docker'
+    volumes:
+      - ./user-service:/app
+      - ~/.m2:/root/.m2
+    depends_on:
+      - postgres
+      - keycloak
+    restart: on-failure
+    network_mode: "host"
 
 
   #  client-ui-service:

@@ -21,7 +21,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import java.util.Collections;
 import java.util.List;
 
-import static route.RouteConstant.*;
+import static com.fortunatis.userservice.route.RouteConstant.*;
 
 @Configuration
 @EnableWebSecurity

@@ -3,14 +3,13 @@ package com.fortunatis.estateservice.model;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fortunatis.estateservice.entity.TimestampEntity;
 import com.fortunatis.estateservice.enums.EstateAmountType;
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.annotations.CreationTimestamp;
+import org.apache.commons.lang3.ObjectUtils;
 import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.UpdateTimestamp;
 
-import java.io.Serializable;
 import java.util.*;
 
 @Entity
@@ -19,7 +18,7 @@ import java.util.*;
 @NoArgsConstructor
 @Getter
 @Setter
-public class Estate implements Serializable {
+public class Estate extends TimestampEntity {
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(
@@ -103,14 +102,6 @@ public class Estate implements Serializable {
     @Column(name = "is_deleted", columnDefinition = "boolean default false")
     private Boolean isDeleted;
 
-    @Column(name = "creation_date", nullable = false, updatable = false)
-    @CreationTimestamp
-    private Date creationDate;
-
-    @Column(name = "updated_at")
-    @UpdateTimestamp
-    private Date lastModified;
-
     @Column(name = "user_id")
     private String userId;
 
@@ -125,12 +116,11 @@ public class Estate implements Serializable {
     @JsonManagedReference
     @ToString.Exclude
     private EstateLocation location;
-//
-//    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-//    @JoinColumn(name = "estate_search_priority_id", columnDefinition = "bigint default 1")
-//    @ToString.Exclude
-//    private EstateSearchPriority estateSearchPriority;
-//
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "estate_search_property_id", referencedColumnName = "id")
+    private EstateSearchPriority estateSearchPriority;
+
     @Column(name = "country")
     private String country;
 
@@ -152,16 +142,19 @@ public class Estate implements Serializable {
     @Column(name = "feature_id")
     private Set<UUID> estateFeatures = new HashSet<>();
 
-    @ElementCollection
-    @CollectionTable(name = "estate_stickers", joinColumns = @JoinColumn(name = "estate_id"))
-    @Column(name = "sticker")
-    @ToString.Exclude
-    private Set<UUID> estateStickers = new HashSet<>();
-//
-//    @PrePersist
-//    public void prePersist() {
-//        if (ObjectUtils.isEmpty(isPublished)) {
-//            setIsPublished(true);
-//        }
-//    }
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "estate_search_property",
+            joinColumns = @JoinColumn(name = "estate_id"),
+            inverseJoinColumns = @JoinColumn(name = "search_property_id"))
+    private Set<EstateSticker> estateStickers = new HashSet<>();
+
+    @PrePersist
+    public void prePersist() {
+        if (ObjectUtils.isEmpty(isPublished)) {
+            // TODO: Required to change this in the future
+            setIsPublished(true);
+            setIsActive(true);
+            setIsDeleted(false);
+        }
+    }
 }

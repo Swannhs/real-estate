@@ -20,43 +20,6 @@ services:
     logging:
       driver: none
 
-  traefik:
-    container_name: traefik
-    image: traefik:v3.0
-    command:
-      - --providers.docker
-      - --providers.docker.exposedbydefault=false
-      - --entrypoints.web.address=:80
-      - --api.insecure=true
-      - --providers.consulcatalog
-      - --providers.consulcatalog.endpoint.address=http://consul:8500
-      - --providers.consulcatalog.prefix=traefik
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.krakend.rule=Host(`api-gateway.local`)"
-      - "traefik.http.routers.krakend.entrypoints=web"
-    ports:
-      - "8000:80"
-      - "9090:8080"
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-    depends_on:
-      - consul
-    networks:
-      - swann_network
-
-  krakend:
-    container_name: krakend
-    image: devopsfaith/krakend:latest
-    ports:
-      - "8888:8080"
-#    volumes:
-#      - ./krakend/krakend.json:/etc/krakend/krakend.json
-    environment:
-      - DEBUG=1
-    networks:
-      - swann_network
-
   mysql:
     container_name: mysql
     image: mysql:8.0.26

@@ -1,4 +1,4 @@
-package route;
+package com.fortunatis.userservice.route;
 
 public class RouteConstant {
     public static final String[] PUBLIC_ROUTES = {
