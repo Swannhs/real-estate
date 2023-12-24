@@ -14,7 +14,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/v1/estates")
 @RequiredArgsConstructor
-@Tag(name = "Estate Controller", description = "estate controller")
+@Tag(name = "Estate Controller", description = "Rest Resource for Estate")
 @Slf4j
 public class EstateController {
     private final EstateService estateService;
@@ -27,7 +27,7 @@ public class EstateController {
             @RequestParam(name = "orderBy", required = false, defaultValue = "createdAt") String orderBy,
             @RequestParam(name = "desc", required = false, defaultValue = "desc") String desc
     ) {
-        return ResponseEntity.ok(estateService.getAllEstatesByUser(page, size > 50 ? 50 : size, orderBy, desc));
+        return ResponseEntity.ok(estateService.getAllEstatesByUser(page, size, orderBy, desc));
     }
 
     @PostMapping

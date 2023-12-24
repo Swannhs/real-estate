@@ -256,4 +256,8 @@ public class UtilityService {
 
         return query.toString();
     }
+
+    public static Integer preventEntitySize(Integer size) {
+        return size > 50 ? 50 : size;
+    }
 }

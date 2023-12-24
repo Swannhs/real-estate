@@ -1,17 +1,14 @@
 package com.fortunatis.estateservice.faker.estate.seeder;
 
 import com.fortunatis.estateservice.faker.estate.factory.EstateFactory;
+import com.fortunatis.estateservice.faker.estate.service.SeederService;
 import com.fortunatis.estateservice.model.Estate;
 import com.fortunatis.estateservice.model.EstateContact;
 import com.fortunatis.estateservice.model.EstateGallery;
 import com.fortunatis.estateservice.model.EstateLocation;
 import com.fortunatis.estateservice.pojo.request.EstateAddDto;
 import com.fortunatis.estateservice.pojo.request.EstateAddGalleryDto;
-import com.fortunatis.estateservice.pojo.response.EstateResponseDto;
 import com.fortunatis.estateservice.repository.EstateRepository;
-import com.fortunatis.estateservice.service.EstateService;
-import com.fortunatis.estateservice.service.StaticApiService;
-import com.fortunatis.estateservice.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
@@ -19,21 +16,20 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
-import java.util.UUID;
 
 @Component
 @RequiredArgsConstructor
 @Slf4j
 public class EstateSeeder {
     private final ModelMapper modelMapper;
-    private final StaticApiService staticApiService;
-    private final UserService userService;
+    private final SeederService seederService;
     private final EstateRepository estateRepository;
 
-    public void run() {
-        cleanData();
-        seedData(5000);
+    public void run(Integer entries, Boolean clean) {
+        if (clean) {
+            cleanData();
+        }
+        seedData(entries);
     }
 
     public void seedData(Integer numberOfEstates) {
@@ -57,7 +53,7 @@ public class EstateSeeder {
                 }
                 estate.setEstateGalleries(estateGalleries);
             }
-            estate.setUserId(getRandomUserId());
+            estate.setUserId(seederService.getRandomUserId());
             estates.add(estate);
         }
         estateRepository.saveAll(estates);
@@ -69,12 +65,7 @@ public class EstateSeeder {
     }
 
     private EstateAddDto createDummyEstateAddDto() {
-        EstateFactory estateFactory = new EstateFactory(staticApiService);
+        EstateFactory estateFactory = new EstateFactory(seederService);
         return estateFactory.createDummyEstateAddDto();
-    }
-
-    private UUID getRandomUserId() {
-        List<UUID> userIds = userService.getUserIds();
-        return userIds.get(new Random().nextInt(userIds.size()));
     }
 }

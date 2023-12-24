@@ -148,13 +148,9 @@ public class EstateServiceImpl implements EstateService {
 
     @Override
     public Page<EstateResponseDto> getAllEstatesByUser(Integer page, Integer size, String orderBy, String desc) {
-        Pageable pageable = PageRequest.of(page, size, Sort.Direction.fromString(desc), orderBy);
+        Pageable pageable = PageRequest.of(page, UtilityService.preventEntitySize(size), Sort.Direction.fromString(desc), orderBy);
         Page<Estate> estatePage = estateRepository.findAllByUserId(userService.getUserId(), pageable);
-        List<Estate> estates = estatePage.getContent();
-        if (!estates.isEmpty()) {
-            return new PageImpl<>(estates.stream().map(estate -> modelMapper.map(estate, EstateResponseDto.class)).collect(Collectors.toList()), pageable, estatePage.getTotalElements());
-        }
-        return new PageImpl<>(new ArrayList<>(), pageable, 0);
+        return estatePage.map(estate -> modelMapper.map(estate, EstateResponseDto.class));
     }
 
     @Override
@@ -165,6 +161,11 @@ public class EstateServiceImpl implements EstateService {
             return estates.stream().map(estate -> modelMapper.map(estate, EstateResponseDto.class)).collect(Collectors.toList());
         }
         return new ArrayList<>();
+    }
+
+    @Override
+    public Estate getEstateByEstateId(UUID id) {
+        return estateRepository.findById(id).orElseThrow(() -> new RuntimeException("Estate not found"));
     }
 
     @Override

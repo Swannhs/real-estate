@@ -1,13 +1,11 @@
 package com.fortunatis.estateservice.faker.estate.factory;
 
 import com.fortunatis.estateservice.enums.EstateAmountType;
+import com.fortunatis.estateservice.faker.estate.service.SeederService;
 import com.fortunatis.estateservice.pojo.request.EstateAddContactDto;
 import com.fortunatis.estateservice.pojo.request.EstateAddDto;
 import com.fortunatis.estateservice.pojo.request.EstateAddGalleryDto;
 import com.fortunatis.estateservice.pojo.request.EstateAddLocationDto;
-import com.fortunatis.estateservice.pojo.response.staticService.FeaturesResponseDto;
-import com.fortunatis.estateservice.pojo.response.staticService.StaticDataResponseDto;
-import com.fortunatis.estateservice.service.StaticApiService;
 import com.github.javafaker.Faker;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -15,21 +13,20 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 @Component
 @RequiredArgsConstructor
 public class EstateFactory {
     private static final Faker faker = new Faker();
-    private final StaticApiService staticApiService;
+    private final SeederService seederService;
 
     public EstateAddDto createDummyEstateAddDto() {
         EstateAddDto estateAddDto = new EstateAddDto();
 
-        estateAddDto.setEstateAdvertiser(getRandomAdvertiser());
-        estateAddDto.setEstateType(getRandomEstateType());
-        estateAddDto.setEstateAdvertisePurpose(getRandomAdvertisePurpose());
+        estateAddDto.setEstateAdvertiser(seederService.getRandomAdvertiser());
+        estateAddDto.setEstateType(seederService.getRandomEstateType());
+        estateAddDto.setEstateAdvertisePurpose(seederService.getRandomAdvertisePurpose());
         estateAddDto.setRooms(faker.number().randomDouble(1, 1, 10));
         estateAddDto.setLivingArea(faker.number().randomDouble(2, 50, 500));
         estateAddDto.setEstateAvailabilityPolicy(faker.lorem().sentence());
@@ -72,36 +69,9 @@ public class EstateFactory {
         estateAddDto.setEstateGalleries(getRandomGalleries());
 
         // Dummy estate features
-        estateAddDto.setEstateFeatures(getRandomFeatures());
+        estateAddDto.setEstateFeatures(seederService.getRandomFeatures());
 
         return estateAddDto;
-    }
-
-    private String getRandomAdvertiser() {
-        String[] advertiserKeywords = staticApiService.getAdvertisers().stream().map(StaticDataResponseDto::getKeyword).toArray(String[]::new);
-
-        return advertiserKeywords[new Random().nextInt(advertiserKeywords.length)];
-    }
-
-    private String getRandomAdvertisePurpose() {
-        String[] estateAdvertisePurposes = staticApiService.getAdvertisePurpose().stream().map(StaticDataResponseDto::getKeyword).toArray(String[]::new);
-
-        return estateAdvertisePurposes[new Random().nextInt(estateAdvertisePurposes.length)];
-    }
-
-    private String getRandomEstateType() {
-        String[] estateTypes = staticApiService.getEstateCategories().stream().map(StaticDataResponseDto::getKeyword).toArray(String[]::new);
-
-        return estateTypes[new Random().nextInt(estateTypes.length)];
-    }
-
-    private List<UUID> getRandomFeatures() {
-        List<UUID> features = new ArrayList<>();
-        List<FeaturesResponseDto> estateFeatures = staticApiService.getEstateFeatures();
-        for (int i = 0; i < new Random().nextInt(3, 8); i++) {
-            features.add(estateFeatures.get(new Random().nextInt(estateFeatures.size())).getId());
-        }
-        return features;
     }
 
     private List<EstateAddGalleryDto> getRandomGalleries() {

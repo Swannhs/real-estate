@@ -1,5 +1,6 @@
 package com.fortunatis.estateservice.service;
 
+import com.fortunatis.estateservice.model.Estate;
 import com.fortunatis.estateservice.pojo.request.EstateAddDto;
 import com.fortunatis.estateservice.pojo.request.EstateSearchDto;
 import com.fortunatis.estateservice.pojo.response.EstateResponseDto;
@@ -17,4 +18,5 @@ public interface EstateService {
     List<EstateResponseDto> searchEstateProperties(EstateSearchDto estateSearchDto);
     Page<EstateResponseDto> getAllEstatesByUser(Integer page, Integer size, String orderBy, String desc);
     List<EstateResponseDto> getRecentListings(Integer limit);
+    Estate getEstateByEstateId(UUID id);
 }

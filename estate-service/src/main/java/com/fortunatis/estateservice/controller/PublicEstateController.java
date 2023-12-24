@@ -15,7 +15,7 @@ import static com.fortunatis.estateservice.util.ApplicationConstants.PUBLIC_URL_
 @RestController
 @RequestMapping(PUBLIC_URL_PREFIX + "/v1/estates")
 @RequiredArgsConstructor
-@Tag(name = "Public Estate Controller", description = "Public estate controller")
+@Tag(name = "Public Estate Controller", description = "Public Rest API for Estate")
 public class PublicEstateController {
     private final EstateService estateService;
 
