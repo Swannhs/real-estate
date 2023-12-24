@@ -1,4 +1,4 @@
-package com.fortunatis.userservice.pojo;
+package com.fortunatis.userservice.pojo.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;

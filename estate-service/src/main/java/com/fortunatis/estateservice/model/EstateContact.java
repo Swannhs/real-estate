@@ -1,5 +1,6 @@
 package com.fortunatis.estateservice.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -39,5 +40,6 @@ public class EstateContact implements Serializable {
     private Boolean displayAsPublic;
 
     @OneToOne(mappedBy = "contact")
+    @JsonBackReference
     private Estate contactEstate;
 }

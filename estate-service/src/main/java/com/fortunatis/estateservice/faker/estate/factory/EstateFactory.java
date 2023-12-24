@@ -68,12 +68,8 @@ public class EstateFactory {
         location.setSearchKeywords(String.valueOf(faker.lorem().words(3)));
         estateAddDto.setLocation(location);
 
-        // Dummy estate gallery (one image)
-        EstateAddGalleryDto gallery = new EstateAddGalleryDto();
-        gallery.setOriginalImageName(faker.file().fileName());
-        gallery.setCompressedImageName(faker.file().fileName());
-        gallery.setIsFeaturedImage(true);
-        estateAddDto.setEstateGalleries(List.of(gallery));
+        // Dummy estate gallery
+        estateAddDto.setEstateGalleries(getRandomGalleries());
 
         // Dummy estate features
         estateAddDto.setEstateFeatures(getRandomFeatures());
@@ -106,5 +102,17 @@ public class EstateFactory {
             features.add(estateFeatures.get(new Random().nextInt(estateFeatures.size())).getId());
         }
         return features;
+    }
+
+    private List<EstateAddGalleryDto> getRandomGalleries() {
+        List<EstateAddGalleryDto> estateGalleries = new ArrayList<>();
+        for (int i = 0; i < new Random().nextInt(1, 5); i++) {
+            EstateAddGalleryDto gallery = new EstateAddGalleryDto();
+            gallery.setOriginalImageName(faker.file().fileName());
+            gallery.setCompressedImageName(faker.file().fileName());
+            gallery.setIsFeaturedImage(false);
+            estateGalleries.add(gallery);
+        }
+        return estateGalleries;
     }
 }

@@ -30,4 +30,10 @@ public class PublicEstateController {
     public ResponseEntity<?> searchEstate(@RequestBody EstateSearchDto estateSearchDto) {
         return ResponseEntity.ok(estateService.searchEstateProperties(estateSearchDto));
     }
+
+    @GetMapping("/recent-listings")
+    @Operation(summary = "Get recent listings")
+    public ResponseEntity<?> getRecentListings(@RequestParam(name = "limit", required = false, defaultValue = "8") Integer limit) {
+        return ResponseEntity.ok(estateService.getRecentListings(limit));
+    }
 }

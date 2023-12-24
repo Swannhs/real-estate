@@ -12,7 +12,6 @@ public class DataInitializer implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
-//        estateSeeder.cleanData();
-//        estateSeeder.seedData(1000);
+//        estateSeeder.run();
     }
 }

@@ -50,5 +50,7 @@ logging:
   level:
     root: INFO
 springdoc:
-  show-actuator: true
+  show-actuator: false
   enable-kotlin: false
+  swagger-ui:
+    doc-expansion: none

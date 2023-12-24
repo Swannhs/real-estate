@@ -99,11 +99,8 @@ public class Estate extends TimestampEntity {
     @Column(name = "is_published", columnDefinition = "boolean default false")
     private Boolean isPublished;
 
-    @Column(name = "is_deleted", columnDefinition = "boolean default false")
-    private Boolean isDeleted;
-
     @Column(name = "user_id")
-    private String userId;
+    private UUID userId;
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @ToString.Exclude
@@ -154,7 +151,6 @@ public class Estate extends TimestampEntity {
             // TODO: Required to change this in the future
             setIsPublished(true);
             setIsActive(true);
-            setIsDeleted(false);
         }
     }
 }

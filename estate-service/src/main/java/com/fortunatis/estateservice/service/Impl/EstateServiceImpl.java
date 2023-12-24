@@ -13,18 +13,18 @@ import com.fortunatis.estateservice.repository.EstateRepository;
 import com.fortunatis.estateservice.service.CustomDAOService;
 import com.fortunatis.estateservice.service.EstateService;
 import com.fortunatis.estateservice.service.StaticApiService;
+import com.fortunatis.estateservice.service.UserService;
 import com.fortunatis.estateservice.util.UtilityService;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static com.fortunatis.estateservice.util.ApplicationConstants.ENTRIES_PER_PAGE;
@@ -34,6 +34,7 @@ import static com.fortunatis.estateservice.util.ApplicationConstants.ENTRIES_PER
 @Slf4j
 public class EstateServiceImpl implements EstateService {
     private final ModelMapper modelMapper;
+    private final UserService userService;
     private final StaticApiService staticApiService;
     private final CustomDAOService customDAOService;
     private final EstateRepository estateRepository;
@@ -69,6 +70,67 @@ public class EstateServiceImpl implements EstateService {
     }
 
     @Override
+    @Transactional
+    public EstateResponseDto updateEstate(EstateAddDto estateAddDto, UUID id) {
+        Estate estate = estateRepository.findByIdAndUserId(id, userService.getUserId());
+        if (Objects.isNull(estate)) {
+            throw new RuntimeException("Estate not found");
+        }
+
+        modelMapper.map(estateAddDto, estate);
+
+        // Update or create contact and location separately
+        EstateContact estateContact = estate.getContact();
+        if (estateContact == null) {
+            estateContact = new EstateContact();
+            estate.setContact(estateContact);
+        }
+        modelMapper.map(estateAddDto.getContact(), estateContact);
+
+        EstateLocation estateLocation = estate.getLocation();
+        if (estateLocation == null) {
+            estateLocation = new EstateLocation();
+            estate.setLocation(estateLocation);
+        }
+        modelMapper.map(estateAddDto.getLocation(), estateLocation);
+
+        // Update galleries if present
+        if (!estateAddDto.getEstateGalleries().isEmpty()) {
+            List<EstateGallery> estateGalleries = estate.getEstateGalleries();
+            for (EstateAddGalleryDto estateImageDTO : estateAddDto.getEstateGalleries()) {
+                EstateGallery estateGallery = new EstateGallery();
+                modelMapper.map(estateImageDTO, estateGallery);
+                estateGallery.setGalleryEstate(estate);
+                estateGalleries.add(estateGallery);
+            }
+            estate.setEstateGalleries(estateGalleries);
+        }
+
+        try {
+            estate = estateRepository.save(estate);
+            return modelMapper.map(estate, EstateResponseDto.class);
+        } catch (Exception e) {
+            log.error("Error while updating estate", e);
+            throw new RuntimeException("Error while updating estate", e);
+        }
+    }
+
+    @Override
+    public EstateResponseDto deleteEstate(UUID id) {
+        Estate estate = estateRepository.findByIdAndUserId(id, userService.getUserId());
+        if (Objects.isNull(estate)) {
+            throw new RuntimeException("Estate not found");
+        }
+        try {
+            estateRepository.delete(estate);
+            return modelMapper.map(estate, EstateResponseDto.class);
+        } catch (Exception e) {
+            log.error("Error while deleting estate", e);
+            throw new RuntimeException("Error while deleting estate", e);
+        }
+    }
+
+    @Override
     public EstateSingleResponseDto getEstateById(UUID id) {
         Estate estate = estateRepository.findById(id).orElseThrow(() -> new RuntimeException("Estate not found"));
         EstateSingleResponseDto estateResponseDto = modelMapper.map(estate, EstateSingleResponseDto.class);
@@ -82,6 +144,27 @@ public class EstateServiceImpl implements EstateService {
             estateResponseDto.setEstateFeatures(estateFeatures);
         }
         return estateResponseDto;
+    }
+
+    @Override
+    public Page<EstateResponseDto> getAllEstatesByUser(Integer page, Integer size, String orderBy, String desc) {
+        Pageable pageable = PageRequest.of(page, size, Sort.Direction.fromString(desc), orderBy);
+        Page<Estate> estatePage = estateRepository.findAllByUserId(userService.getUserId(), pageable);
+        List<Estate> estates = estatePage.getContent();
+        if (!estates.isEmpty()) {
+            return new PageImpl<>(estates.stream().map(estate -> modelMapper.map(estate, EstateResponseDto.class)).collect(Collectors.toList()), pageable, estatePage.getTotalElements());
+        }
+        return new PageImpl<>(new ArrayList<>(), pageable, 0);
+    }
+
+    @Override
+    public List<EstateResponseDto> getRecentListings(Integer limit) {
+        Pageable pageable = PageRequest.of(0, limit > 50 ? 8 : limit);
+        List<Estate> estates = estateRepository.findAllByOrderByCreatedAtDesc(pageable);
+        if (!estates.isEmpty()) {
+            return estates.stream().map(estate -> modelMapper.map(estate, EstateResponseDto.class)).collect(Collectors.toList());
+        }
+        return new ArrayList<>();
     }
 
     @Override

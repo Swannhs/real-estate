@@ -31,4 +31,16 @@ ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL PRIVILEGES ON TABLES TO fort
 -- Create the "auth-service" database (errors if it already exists)
 CREATE DATABASE "auth-service";
 
--- CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+-- Connect to "static-data-service" and create the extension if it doesn't exist
+\c "static-data-service"
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+
+-- Repeat the above for other databases:
+\c "estate-service"
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+
+\c "user-service"
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+
+\c "auth-service"
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";

@@ -1,6 +1,6 @@
 -- liquibase formatted sql
 
--- changeset swann:1703239372782-1
+-- changeset swann:1703323300538-1
 CREATE TABLE canton_name_variations
 (
     id      UUID DEFAULT uuid_generate_v4() NOT NULL,
@@ -8,7 +8,7 @@ CREATE TABLE canton_name_variations
     CONSTRAINT pk_canton_name_variations PRIMARY KEY (id)
 );
 
--- changeset swann:1703239372782-2
+-- changeset swann:1703323300538-2
 CREATE TABLE estate
 (
     id                          UUID    DEFAULT uuid_generate_v4() NOT NULL,
@@ -38,7 +38,7 @@ CREATE TABLE estate
     is_active                   BOOLEAN DEFAULT TRUE,
     is_published                BOOLEAN DEFAULT FALSE,
     is_deleted                  BOOLEAN DEFAULT FALSE,
-    user_id                     VARCHAR(255),
+    user_id                     UUID,
     estate_contact_id           UUID    DEFAULT uuid_generate_v4(),
     location_id                 UUID    DEFAULT uuid_generate_v4(),
     estate_search_property_id   UUID    DEFAULT uuid_generate_v4(),
@@ -46,7 +46,7 @@ CREATE TABLE estate
     CONSTRAINT pk_estate PRIMARY KEY (id)
 );
 
--- changeset swann:1703239372782-3
+-- changeset swann:1703323300538-3
 CREATE TABLE estate_contact
 (
     id                UUID    DEFAULT uuid_generate_v4() NOT NULL,
@@ -57,14 +57,14 @@ CREATE TABLE estate_contact
     CONSTRAINT pk_estate_contact PRIMARY KEY (id)
 );
 
--- changeset swann:1703239372782-4
+-- changeset swann:1703323300538-4
 CREATE TABLE estate_features
 (
     estate_id  UUID DEFAULT uuid_generate_v4() NOT NULL,
     feature_id UUID
 );
 
--- changeset swann:1703239372782-5
+-- changeset swann:1703323300538-5
 CREATE TABLE estate_gallery
 (
     id                    UUID    DEFAULT uuid_generate_v4() NOT NULL,
@@ -77,7 +77,7 @@ CREATE TABLE estate_gallery
     CONSTRAINT pk_estate_gallery PRIMARY KEY (id)
 );
 
--- changeset swann:1703239372782-6
+-- changeset swann:1703323300538-6
 CREATE TABLE estate_location
 (
     id              UUID DEFAULT uuid_generate_v4() NOT NULL,
@@ -91,7 +91,7 @@ CREATE TABLE estate_location
     CONSTRAINT pk_estate_location PRIMARY KEY (id)
 );
 
--- changeset swann:1703239372782-7
+-- changeset swann:1703323300538-7
 CREATE TABLE estate_rules
 (
     id                           UUID DEFAULT uuid_generate_v4() NOT NULL,
@@ -104,7 +104,7 @@ CREATE TABLE estate_rules
     CONSTRAINT pk_estate_rules PRIMARY KEY (id)
 );
 
--- changeset swann:1703239372782-8
+-- changeset swann:1703323300538-8
 CREATE TABLE estate_search_priority
 (
     id         UUID DEFAULT uuid_generate_v4() NOT NULL,
@@ -114,7 +114,7 @@ CREATE TABLE estate_search_priority
     CONSTRAINT pk_estate_search_priority PRIMARY KEY (id)
 );
 
--- changeset swann:1703239372782-9
+-- changeset swann:1703323300538-9
 CREATE TABLE estate_search_property
 (
     estate_id          UUID DEFAULT uuid_generate_v4() NOT NULL,
@@ -122,7 +122,7 @@ CREATE TABLE estate_search_property
     CONSTRAINT pk_estate_search_property PRIMARY KEY (estate_id, search_property_id)
 );
 
--- changeset swann:1703239372782-10
+-- changeset swann:1703323300538-10
 CREATE TABLE estate_sticker
 (
     id            UUID DEFAULT uuid_generate_v4() NOT NULL,
@@ -133,7 +133,7 @@ CREATE TABLE estate_sticker
     CONSTRAINT pk_estate_sticker PRIMARY KEY (id)
 );
 
--- changeset swann:1703239372782-11
+-- changeset swann:1703323300538-11
 CREATE TABLE estate_sticker_estate_type
 (
     estate_sticker_id UUID DEFAULT uuid_generate_v4() NOT NULL,
@@ -141,7 +141,7 @@ CREATE TABLE estate_sticker_estate_type
     CONSTRAINT pk_estate_sticker_estate_type PRIMARY KEY (estate_sticker_id, estate_type_id)
 );
 
--- changeset swann:1703239372782-12
+-- changeset swann:1703323300538-12
 CREATE TABLE estate_wish_list
 (
     id         UUID DEFAULT uuid_generate_v4() NOT NULL,
@@ -152,63 +152,63 @@ CREATE TABLE estate_wish_list
     CONSTRAINT pk_estate_wish_list PRIMARY KEY (id)
 );
 
--- changeset swann:1703239372782-13
+-- changeset swann:1703323300538-13
 ALTER TABLE estate
     ADD CONSTRAINT uc_estate_estate_contact UNIQUE (estate_contact_id);
 
--- changeset swann:1703239372782-14
+-- changeset swann:1703323300538-14
 ALTER TABLE estate
     ADD CONSTRAINT uc_estate_location UNIQUE (location_id);
 
--- changeset swann:1703239372782-15
+-- changeset swann:1703323300538-15
 ALTER TABLE estate_rules
     ADD CONSTRAINT uc_estate_rules_estate UNIQUE (estate_id);
 
--- changeset swann:1703239372782-16
+-- changeset swann:1703323300538-16
 ALTER TABLE estate_search_priority
     ADD CONSTRAINT uc_estate_search_priority_priority UNIQUE (priority);
 
--- changeset swann:1703239372782-17
+-- changeset swann:1703323300538-17
 ALTER TABLE estate_gallery
     ADD CONSTRAINT FK_ESTATE_GALLERY_ON_ESTATE FOREIGN KEY (estate_id) REFERENCES estate (id);
 
--- changeset swann:1703239372782-18
+-- changeset swann:1703323300538-18
 ALTER TABLE estate
     ADD CONSTRAINT FK_ESTATE_ON_ESTATE_CONTACT FOREIGN KEY (estate_contact_id) REFERENCES estate_contact (id);
 
--- changeset swann:1703239372782-19
+-- changeset swann:1703323300538-19
 ALTER TABLE estate
     ADD CONSTRAINT FK_ESTATE_ON_ESTATE_SEARCH_PROPERTY FOREIGN KEY (estate_search_property_id) REFERENCES estate_search_priority (id);
 
--- changeset swann:1703239372782-20
+-- changeset swann:1703323300538-20
 ALTER TABLE estate
     ADD CONSTRAINT FK_ESTATE_ON_LOCATION FOREIGN KEY (location_id) REFERENCES estate_location (id);
 
--- changeset swann:1703239372782-21
+-- changeset swann:1703323300538-21
 ALTER TABLE estate_rules
     ADD CONSTRAINT FK_ESTATE_RULES_ON_ESTATE FOREIGN KEY (estate_id) REFERENCES estate (id);
 
--- changeset swann:1703239372782-22
+-- changeset swann:1703323300538-22
 ALTER TABLE estate_wish_list
     ADD CONSTRAINT FK_ESTATE_WISH_LIST_ON_ESTATE FOREIGN KEY (estate_id) REFERENCES estate (id);
 
--- changeset swann:1703239372782-23
+-- changeset swann:1703323300538-23
 ALTER TABLE estate_features
     ADD CONSTRAINT fk_estate_features_on_estate FOREIGN KEY (estate_id) REFERENCES estate (id);
 
--- changeset swann:1703239372782-24
+-- changeset swann:1703323300538-24
 ALTER TABLE estate_search_property
     ADD CONSTRAINT fk_estseapro_on_estate FOREIGN KEY (estate_id) REFERENCES estate (id);
 
--- changeset swann:1703239372782-25
+-- changeset swann:1703323300538-25
 ALTER TABLE estate_search_property
     ADD CONSTRAINT fk_estseapro_on_estate_sticker FOREIGN KEY (search_property_id) REFERENCES estate_sticker (id);
 
--- changeset swann:1703239372782-26
+-- changeset swann:1703323300538-26
 ALTER TABLE estate_sticker_estate_type
     ADD CONSTRAINT fk_eststiesttyp_on_estate_search_priority FOREIGN KEY (estate_type_id) REFERENCES estate_search_priority (id);
 
--- changeset swann:1703239372782-27
+-- changeset swann:1703323300538-27
 ALTER TABLE estate_sticker_estate_type
     ADD CONSTRAINT fk_eststiesttyp_on_estate_sticker FOREIGN KEY (estate_sticker_id) REFERENCES estate_sticker (id);
 
