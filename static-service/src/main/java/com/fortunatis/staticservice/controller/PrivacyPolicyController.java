@@ -10,7 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/v1/static/manage/privacy-policy")
+@RequestMapping("/api/v1/${spring.application.api-prefix}/manage/privacy-policy")
 @RequiredArgsConstructor
 @Tag(name = "Privacy Policy Settings", description = "Manage privacy policy settings")
 public class PrivacyPolicyController {

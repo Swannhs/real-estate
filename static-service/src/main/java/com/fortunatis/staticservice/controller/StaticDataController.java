@@ -15,7 +15,7 @@ import java.util.UUID;
 import static com.fortunatis.staticservice.util.Constants.PUBLIC_URL_PREFIX;
 
 @RestController
-@RequestMapping(PUBLIC_URL_PREFIX + "/api/v1/static")
+@RequestMapping(PUBLIC_URL_PREFIX + "/api/v1/${spring.application.api-prefix}")
 @RequiredArgsConstructor
 @Tag(name = "Public Static Data", description = "Public Static Data Resources")
 public class StaticDataController {
@@ -91,5 +91,17 @@ public class StaticDataController {
     @Operation(summary = "Get general terms and conditions")
     public ResponseEntity<?> getGeneralTermsAndConditions() {
         return ResponseEntity.ok(staticDataService.getGeneralTermsAndConditions());
+    }
+
+    @GetMapping("/stickers")
+    @Operation(summary = "Get all stickers")
+    public ResponseEntity<?> getStickers() {
+        return ResponseEntity.ok(staticDataService.getStickers());
+    }
+
+    @GetMapping("/stickers/{stickerId}")
+    @Operation(summary = "Get sticker by id")
+    public ResponseEntity<?> getStickerById(@PathVariable UUID stickerId) {
+        return ResponseEntity.ok(staticDataService.getStickerById(stickerId));
     }
 }

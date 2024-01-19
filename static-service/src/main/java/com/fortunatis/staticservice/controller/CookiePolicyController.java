@@ -10,7 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/v1/static/manage/cookie-policy")
+@RequestMapping("/api/v1/${spring.application.api-prefix}/manage/cookie-policy")
 @RequiredArgsConstructor
 @Tag(name = "Cookie Policy", description = "Manage Cookie Policy")
 public class CookiePolicyController {

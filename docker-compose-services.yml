@@ -55,36 +55,19 @@ services:
     restart: on-failure
     network_mode: "host"
 
-
-  #  client-ui-service:
-  #    container_name: client-ui-service
-  #    build:
-  #      context: ./client-ui-service
-  #      dockerfile: Dockerfile
-  #    volumes:
-  #      - ./client-ui-service:/app
-  #    depends_on:
-  #      - keycloak
-  #    network_mode: "host"
-
-#  client-ui-react:
-#    container_name: client-ui-react
-#    build:
-#      context: ./client-ui-react
-#      dockerfile: Dockerfile
-#    volumes:
-#      - ./client-ui-react:/app
-#    depends_on:
-#      - keycloak
-#    network_mode: "host"
-
-#  admin-ui-service:
-#    container_name: admin-ui-service
-#    build:
-#      context: ./admin-ui-service
-#      dockerfile: Dockerfile
-#    volumes:
-#      - ./admin-ui-service:/app
-#    depends_on:
-#      - keycloak
-#    network_mode: "host"
+  email-service:
+    container_name: email-service
+    image: email-service
+    build:
+      context: email-service
+      dockerfile: Dockerfile
+    environment:
+      SPRING_PROFILES_ACTIVE: 'docker'
+    volumes:
+      - ./email-service:/app
+      - ~/.m2:/root/.m2
+    depends_on:
+      - mysql
+      - keycloak
+    restart: on-failure
+    network_mode: "host"

@@ -1,7 +1,8 @@
-.idea
+.idea/
 realestate-microservice.iml
 .jpb
 data
 client-ui-react/node_modules
-admin-ui-service/node_modules
-client-ui-service/node_modules
+admin-ui/node_modules
+client-ui/node_modules
+.vscode

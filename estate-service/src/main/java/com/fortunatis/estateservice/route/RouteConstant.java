@@ -10,5 +10,7 @@ public class RouteConstant {
             PUBLIC_URL_PREFIX + "/v1/estates/**"
     };
     public static final String[] USER_ROUTES = {};
-    public static final String[] ADMIN_ROUTES = {};
+    public static final String[] ADMIN_ROUTES = {
+            "/v1/admin/**",
+    };
 }

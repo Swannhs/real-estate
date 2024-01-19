@@ -1,0 +1,33 @@
+spring:
+  application:
+    name: email-service
+    api-prefix: email-api
+  profiles:
+    active: dev
+  datasource:
+    url: jdbc:mysql://localhost:3306/email-service
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  quartz:
+    job-store-type: jdbc
+    jdbc:
+      initialize-schema: embedded
+    properties:
+      org:
+        quartz:
+          jobStore:
+            isClustered: true
+          scheduler:
+            instanceId: AUTO
+          threadPool:
+            threadCount: 5
+server:
+  port: 8184
+
+springfox:
+  documentation:
+    type: swagger_2
+    enabled: true  # Set false to disable
+  swagger-ui:
+    base-url: /swagger-ui/  # URL to access swagger UI

@@ -1,21 +1,6 @@
 spring:
   application:
     name: estate-service
-  config:
-    import: "optional:consul:${spring.cloud.consul.host}:${spring.cloud.consul.port}/"
-  cloud:
-    consul:
-      host: localhost
-      port: 8500
-      discovery:
-        prefer-ip-address: true
-        instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
-        service-name: ${spring.application.name}
-        health-check-path: /actuator/health
-        health-check-interval: 10s
-        health-check-timeout: 5s
-      config:
-        enabled: true
   profiles:
     active: dev
   datasource:
