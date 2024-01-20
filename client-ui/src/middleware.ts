@@ -38,3 +38,13 @@ export default function middleware(req: NextRequest) {
 export const config = {
     matcher: ["/((?!api|_next|.*\\..*).*)"],
 };
+import KeycloakProvider from "next-auth/providers/keycloak";
+// ...
+// providers: [
+//     KeycloakProvider({
+//         clientId: process.env.KEYCLOAK_ID,
+//         clientSecret: process.env.KEYCLOAK_SECRET,
+//         issuer: process.env.KEYCLOAK_ISSUER,
+//     })
+// ]
+// ...

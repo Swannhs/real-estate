@@ -1,6 +1,7 @@
 'use client'
 
 import React, {FC} from "react";
+import { useSession, signIn, signOut } from "next-auth/react";
 import Logo from "@/shared/Logo";
 import Link from "next/link";
 import MenuBar from "@/shared/MenuBar";
@@ -14,6 +15,7 @@ export interface MainNav2Props {
 
 const MainNav2: FC<MainNav2Props> = ({className = ""}) => {
     const t = useTranslations("Index");
+    const {data: session, status} = useSession();
 
     // const {isAuthenticated} = useAuth();
     // const location = useLocation();
@@ -60,7 +62,7 @@ const MainNav2: FC<MainNav2Props> = ({className = ""}) => {
                                 <Link
                                     href='/wish-list'
                                     className="text-opacity-90 px-4 group py-2 hover:border-neutral-400 dark:border-neutral-700 rounded-full inline-flex items-center text-sm text-gray-700 dark:text-neutral-300 font-medium hover:text-opacity-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
-                                    {t('wish-list')}
+                                    Wish List
                                 </Link>
                             </li>
                             {/*<li className="inline-block">*/}
@@ -97,11 +99,12 @@ const MainNav2: FC<MainNav2Props> = ({className = ""}) => {
                             </Link>
                         </div> */}
                         <div></div>
-                        <Link
+                        <button
                             className='border-x-4 border-y-2 border-cyan-500 hover:text-green-500 nc-Button relative h-auto inline-flex items-center justify-center rounded-full transition-colors py-1 px-4'
-                            href="/login">
+                            onClick={() => {signIn('keycloak')}}
+                        >
                             {t('Login')}
-                        </Link>
+                        </button>
                     </div>
                     <div className="flex items-center space-x-2 md:hidden">
                         {/*{*/}
