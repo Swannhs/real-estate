@@ -1,6 +1,6 @@
 package com.fortunatis.estateservice.route;
 
-import static com.fortunatis.estateservice.util.ApplicationConstants.PUBLIC_URL_PREFIX;
+import static com.fortunatis.estateservice.utils.ApplicationConstants.PUBLIC_URL_PREFIX;
 
 public class RouteConstant {
     public static final String[] PUBLIC_ROUTES = {

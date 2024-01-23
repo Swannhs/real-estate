@@ -50,5 +50,11 @@ services:
       - mysql
     network_mode: "host"
 
-networks:
-  swann_network:
+  krakend:
+    container_name: krakend
+    image: devopsfaith/krakend:latest
+    volumes:
+      - ./krakend/krakend.json:/etc/krakend/krakend.json
+    environment:
+      - DEBUG=1
+    network_mode: "host"

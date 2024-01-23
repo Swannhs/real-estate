@@ -1,4 +1,4 @@
-package com.fortunatis.estateservice.util;
+package com.fortunatis.estateservice.utils;
 
 import com.fortunatis.estateservice.pojo.request.EstateSearchDto;
 import lombok.RequiredArgsConstructor;
@@ -13,7 +13,7 @@ import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static com.fortunatis.estateservice.util.ApplicationConstants.ENTRIES_PER_PAGE;
+import static com.fortunatis.estateservice.utils.ApplicationConstants.ENTRIES_PER_PAGE;
 
 @Component
 @RequiredArgsConstructor

@@ -15,7 +15,7 @@ import java.util.UUID;
 @RequestMapping("/v1/wishlist")
 @Slf4j
 @RequiredArgsConstructor
-@Tag(name = "Wishlist", description = "REST Resource for Wishlist")
+@Tag(name = "Wishlist Controller", description = "REST Resource for Wishlist")
 public class WishListController {
     private final WishListService wishListService;
 

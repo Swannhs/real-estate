@@ -1,11 +1,11 @@
-package com.fortunatis.estateservice.security;
+package com.fortunatis.emailservice.security;
 
-import com.fortunatis.estateservice.converter.KeycloakRoleConverter;
-import com.fortunatis.estateservice.filter.CsrfCookieFilter;
-import lombok.RequiredArgsConstructor;
+import com.fortunatis.emailservice.converter.KeycloakRoleConverter;
+import com.fortunatis.emailservice.filter.CsrfCookieFilter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -21,13 +21,17 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import java.util.Collections;
 import java.util.List;
 
-import static com.fortunatis.estateservice.route.RouteConstant.*;
-
 @Configuration
 @EnableWebSecurity
+@EnableMethodSecurity
 @Slf4j
-@RequiredArgsConstructor
 public class SecurityConfig {
+    private final String[] PUBLIC_ROUTES = {
+            "/swagger-ui/**",
+            "/v3/api-docs/**",
+            "/actuator/**"
+    };
+
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
@@ -35,7 +39,7 @@ public class SecurityConfig {
         config.setAllowedMethods(Collections.singletonList("*"));
         config.setAllowCredentials(true);
         config.setAllowedHeaders(Collections.singletonList("*"));
-        config.setExposedHeaders(List.of("Authorization", "Content-Type"));
+        config.setExposedHeaders(List.of("Authorization"));
         config.setMaxAge(3600L);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
@@ -55,15 +59,13 @@ public class SecurityConfig {
                 .addFilterAfter(new CsrfCookieFilter(), BasicAuthenticationFilter.class)
                 .authorizeHttpRequests(requests -> requests
                         .requestMatchers(PUBLIC_ROUTES).permitAll()
-                        .requestMatchers(USER_ROUTES).hasRole("USER")
-                        .requestMatchers(ADMIN_ROUTES).hasRole("ADMIN")
+                        .requestMatchers("/api/**").hasRole("realm-admin") // This role is only available in the realm-management client
                         .anyRequest().authenticated())
                 .oauth2ResourceServer(oauth2ResourceServerCustomizer ->
                         oauth2ResourceServerCustomizer.jwt(jwtCustomizer ->
                                 jwtCustomizer.jwtAuthenticationConverter(new JwtAuthenticationConverter() {{
                                     setJwtGrantedAuthoritiesConverter(new KeycloakRoleConverter());
                                 }})));
-
         return http.build();
     }
 }

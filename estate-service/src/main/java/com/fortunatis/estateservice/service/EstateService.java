@@ -19,4 +19,5 @@ public interface EstateService {
     Page<EstateResponseDto> getAllEstatesByUser(Integer page, Integer size, String orderBy, String desc);
     List<EstateResponseDto> getRecentListings(Integer limit);
     Estate getEstateByEstateId(UUID id);
+    EstateSingleResponseDto getUserEstateById(UUID id);
 }

@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
 
-import static com.fortunatis.estateservice.util.ApplicationConstants.STATIC_API_URL;
+import static com.fortunatis.estateservice.utils.ApplicationConstants.STATIC_API_URL;
 
 @Component
 @RequiredArgsConstructor

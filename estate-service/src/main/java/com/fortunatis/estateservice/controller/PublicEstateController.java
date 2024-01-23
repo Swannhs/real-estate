@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
 
-import static com.fortunatis.estateservice.util.ApplicationConstants.PUBLIC_URL_PREFIX;
+import static com.fortunatis.estateservice.utils.ApplicationConstants.PUBLIC_URL_PREFIX;
 
 @RestController
 @RequestMapping(PUBLIC_URL_PREFIX + "/v1/estates")

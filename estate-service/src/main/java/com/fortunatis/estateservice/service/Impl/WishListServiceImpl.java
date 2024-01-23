@@ -9,7 +9,7 @@ import com.fortunatis.estateservice.repository.WishListRepository;
 import com.fortunatis.estateservice.service.EstateService;
 import com.fortunatis.estateservice.service.UserService;
 import com.fortunatis.estateservice.service.WishListService;
-import com.fortunatis.estateservice.util.UtilityService;
+import com.fortunatis.estateservice.utils.UtilityService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
