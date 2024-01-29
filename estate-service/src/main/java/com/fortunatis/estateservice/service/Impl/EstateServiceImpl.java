@@ -7,7 +7,6 @@ import com.fortunatis.estateservice.pojo.request.EstateAddGalleryDto;
 import com.fortunatis.estateservice.pojo.request.EstateSearchDto;
 import com.fortunatis.estateservice.pojo.response.EstateResponseDto;
 import com.fortunatis.estateservice.pojo.response.EstateSingleResponseDto;
-import com.fortunatis.estateservice.pojo.response.staticService.FeaturesResponseDto;
 import com.fortunatis.estateservice.repository.CantonNameVariationsRepository;
 import com.fortunatis.estateservice.repository.EstateRepository;
 import com.fortunatis.estateservice.service.CustomDAOService;

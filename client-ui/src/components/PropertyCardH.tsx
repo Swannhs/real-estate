@@ -19,10 +19,11 @@ const PropertyCardH: FC<PropertyCardHProps> = ({
                                                    className = "",
                                                    data = DEMO_DATA,
                                                }) => {
+    const href = '/property/1'
     const {
         galleryImgs,
         title,
-        href,
+        // href,
         like,
         saleOff,
         isAds,
@@ -54,32 +55,32 @@ const PropertyCardH: FC<PropertyCardHProps> = ({
         return (
             <div className="inline-grid grid-cols-3 gap-2">
                 <div className="flex items-center space-x-2">
-          <span className="hidden sm:inline-block">
-            <i className="las la-bed text-lg"></i>
-          </span>
+                  <span className="hidden sm:inline-block">
+                    <i className="las la-bed text-lg"></i>
+                  </span>
                     <span className="text-xs text-neutral-500 dark:text-neutral-400">
-            6 beds
-          </span>
+                    6 beds
+                  </span>
                 </div>
 
                 {/* ---- */}
                 <div className="flex items-center space-x-2">
-          <span className="hidden sm:inline-block">
-            <i className="las la-bath text-lg"></i>
-          </span>
+                  <span className="hidden sm:inline-block">
+                    <i className="las la-bath text-lg"></i>
+                  </span>
                     <span className="text-xs text-neutral-500 dark:text-neutral-400">
-            3 baths
-          </span>
+                    3 baths
+                  </span>
                 </div>
 
                 {/* ---- */}
                 <div className="flex items-center space-x-2">
-          <span className="hidden sm:inline-block">
-            <i className="las la-expand-arrows-alt text-lg"></i>
-          </span>
+                    <span className="hidden sm:inline-block">
+                        <i className="las la-expand-arrows-alt text-lg"></i>
+                    </span>
                     <span className="text-xs text-neutral-500 dark:text-neutral-400">
-            1200 Sq. Fit
-          </span>
+                        1200 Sq. Fit
+                    </span>
                 </div>
             </div>
         );
@@ -120,8 +121,8 @@ const PropertyCardH: FC<PropertyCardHProps> = ({
                         <StartRating reviewCount={reviewCount} point={reviewStart}/>
                         <span
                             className="flex items-center justify-center px-2.5 py-1.5 border-2 border-secondary-500 rounded-lg leading-none text-sm font-medium text-secondary-500">
-              {`${price},000`}
-            </span>
+                          {`${price},000`}
+                        </span>
                     </div>
                 </div>
             </div>

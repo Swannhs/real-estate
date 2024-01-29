@@ -9,8 +9,6 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.reactive.function.client.WebClient;
 
-import static com.fortunatis.estateservice.utils.ApplicationConstants.EMAIL_API_URL;
-
 @Component
 @RequiredArgsConstructor
 public class EmailApiClient {
@@ -20,17 +18,12 @@ public class EmailApiClient {
     private String keycloakClientId;
     @Value("${service.param.keycloak-service.client-secret}")
     private String keycloakClientSecret;
-    private final WebClient webClient;
-
-    public EmailApiClient() {
-        this.webClient = WebClient.builder()
-                .baseUrl(EMAIL_API_URL)
-                .build();
-    }
+    @Value("${service.param.email-service.base-url}")
+    private String emailServiceBaseUrl;
 
     public WebClient getClient() {
         return WebClient.builder()
-                .baseUrl(EMAIL_API_URL)
+                .baseUrl(emailServiceBaseUrl)
                 .defaultHeader("Authorization", "Bearer " + generateKeycloakClientToken().getAccessToken())
                 .defaultHeader("Content-Type", "application/json")
                 .build();
@@ -42,7 +35,7 @@ public class EmailApiClient {
         formData.add("client_id", keycloakClientId);
         formData.add("client_secret", keycloakClientSecret);
 
-        return webClient
+        return getClient()
                 .post()
                 .uri(keycloakTokenUrl)
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)

@@ -1,8 +1,8 @@
-import NextAuth, { Account, NextAuthOptions, Profile, User } from "next-auth";
+import NextAuth, {Account, NextAuthOptions, Profile, User} from "next-auth";
 import KeycloakProvider from "next-auth/providers/keycloak";
-import { jwtDecode } from "jwt-decode";
-import { encrypt } from "@/utils/encryption";
-import { AdapterUser } from "next-auth/adapters";
+import {jwtDecode} from "jwt-decode";
+import {encrypt} from "@/utils/encryption";
+import {AdapterUser} from "next-auth/adapters";
 
 interface Token {
     access_token?: string;
@@ -15,7 +15,7 @@ interface Token {
 
 async function refreshAccessToken(token: Token) {
     const resp = await fetch(`${process.env.REFRESH_TOKEN_URL}`, {
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        headers: {"Content-Type": "application/x-www-form-urlencoded"},
         body: new URLSearchParams({
             client_id: process.env.NEXT_KEYCLOAK_CLIENT_ID as string,
             client_secret: process.env.NEXT_KEYCLOAK_CLIENT_SECRET as string,
@@ -103,7 +103,7 @@ export const authOptions: NextAuthOptions = {
                     return refreshedToken;
                 } catch (error) {
                     console.error("Error refreshing access token", error);
-                    return { ...params.token, error: "RefreshAccessTokenError" } as Token;
+                    return {...params.token, error: "RefreshAccessTokenError"} as Token;
                 }
             }
         },
@@ -120,4 +120,4 @@ export const authOptions: NextAuthOptions = {
 
 const handler = NextAuth(authOptions);
 
-export { handler as GET, handler as POST };
+export {handler as GET, handler as POST};

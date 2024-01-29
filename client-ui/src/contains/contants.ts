@@ -1,3 +1,5 @@
+import process from "process";
+
 const avatarColors = [
     "#ffdd00",
     "#fbb034",
@@ -27,4 +29,9 @@ const avatarColors = [
     "#E208A7",
 ];
 
-export {avatarColors};
+const API_PATHS = {
+    BASE_URL: process.env.NEXT_PUBLIC_API_GATEWAY_URL,
+    IMAGE_URL_PREFIX_BY_USER: `${process.env.NEXT_PUBLIC_API_GATEWAY_URL}/${process.env.NEXT_PUBLIC_ESTATE_SERVICE_PREFIX}/public/v1/uploads/users/`,
+}
+
+export {avatarColors, API_PATHS};

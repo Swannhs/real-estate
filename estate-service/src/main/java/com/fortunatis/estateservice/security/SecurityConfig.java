@@ -33,7 +33,6 @@ public class SecurityConfig {
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowedOrigins(Collections.singletonList("*"));
         config.setAllowedMethods(Collections.singletonList("*"));
-        config.setAllowCredentials(true);
         config.setAllowedHeaders(Collections.singletonList("*"));
         config.setExposedHeaders(List.of("Authorization", "Content-Type"));
         config.setMaxAge(3600L);
@@ -57,7 +56,7 @@ public class SecurityConfig {
                         .requestMatchers(PUBLIC_ROUTES).permitAll()
                         .requestMatchers(USER_ROUTES).hasRole("USER")
                         .requestMatchers(ADMIN_ROUTES).hasRole("ADMIN")
-                        .anyRequest().authenticated())
+                        .anyRequest().permitAll())
                 .oauth2ResourceServer(oauth2ResourceServerCustomizer ->
                         oauth2ResourceServerCustomizer.jwt(jwtCustomizer ->
                                 jwtCustomizer.jwtAuthenticationConverter(new JwtAuthenticationConverter() {{

@@ -10,25 +10,27 @@ import Link from "next/link";
 
 export interface GallerySliderProps {
     className?: string;
-    galleryImgs: (StaticImageData | string)[];
+    galleryImgs: string[];
     ratioClass?: string;
     uniqueID: string;
     href?: string;
     imageClass?: string;
     galleryClass?: string;
     navigation?: boolean;
+    alt?: string;
 }
 
 export default function GallerySlider({
-                                          className = "",
-                                          galleryImgs,
-                                          ratioClass = "aspect-w-4 aspect-h-3",
-                                          imageClass = "",
-                                          uniqueID = "uniqueID",
-                                          galleryClass = "rounded-xl",
-                                          href = "/listing-stay-detail",
-                                          navigation = true,
-                                      }: GallerySliderProps) {
+    className = "",
+    galleryImgs,
+    ratioClass = "aspect-w-4 aspect-h-3",
+    imageClass = "",
+    uniqueID = "uniqueID",
+    galleryClass = "rounded-xl",
+    href = "/listing-stay-detail",
+    navigation = true,
+    alt = "listing card gallery",
+}: GallerySliderProps) {
     const [loaded, setLoaded] = useState(false);
     const [index, setIndex] = useState(0);
     const [direction, setDirection] = useState(0);
@@ -89,7 +91,7 @@ export default function GallerySlider({
                                 <Image
                                     src={currentImage || ""}
                                     fill
-                                    alt="listing card gallery"
+                                    alt={alt}
                                     className={`object-cover ${imageClass}`}
                                     onLoadingComplete={() => setLoaded(true)}
                                     sizes="(max-width: 1025px) 100vw, 300px"

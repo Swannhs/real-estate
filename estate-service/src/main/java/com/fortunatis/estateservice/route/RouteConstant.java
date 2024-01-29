@@ -7,7 +7,8 @@ public class RouteConstant {
             "/swagger-ui/**",
             "/v3/api-docs/**",
             "/actuator/**",
-            PUBLIC_URL_PREFIX + "/v1/estates/**"
+            PUBLIC_URL_PREFIX + "/v1/estates/**",
+            PUBLIC_URL_PREFIX + "/v1/uploads/**",
     };
     public static final String[] USER_ROUTES = {};
     public static final String[] ADMIN_ROUTES = {

@@ -26,7 +26,12 @@ service:
     static-service:
       base-url: http://localhost:8181
       public-prefix: /public
-      endpoint-prefix: /api/v1/static-api
+      endpoint-prefix: /api/v1
+    user-service:
+      base-url: http://localhost:8183
+    email-service:
+      base-url: http://localhost:8184
+      endpoint-prefix: /api/v1
     file-storage:
       dir: https://fotunatishome.s3.amazonaws.com/
       users-dir: fortunatis-real-estate/uploads/users/
