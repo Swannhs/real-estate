@@ -13,7 +13,6 @@ export async function getRecentListings() {
 }
 
 export async function getEstateById(id: string) {
-    console.log('getEstateById', id);
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_GATEWAY_URL}/estate-api/public/v1/estates/${id}`, {
         method: 'GET',
         headers: {

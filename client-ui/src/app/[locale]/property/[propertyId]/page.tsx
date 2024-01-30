@@ -161,10 +161,10 @@ export default async function PropertyDetailPage({params}: { params: { propertyI
                 {/* MAP */}
                 <div className="aspect-w-5 aspect-h-5 sm:aspect-h-3">
                     <div className="rounded-xl overflow-hidden">
-                        <GoogleMapLocation
-                            lat={property?.location?.lat as unknown as number}
-                            lng={property?.location?.lng as unknown as number}
-                        />
+                        {/*<GoogleMapLocation*/}
+                        {/*    lat={property?.location?.lat as unknown as number}*/}
+                        {/*    lng={property?.location?.lng as unknown as number}*/}
+                        {/*/>*/}
                     </div>
                 </div>
             </div>
@@ -174,7 +174,7 @@ export default async function PropertyDetailPage({params}: { params: { propertyI
     return (
         <div className="nc-ListingStayDetailPage">
             {/*  HEADER */}
-            <header className="rounded-md sm:rounded-xl">
+            <header className="container 2xl:px-14 rounded-md sm:rounded-xl">
                 <div className="relative grid grid-cols-3 sm:grid-cols-4 gap-1 sm:gap-2">
                     <div
                         className="col-span-2 row-span-3 sm:row-span-2 relative rounded-md sm:rounded-xl overflow-hidden cursor-pointer"
@@ -231,7 +231,7 @@ export default async function PropertyDetailPage({params}: { params: { propertyI
                 </div>
             </header>
 
-            <main className=" relative z-10 mt-11 flex flex-col lg:flex-row ">
+            <main className="container relative z-10 mt-11 flex flex-col lg:flex-row">
                 {/* CONTENT */}
                 <div className="w-full lg:w-3/5 xl:w-2/3 space-y-8 lg:space-y-10 lg:pr-10">
                     {availabilitySection()}

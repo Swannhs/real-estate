@@ -3,6 +3,7 @@ import KeycloakProvider from "next-auth/providers/keycloak";
 import {jwtDecode} from "jwt-decode";
 import {encrypt} from "@/utils/encryption";
 import {AdapterUser} from "next-auth/adapters";
+import process from "process";
 
 interface Token {
     access_token?: string;
@@ -14,7 +15,7 @@ interface Token {
 }
 
 async function refreshAccessToken(token: Token) {
-    const resp = await fetch(`${process.env.REFRESH_TOKEN_URL}`, {
+    const resp = await fetch(`${process.env.NEXT_KEYCLOAK_ISSUER}/protocol/openid-connect/token`, {
         headers: {"Content-Type": "application/x-www-form-urlencoded"},
         body: new URLSearchParams({
             client_id: process.env.NEXT_KEYCLOAK_CLIENT_ID as string,

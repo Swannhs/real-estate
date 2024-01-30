@@ -1,23 +1,59 @@
+"use client";
+
 import {Popover, Transition} from "@headlessui/react";
 import {Fragment} from "react";
 import Avatar from "@/shared/Avatar";
 import SwitchDarkMode2 from "@/shared/SwitchDarkMode2";
 import Link from "next/link";
+import {signOut, useSession} from "next-auth/react";
 
 interface Props {
+    isLoading?: boolean;
     className?: string;
 }
 
-export default function AvatarDropdown({className = ""}: Props) {
+async function keycloakSessionLogout() {
+    try {
+        await fetch("/api/auth/logout", {method: "GET"});
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+export default function AvatarDropdown({isLoading = false, className = ""}: Props) {
+    const {data: session} = useSession();
+
+    const handleLogout = async () => {
+        keycloakSessionLogout()
+            .then(() => {
+                signOut({callbackUrl: "/"});
+            })
+            .catch((error: any) => {
+                console.error(error);
+            });
+    };
+
+    if (isLoading) {
+        return (
+            <div className={`AvatarDropdown relative flex ${className}`}>
+                <div
+                    className="self-center w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-neutral-200 dark:bg-neutral-700 animate-pulse"/>
+            </div>
+        );
+    }
+
     return (
         <>
             <Popover className={`AvatarDropdown relative flex ${className}`}>
-                {({open, close}) => (
+                {({close}) => (
                     <>
                         <Popover.Button
                             className={`self-center w-10 h-10 sm:w-12 sm:h-12 rounded-full text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 focus:outline-none flex items-center justify-center`}
                         >
-                            <Avatar sizeClass="w-8 h-8 sm:w-9 sm:h-9"/>
+                            <Avatar
+                                userName={session?.user?.name as unknown as string}
+                                sizeClass="w-8 h-8 sm:w-9 sm:h-9"
+                            />
                         </Popover.Button>
                         <Transition
                             as={Fragment}
@@ -34,11 +70,15 @@ export default function AvatarDropdown({className = ""}: Props) {
                                     <div
                                         className="relative grid grid-cols-1 gap-6 bg-white dark:bg-neutral-800 py-7 px-6">
                                         <div className="flex items-center space-x-3">
-                                            <Avatar sizeClass="w-12 h-12"/>
+                                            <Avatar
+                                                sizeClass="w-12 h-12"
+                                                userName={session?.user?.name as unknown as string}
+                                            />
 
                                             <div className="flex-grow">
-                                                <h4 className="font-semibold">Eden Smith</h4>
-                                                <p className="text-xs mt-0.5">Los Angeles, CA</p>
+                                                <h4 className="font-semibold">
+                                                    {session?.user?.name}
+                                                </h4>
                                             </div>
                                         </div>
 
@@ -274,7 +314,7 @@ export default function AvatarDropdown({className = ""}: Props) {
                                         <Link
                                             href={"/#"}
                                             className="flex items-center p-2 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
-                                            onClick={() => close()}
+                                            onClick={handleLogout}
                                         >
                                             <div
                                                 className="flex items-center justify-center flex-shrink-0 text-neutral-500 dark:text-neutral-300">
@@ -309,7 +349,9 @@ export default function AvatarDropdown({className = ""}: Props) {
                                                 </svg>
                                             </div>
                                             <div className="ml-4">
-                                                <p className="text-sm font-medium ">{"Log out"}</p>
+                                                <p className="text-sm font-medium">
+                                                    {"Log out"}
+                                                </p>
                                             </div>
                                         </Link>
                                     </div>

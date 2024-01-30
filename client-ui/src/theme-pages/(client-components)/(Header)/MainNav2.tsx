@@ -1,13 +1,14 @@
-'use client'
+"use client";
 
 import React, {FC} from "react";
-import { useSession, signIn, signOut } from "next-auth/react";
+import {signIn, useSession} from "next-auth/react";
 import Logo from "@/shared/Logo";
 import Link from "next/link";
 import MenuBar from "@/shared/MenuBar";
 import LangDropdown from "@/theme-pages/(client-components)/(Header)/LangDropdown";
 import SwitchDarkMode from "@/shared/SwitchDarkMode";
 import {useTranslations} from 'next-intl';
+import AvatarDropdown from "@/theme-pages/(client-components)/(Header)/AvatarDropdown";
 
 export interface MainNav2Props {
     className?: string;
@@ -15,23 +16,9 @@ export interface MainNav2Props {
 
 const MainNav2: FC<MainNav2Props> = ({className = ""}) => {
     const t = useTranslations("Index");
-    const {data: session, status} = useSession();
+    const {status} = useSession();
 
-    // const {isAuthenticated} = useAuth();
     // const location = useLocation();
-    // const [username, setUserName] = React.useState<string>('');
-
-    // useEffect(() => {
-    //     if(isAuthenticated){
-    //         getUserInfoApi()
-    //           .then(({data}: { data: UserDetailsInterface }) => {
-    //               setUserName(data.userName);
-    //           })
-    //           .catch((error: any) => {
-    //               toast.error(error?.response?.data?.message);
-    //           })
-    //     }
-    // }, [isAuthenticated]);
 
     return (
         <div className={`nc-MainNav1 nc-MainNav2 relative z-10 ${className}`}>
@@ -99,12 +86,19 @@ const MainNav2: FC<MainNav2Props> = ({className = ""}) => {
                             </Link>
                         </div> */}
                         <div></div>
-                        <button
-                            className='border-x-4 border-y-2 border-cyan-500 hover:text-green-500 nc-Button relative h-auto inline-flex items-center justify-center rounded-full transition-colors py-1 px-4'
-                            onClick={() => {signIn('keycloak')}}
-                        >
-                            {t('Login')}
-                        </button>
+
+                        {
+                            status === 'unauthenticated' ? (
+                                <button
+                                    className='border-x-4 border-y-2 border-cyan-500 hover:text-green-500 nc-Button relative h-auto inline-flex items-center justify-center rounded-full transition-colors py-1 px-4'
+                                    onClick={() => {
+                                        signIn('keycloak')
+                                    }}
+                                >
+                                    {t('Login')}
+                                </button>
+                            ) : <AvatarDropdown isLoading={status === 'loading'}/>
+                        }
                     </div>
                     <div className="flex items-center space-x-2 md:hidden">
                         {/*{*/}
