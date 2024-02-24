@@ -64,7 +64,6 @@ interface NewSessionParams {
 }
 
 // @ts-ignore
-// @ts-ignore
 export const authOptions: NextAuthOptions = {
     providers: [
         KeycloakProvider({

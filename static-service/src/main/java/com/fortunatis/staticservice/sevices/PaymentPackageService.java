@@ -10,7 +10,7 @@ import com.fortunatis.staticservice.pojo.response.admin.payment.PaymentTagRespon
 import java.util.List;
 import java.util.UUID;
 
-public interface PaymentService {
+public interface PaymentPackageService {
     PaymentPackageResponseDto getPaymentPackageById(UUID id);
     List<PaymentPackageResponseDto> getPaymentPackages();
     PaymentPackageResponseDto createPaymentPackage(PaymentPackageRequestDto paymentPackageRequestDto);

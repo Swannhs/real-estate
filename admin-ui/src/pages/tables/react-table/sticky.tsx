@@ -59,7 +59,7 @@ const Sticky = () => {
         }
       },
       {
-        Header: 'Profile Progress',
+        Header: 'Page Progress',
         accessor: 'progress',
         Cell: ({ value }: { value: number }) => <LinearWithLabel value={value} sx={{ minWidth: 75 }} />
       }
@@ -148,7 +148,7 @@ const Sticky = () => {
         width: 200
       },
       {
-        Header: 'Profile Progress',
+        Header: 'Page Progress',
         accessor: 'progress',
         Cell: ({ value }: { value: number }) => <LinearWithLabel value={value} sx={{ minWidth: 75 }} />,
         width: 200

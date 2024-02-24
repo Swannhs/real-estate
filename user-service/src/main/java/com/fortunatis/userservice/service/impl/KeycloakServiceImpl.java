@@ -2,6 +2,7 @@ package com.fortunatis.userservice.service.impl;
 
 import com.fortunatis.userservice.client.KeycloakApiClient;
 import com.fortunatis.userservice.pojo.request.KeycloakCreateUserRequestDto;
+import com.fortunatis.userservice.pojo.request.KeycloakUpdateUserRequestDto;
 import com.fortunatis.userservice.pojo.response.KeycloakClientAuthResponseDto;
 import com.fortunatis.userservice.pojo.response.KeycloakUserDetailsResponseDto;
 import com.fortunatis.userservice.pojo.response.KeycloakUserRoleResponseDto;
@@ -80,6 +81,19 @@ public class KeycloakServiceImpl implements KeycloakService {
                 .bodyValue(keycloakCreateUserRequestDto)
                 .retrieve()
                 .toBodilessEntity()
+                .block();
+    }
+
+    @Override
+    public void updateUser(UUID userId, KeycloakUpdateUserRequestDto keycloakUpdateUserRequestDto) {
+        keycloakApiClient.getClient()
+                .put()
+                .uri("/admin/realms/{realm}/users/{userId}", realm, userId)
+                .header(HttpHeaders.AUTHORIZATION, "Bearer " + getClientAuth().getAccessToken())
+                .contentType(MediaType.APPLICATION_JSON)
+                .bodyValue(keycloakUpdateUserRequestDto)
+                .retrieve()
+                .bodyToMono(KeycloakUserDetailsResponseDto.class)
                 .block();
     }
 

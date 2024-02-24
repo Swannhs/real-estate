@@ -25,7 +25,7 @@ public class PublicEstateController {
         return ResponseEntity.ok(estateService.getEstateById(id));
     }
 
-    @PostMapping("/search")
+    @GetMapping("/search")
     @Operation(summary = "Search estate")
     public ResponseEntity<?> searchEstate(@RequestBody EstateSearchDto estateSearchDto) {
         return ResponseEntity.ok(estateService.searchEstateProperties(estateSearchDto));

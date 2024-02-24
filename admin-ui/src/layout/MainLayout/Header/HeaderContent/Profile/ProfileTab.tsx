@@ -25,14 +25,14 @@ const ProfileTab = ({ handleLogout }: Props) => {
         <ListItemIcon>
           <Edit2 variant='Bulk' size={18} />
         </ListItemIcon>
-        <ListItemText primary='Edit Profile' />
+        <ListItemText primary='Edit Page' />
       </ListItemButton>
       <ListItemButton selected={selectedIndex === 1}
                       onClick={(event: MouseEvent<HTMLDivElement>) => handleListItemClick(event, 1)}>
         <ListItemIcon>
           <Profile variant='Bulk' size={18} />
         </ListItemIcon>
-        <ListItemText primary='View Profile' />
+        <ListItemText primary='View Page' />
       </ListItemButton>
 
       <ListItemButton selected={selectedIndex === 3}
@@ -40,7 +40,7 @@ const ProfileTab = ({ handleLogout }: Props) => {
         <ListItemIcon>
           <Profile2User variant='Bulk' size={18} />
         </ListItemIcon>
-        <ListItemText primary='Social Profile' />
+        <ListItemText primary='Social Page' />
       </ListItemButton>
       <ListItemButton selected={selectedIndex === 4}
                       onClick={(event: MouseEvent<HTMLDivElement>) => handleListItemClick(event, 4)}>

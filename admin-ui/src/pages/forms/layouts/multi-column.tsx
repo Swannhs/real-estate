@@ -62,10 +62,10 @@ function ColumnsLayouts() {
             </Grid>
             <Grid item xs={12} lg={6}>
               <Stack spacing={1}>
-                <InputLabel>Profile URL</InputLabel>
+                <InputLabel>Page URL</InputLabel>
                 <TextField
                   fullWidth
-                  placeholder='Please enter your Profile URL'
+                  placeholder='Please enter your Page URL'
                   InputProps={{
                     endAdornment: (
                       <InputAdornment position='end'>
@@ -75,7 +75,7 @@ function ColumnsLayouts() {
                   }}
                 />
               </Stack>
-              <FormHelperText>Please enter your Profile URL</FormHelperText>
+              <FormHelperText>Please enter your Page URL</FormHelperText>
             </Grid>
             <Grid item xs={12} lg={6}>
               <Typography variant='subtitle1' component='div' sx={{ mb: 1 }}>
@@ -138,12 +138,12 @@ function ColumnsLayouts() {
             <Grid item xs={12} lg={6}>
               <Grid container spacing={2} alignItems='center'>
                 <Grid item xs={12} lg={4}>
-                  <InputLabel>Profile URL</InputLabel>
+                  <InputLabel>Page URL</InputLabel>
                 </Grid>
                 <Grid item xs={12} lg={8}>
                   <TextField
                     fullWidth
-                    placeholder='Please enter your Profile URL'
+                    placeholder='Please enter your Page URL'
                     InputProps={{
                       endAdornment: (
                         <InputAdornment position='end'>
@@ -152,7 +152,7 @@ function ColumnsLayouts() {
                       )
                     }}
                   />
-                  <FormHelperText>Please enter your Profile URL</FormHelperText>
+                  <FormHelperText>Please enter your Page URL</FormHelperText>
                 </Grid>
               </Grid>
             </Grid>
@@ -215,10 +215,10 @@ function ColumnsLayouts() {
             </Grid>
             <Grid item xs={12} lg={4}>
               <Stack spacing={1}>
-                <InputLabel>Profile URL</InputLabel>
+                <InputLabel>Page URL</InputLabel>
                 <TextField
                   fullWidth
-                  placeholder='Please enter your Profile URL'
+                  placeholder='Please enter your Page URL'
                   InputProps={{
                     endAdornment: (
                       <InputAdornment position='end'>
@@ -228,7 +228,7 @@ function ColumnsLayouts() {
                   }}
                 />
               </Stack>
-              <FormHelperText>Please enter your Profile URL</FormHelperText>
+              <FormHelperText>Please enter your Page URL</FormHelperText>
             </Grid>
             <Grid item xs={12} lg={4}>
               <Stack spacing={1}>
@@ -317,12 +317,12 @@ function ColumnsLayouts() {
             <Grid item xs={12} lg={4}>
               <Grid container spacing={2} alignItems='center'>
                 <Grid item xs={12} sm={3} lg={4} sx={{ pt: { xs: 2, sm: '0 !important' } }}>
-                  <InputLabel sx={{ textAlign: { xs: 'left', sm: 'right' } }}>Profile URL :</InputLabel>
+                  <InputLabel sx={{ textAlign: { xs: 'left', sm: 'right' } }}>Page URL :</InputLabel>
                 </Grid>
                 <Grid item xs={12} sm={9} lg={8}>
                   <TextField
                     fullWidth
-                    placeholder='Please enter your Profile URL'
+                    placeholder='Please enter your Page URL'
                     InputProps={{
                       endAdornment: (
                         <InputAdornment position='end'>
@@ -331,7 +331,7 @@ function ColumnsLayouts() {
                       )
                     }}
                   />
-                  <FormHelperText>Please enter your Profile URL</FormHelperText>
+                  <FormHelperText>Please enter your Page URL</FormHelperText>
                 </Grid>
               </Grid>
             </Grid>

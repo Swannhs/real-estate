@@ -27,10 +27,4 @@ public class UserController {
     public ResponseEntity<?> getUserById(@PathVariable UUID id) {
         return ResponseEntity.ok(keycloakService.getUserById(id));
     }
-
-//    @PostMapping
-//    @Operation(summary = "Create user")
-//    public ResponseEntity<?> createUser(@RequestBody KeycloakCreateUserRequestDto keycloakCreateUserRequestDto) {
-//        return ResponseEntity.ok(keycloakService.createUser(keycloakCreateUserRequestDto));
-//    }
 }

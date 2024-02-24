@@ -1,7 +1,7 @@
 "use client";
 
-import React, {FC} from "react";
-import {signIn, useSession} from "next-auth/react";
+import React, {FC, useEffect} from "react";
+import {signIn, signOut, useSession} from "next-auth/react";
 import Logo from "@/shared/Logo";
 import Link from "next/link";
 import MenuBar from "@/shared/MenuBar";
@@ -9,6 +9,7 @@ import LangDropdown from "@/theme-pages/(client-components)/(Header)/LangDropdow
 import SwitchDarkMode from "@/shared/SwitchDarkMode";
 import {useTranslations} from 'next-intl';
 import AvatarDropdown from "@/theme-pages/(client-components)/(Header)/AvatarDropdown";
+import {SessionInterface} from "@/types/user";
 
 export interface MainNav2Props {
     className?: string;
@@ -16,9 +17,14 @@ export interface MainNav2Props {
 
 const MainNav2: FC<MainNav2Props> = ({className = ""}) => {
     const t = useTranslations("Index");
-    const {status} = useSession();
-
+    const {status, data: session}: { data: SessionInterface } = useSession();
     // const location = useLocation();
+
+    useEffect(() => {
+        if (status != 'loading' && session && session?.error === 'RefreshAccessTokenError') {
+            signOut({callbackUrl: '/'})
+        }
+    }, [status]);
 
     return (
         <div className={`nc-MainNav1 nc-MainNav2 relative z-10 ${className}`}>

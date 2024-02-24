@@ -1,6 +1,6 @@
-export function serverSideResponse(response: any) {
-    // if (!response.ok) {
-    //     console.error(response);
-    // }
+export function serverSideResponse(response) {
+    if (!response.ok) {
+        throw new Error("Failed to fetch data. Status: ");
+    }
     return response.json();
 }

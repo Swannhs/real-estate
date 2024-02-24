@@ -10,7 +10,7 @@ interface GoogleMapLocationProps {
     lng: number;
 }
 
-const GoogleMapLocation:FC<GoogleMapLocationProps> = ({lat, lng}) => {
+const GoogleMapLocation: FC<GoogleMapLocationProps> = ({lat, lng}) => {
     return (
         <GoogleMapReact
             bootstrapURLKeys={{

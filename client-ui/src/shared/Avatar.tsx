@@ -1,6 +1,5 @@
 import {avatarColors} from "@/contains/contants";
 import React, {FC} from "react";
-import avatar1 from "@/images/avatars/Image-1.png";
 import Image, {StaticImageData} from "next/image";
 
 export interface AvatarProps {
@@ -14,14 +13,14 @@ export interface AvatarProps {
 }
 
 const Avatar: FC<AvatarProps> = ({
-    containerClassName = "ring-1 ring-white dark:ring-neutral-900",
-    sizeClass = "h-6 w-6 text-sm",
-    radius = "rounded-full",
-    imgUrl = undefined,
-    userName,
-    hasChecked,
-    hasCheckedClass = "w-4 h-4 -top-0.5 -right-0.5",
-}) => {
+                                     containerClassName = "ring-1 ring-white dark:ring-neutral-900",
+                                     sizeClass = "h-6 w-6 text-sm",
+                                     radius = "rounded-full",
+                                     imgUrl = undefined,
+                                     userName,
+                                     hasChecked,
+                                     hasCheckedClass = "w-4 h-4 -top-0.5 -right-0.5",
+                                 }) => {
     const url = imgUrl || "";
     const name = userName || "";
 

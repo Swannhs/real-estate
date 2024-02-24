@@ -48,7 +48,7 @@ const AccountProfile = () => {
       <Box sx={{ borderBottom: 1, borderColor: 'divider', width: '100%' }}>
         <Tabs value={value} onChange={handleChange} variant='scrollable' scrollButtons='auto'
               aria-label='account profile tab'>
-          <Tab label='Profile' component={Link} to='/apps/profiles/account/basic' icon={<Profile />}
+          <Tab label='Page' component={Link} to='/apps/profiles/account/basic' icon={<Profile />}
                iconPosition='start' />
           <Tab label='Personal' component={Link} to='/apps/profiles/account/personal' icon={<DocumentText />}
                iconPosition='start' />

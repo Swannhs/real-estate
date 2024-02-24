@@ -673,8 +673,8 @@ const UmbrellaTable = () => {
           filter: 'includes'
         },
         {
-          Header: 'Profile Progress',
-          Footer: 'Profile Progress',
+          Header: 'Page Progress',
+          Footer: 'Page Progress',
           accessor: 'progress',
           Filter: SliderColumnFilter,
           dataType: 'progress',

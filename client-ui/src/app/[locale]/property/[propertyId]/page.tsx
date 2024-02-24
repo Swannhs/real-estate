@@ -4,7 +4,7 @@ import Image from "next/image";
 import {API_PATHS} from "@/contains/contants";
 import {Squares2X2Icon} from "@heroicons/react/24/outline";
 import {currencyFormatter} from "@/utils/currencyFormatter";
-import GoogleMapLocation from "@/custom-components/GoogleMapLocation";
+import LocationSection from "@/app/[locale]/property/(components)/LocationSection";
 
 export default async function PropertyDetailPage({params}: { params: { propertyId: string } }) {
     const property = await getEstateById(params.propertyId);
@@ -144,33 +144,6 @@ export default async function PropertyDetailPage({params}: { params: { propertyI
         );
     };
 
-    const renderLocation = () => {
-        return (
-            <div className="listingSection__wrap">
-                {/* HEADING */}
-                <div>
-                    <h2 className="text-2xl font-semibold">
-                        propertyDetails.property.location
-                    </h2>
-                    <span className="block mt-2 text-neutral-500 dark:text-neutral-400">
-                        {property?.location?.addressLine1}
-                    </span>
-                </div>
-                <div className="w-14 border-b border-neutral-200 dark:border-neutral-700"/>
-
-                {/* MAP */}
-                <div className="aspect-w-5 aspect-h-5 sm:aspect-h-3">
-                    <div className="rounded-xl overflow-hidden">
-                        {/*<GoogleMapLocation*/}
-                        {/*    lat={property?.location?.lat as unknown as number}*/}
-                        {/*    lng={property?.location?.lng as unknown as number}*/}
-                        {/*/>*/}
-                    </div>
-                </div>
-            </div>
-        );
-    };
-
     return (
         <div className="nc-ListingStayDetailPage">
             {/*  HEADER */}
@@ -183,11 +156,11 @@ export default async function PropertyDetailPage({params}: { params: { propertyI
                         {
                             property?.estateGalleries?.length > 0 && (
                                 <Image
-                                  fill
-                                  className="object-cover rounded-md sm:rounded-xl"
-                                  src={API_PATHS.IMAGE_URL_PREFIX_BY_USER + property.estateGalleries[0].compressedImageName}
-                                  alt=""
-                                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 50vw"
+                                    fill
+                                    className="object-cover rounded-md sm:rounded-xl"
+                                    src={API_PATHS.IMAGE_URL_PREFIX_BY_USER + property.estateGalleries[0].compressedImageName}
+                                    alt=""
+                                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 50vw"
                                 />
                             )
                         }
@@ -240,7 +213,7 @@ export default async function PropertyDetailPage({params}: { params: { propertyI
                     {featuresSection()}
                     {property?.videoUrl !== '' && videoSection()}
                     {blogSection()}
-                    {renderLocation()}
+                    <LocationSection/>
                     {/*{renderSection7()}*/}
                     {/*{renderSection8()}*/}
                 </div>

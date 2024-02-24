@@ -12,7 +12,7 @@ import com.fortunatis.staticservice.pojo.response.admin.payment.PaymentTagRespon
 import com.fortunatis.staticservice.repository.PaymentFeaturesRepository;
 import com.fortunatis.staticservice.repository.PaymentPackageRepository;
 import com.fortunatis.staticservice.repository.PaymentTagRepository;
-import com.fortunatis.staticservice.sevices.PaymentService;
+import com.fortunatis.staticservice.sevices.PaymentPackageService;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -26,7 +26,7 @@ import java.util.UUID;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class PaymentServiceImpl implements PaymentService {
+public class PaymentPackageServiceImpl implements PaymentPackageService {
     private final ModelMapper modelMapper;
     private final PaymentPackageRepository paymentPackageRepository;
     private final PaymentFeaturesRepository paymentFeaturesRepository;

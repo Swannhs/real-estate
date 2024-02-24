@@ -2,7 +2,7 @@
 
 import {ChevronLeftIcon, ChevronRightIcon} from "@heroicons/react/24/outline";
 import {AnimatePresence, motion, MotionConfig} from "framer-motion";
-import Image, {StaticImageData} from "next/image";
+import Image from "next/image";
 import {useState} from "react";
 import {useSwipeable} from "react-swipeable";
 import {variants} from "@/utils/animationVariants";
@@ -75,7 +75,7 @@ export default function GallerySlider({
                 {/* Main image */}
                 <div className={`w-full overflow-hidden ${galleryClass}`}>
                     <Link
-                        href={href}
+                        href={href as string}
                         className={`relative flex items-center justify-center ${ratioClass}`}
                     >
                         <AnimatePresence initial={false} custom={direction}>
@@ -91,7 +91,7 @@ export default function GallerySlider({
                                 <Image
                                     src={currentImage || ""}
                                     fill
-                                    alt={alt}
+                                    alt={alt as string}
                                     className={`object-cover ${imageClass}`}
                                     onLoadingComplete={() => setLoaded(true)}
                                     sizes="(max-width: 1025px) 100vw, 300px"

@@ -118,7 +118,7 @@ const RowDragDrop = ({ data }: { data: [] }) => {
         }
       },
       {
-        Header: 'Profile Progress',
+        Header: 'Page Progress',
         accessor: 'progress',
         Cell: ({ value }: { value: number }) => <LinearWithLabel value={value} sx={{ minWidth: 75 }} />
       }

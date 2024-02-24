@@ -34,4 +34,6 @@ const API_PATHS = {
     IMAGE_URL_PREFIX_BY_USER: `${process.env.NEXT_PUBLIC_API_GATEWAY_URL}/${process.env.NEXT_PUBLIC_ESTATE_SERVICE_PREFIX}/public/v1/uploads/users/`,
 }
 
-export {avatarColors, API_PATHS};
+const GOOGLE_MAPS_API_KEY = process.env.NEXT_PUBLIC_GOOGLE_API_KEY;
+
+export {avatarColors, API_PATHS, GOOGLE_MAPS_API_KEY};

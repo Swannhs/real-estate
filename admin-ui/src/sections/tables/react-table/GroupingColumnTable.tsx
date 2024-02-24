@@ -218,7 +218,7 @@ function GroupingColumnTable({ data }: { data: [] }) {
           }
         },
         {
-          Header: 'Profile Progress',
+          Header: 'Page Progress',
           accessor: 'progress',
           aggregate: roundedMedian,
           Aggregated: ({ value }: { value: number }) => `${value} (med)`,

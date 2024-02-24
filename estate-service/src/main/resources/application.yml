@@ -9,6 +9,14 @@ spring:
     password: root
   jpa:
     show-sql: true
+  liquibase:
+    change-log: classpath:/db/changelog/db.changelog-master.yaml
+    enabled: true
+    default-schema: public
+    url: jdbc:postgresql://localhost:5432/estate-service
+    user: root
+    password: root
+    drop-first: false
   security:
     oauth2:
       resourceserver:

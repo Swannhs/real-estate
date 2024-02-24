@@ -46,7 +46,7 @@ export default function IconTabs() {
 
   const iconTabCodeString = `// IconTabs.tsx
 <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-  <Tab label="Profile" icon={<Profile />} iconPosition="start" {...a11yProps(0)} />
+  <Tab label="Page" icon={<Page />} iconPosition="start" {...a11yProps(0)} />
   <Tab label="Followers" icon={<Book />} iconPosition="start" {...a11yProps(1)} />
   <Tab label="Friends" icon={<Profile2User />} iconPosition="start" {...a11yProps(2)} />
   <Tab label="Gallery" icon={<Image />} iconPosition="start" {...a11yProps(3)} />
@@ -81,7 +81,7 @@ export default function IconTabs() {
       <Box sx={{ width: '100%' }}>
         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
           <Tabs value={value} onChange={handleChange} aria-label='basic tabs example'>
-            <Tab label='Profile' icon={<Profile />} iconPosition='start' {...a11yProps(0)} />
+            <Tab label='Page' icon={<Profile />} iconPosition='start' {...a11yProps(0)} />
             <Tab label='Followers' icon={<Book />} iconPosition='start' {...a11yProps(1)} />
             <Tab label='Friends' icon={<Profile2User />} iconPosition='start' {...a11yProps(2)} />
             <Tab label='Gallery' icon={<Image />} iconPosition='start' {...a11yProps(3)} />

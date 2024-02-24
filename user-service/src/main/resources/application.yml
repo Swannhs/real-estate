@@ -11,6 +11,14 @@ spring:
     password: root
   jpa:
     show-sql: true
+  liquibase:
+    change-log: classpath:/db/changelog/db.changelog-master.yaml
+    enabled: true
+    default-schema: public
+    url: jdbc:postgresql://localhost:5432/user-service
+    user: root
+    password: root
+    drop-first: false
   security:
     oauth2:
       resourceserver:
@@ -31,7 +39,9 @@ springfox:
     enabled: true  # Set false to disable
   swagger-ui:
     base-url: /swagger-ui/  # URL to access swagger UI
-
+stripe:
+  key:
+    secret: sk_test_51MLhApA4Ym4lDK6RzszOPSgfGlecEa0FMLOKGqpx1viirNSdRlf7lp0LaPGmhR1kuY3oxBEc8n6UFxw0xjgWbFqr00e6Yxo35v
 
 logging:
   level:

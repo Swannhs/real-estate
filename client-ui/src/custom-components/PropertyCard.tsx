@@ -1,6 +1,6 @@
 "use client";
 
-import React, {FC, useEffect, useState} from "react";
+import React, {FC, useMemo} from "react";
 import {EstateInterface} from "@/types/property";
 import {API_PATHS} from "@/contains/contants";
 import BtnLikeIcon from "@/components/BtnLikeIcon";
@@ -14,7 +14,6 @@ interface PropertyCardProps {
 }
 
 const PropertyCard: FC<PropertyCardProps> = ({item}) => {
-    const [images, setImages] = useState<string[]>([]);
     const {
         id,
         estateType,
@@ -30,24 +29,25 @@ const PropertyCard: FC<PropertyCardProps> = ({item}) => {
         estateGalleries
     } = item;
 
-    useEffect(() => {
-        let estateImgs: string[] = [];
-        if (estateGalleries.length) {
-            for (let i = 0; i < estateGalleries.length; i++) {
-                estateImgs.push(API_PATHS.IMAGE_URL_PREFIX_BY_USER + estateGalleries[i].compressedImageName);
-            }
+    const galleryImgs = useMemo(() => {
+        let images: string[] = [];
+        if (item?.estateGalleries) {
+            item?.estateGalleries.forEach((gallery) => {
+                images.push(API_PATHS.IMAGE_URL_PREFIX_BY_USER + gallery.compressedImageName)
+            })
         }
-        setImages(estateImgs);
-    }, []);
+        return images;
+    }, [item?.estateGalleries]);
 
     const renderSliderGallery = () => {
         return (
             <div
                 className="flex-shrink-0 p-3 tablet:p-1 w-full sm:w-64 tablet:w-32 tablet-landscape:h-52 tablet-landscape:w-52">
-                <BtnLikeIcon className='absolute top-5 left-5 tablet-landscape:top-4 tablet-landscape:left-4 tablet:left-24 tablet:top-1'/>
+                <BtnLikeIcon
+                    className='absolute top-5 left-5 tablet-landscape:top-4 tablet-landscape:left-4 tablet:left-24 tablet:top-1'/>
                 <GallerySlider
                     ratioClass="aspect-w-1 aspect-h-1"
-                    galleryImgs={images}
+                    galleryImgs={galleryImgs}
                     className="w-full h-full tablet:h-32 tablet:w-32 rounded-2xl overflow-hidden will-change-transform"
                     uniqueID={`PropertyCard_${id}`}
                     href={`/property/${id}`}

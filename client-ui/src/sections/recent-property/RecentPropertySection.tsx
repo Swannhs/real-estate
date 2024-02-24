@@ -9,7 +9,7 @@ interface RecentPropertySectionProps {
     properties: EstateInterface[];
 }
 
-const RecentPropertySection:FC<RecentPropertySectionProps> = ({properties}) => {
+const RecentPropertySection: FC<RecentPropertySectionProps> = ({properties}) => {
     return (
         <div className='nc-SectionGridFeatureProperty relative tablet:mt-0'>
             <div className='flex flex-col mb-8 relative'>

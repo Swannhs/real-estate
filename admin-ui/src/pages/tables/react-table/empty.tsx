@@ -173,8 +173,8 @@ const EmptyTableDemo = () => {
           }
         },
         {
-          Header: 'Profile Progress',
-          Footer: 'Profile Progress',
+          Header: 'Page Progress',
+          Footer: 'Page Progress',
           accessor: 'progress',
           Filter: SliderColumnFilter,
           filter: filterGreaterThan,

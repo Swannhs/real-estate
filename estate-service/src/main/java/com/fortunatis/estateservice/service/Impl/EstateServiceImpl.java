@@ -213,17 +213,17 @@ public class EstateServiceImpl implements EstateService {
         StringBuilder resultKeywords = new StringBuilder();
         List<String> keywords = Arrays.asList(searchKeywords.split(","));
         if (keywords.size() == 1) {
-            List<CantonNameVariationsModel> cantonNameVariationsModelList = cantonNameVariationsRepository.findByCantonsLike(searchKeywords);
-            if (!CollectionUtils.isEmpty(cantonNameVariationsModelList)) {
-                resultKeywords.append(cantonNameVariationsModelList.get(0).getCantons());
+            List<CantonNameVariations> cantonNameVariationsList = cantonNameVariationsRepository.findByCantonsLike(searchKeywords);
+            if (!CollectionUtils.isEmpty(cantonNameVariationsList)) {
+                resultKeywords.append(cantonNameVariationsList.get(0).getCantons());
             } else {
                 return searchKeywords;
             }
         } else {
             String cantons = keywords.stream().map(keyword -> {
-                List<CantonNameVariationsModel> cantonNameVariationsModelList = cantonNameVariationsRepository.findByCantonsLike(keyword.trim());
-                if (!CollectionUtils.isEmpty(cantonNameVariationsModelList)) {
-                    return cantonNameVariationsModelList.get(0).getCantons();
+                List<CantonNameVariations> cantonNameVariationsList = cantonNameVariationsRepository.findByCantonsLike(keyword.trim());
+                if (!CollectionUtils.isEmpty(cantonNameVariationsList)) {
+                    return cantonNameVariationsList.get(0).getCantons();
                 }
                 return keyword.trim();
             }).collect(Collectors.joining(","));

@@ -56,7 +56,7 @@ public class SecurityConfig {
                         .requestMatchers(PUBLIC_ROUTES).permitAll()
                         .requestMatchers(USER_ROUTES).hasRole("USER")
                         .requestMatchers(ADMIN_ROUTES).hasRole("ADMIN")
-                        .anyRequest().permitAll())
+                        .anyRequest().authenticated())
                 .oauth2ResourceServer(oauth2ResourceServerCustomizer ->
                         oauth2ResourceServerCustomizer.jwt(jwtCustomizer ->
                                 jwtCustomizer.jwtAuthenticationConverter(new JwtAuthenticationConverter() {{

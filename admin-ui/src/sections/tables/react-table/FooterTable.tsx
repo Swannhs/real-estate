@@ -110,8 +110,8 @@ const FooterTable = ({ data }: { data: [] }) => {
         }
       },
       {
-        Header: 'Profile Progress',
-        Footer: 'Profile Progress',
+        Header: 'Page Progress',
+        Footer: 'Page Progress',
         accessor: 'progress',
         Cell: ({ value }: { value: number }) => <LinearWithLabel value={value} sx={{ minWidth: 75 }} />
       }

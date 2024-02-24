@@ -278,7 +278,7 @@ const EditableCell = () => {
         dataType: 'select'
       },
       {
-        Header: 'Profile Progress',
+        Header: 'Page Progress',
         accessor: 'progress',
         dataType: 'progress'
       }

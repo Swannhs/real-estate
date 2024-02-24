@@ -90,7 +90,7 @@ const Buttons = () => {
 <Button variant='shadow' color='error'>Error</Button>`;
 
   const withIconButtonCodeString = `<Button variant="contained" startIcon={<Home3 />}>Home</Button>
-<Button variant="contained" color="secondary" endIcon={<EmojiHappy variant="Bold" />}>Profile</Button>
+<Button variant="contained" color="secondary" endIcon={<EmojiHappy variant="Bold" />}>Page</Button>
 <Button variant="outlined" color="info" startIcon={<Location />}>Address</Button>
 <Button variant="outlined" color="success" startIcon={<AddCircle />}>Add</Button>
 <Button variant="outlined" color="warning" endIcon={<Send />}>Send</Button>
@@ -401,7 +401,7 @@ const Buttons = () => {
                   </Grid>
                   <Grid item>
                     <Button variant='contained' color='secondary' endIcon={<EmojiHappy variant='Bold' />}>
-                      Profile
+                      Page
                     </Button>
                   </Grid>
                   <Grid item>
@@ -575,7 +575,7 @@ const Buttons = () => {
                       </Tooltip>
                     </Grid>
                     <Grid item>
-                      <Tooltip title='Profile'>
+                      <Tooltip title='Page'>
                         <IconButton variant='contained' color='secondary'>
                           <EmojiHappy variant='Bold' />
                         </IconButton>
@@ -619,7 +619,7 @@ const Buttons = () => {
                       </Tooltip>
                     </Grid>
                     <Grid item>
-                      <Tooltip title='Profile'>
+                      <Tooltip title='Page'>
                         <IconButton shape='rounded' variant='contained' color='secondary'>
                           <EmojiHappy variant='Bold' />
                         </IconButton>

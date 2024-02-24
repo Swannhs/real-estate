@@ -15,7 +15,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @Getter
 @Setter
-public class CantonNameVariationsModel {
+public class CantonNameVariations {
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(

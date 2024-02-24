@@ -154,7 +154,7 @@ const FilteringTable = () => {
           }
         },
         {
-          Header: 'Profile Progress',
+          Header: 'Page Progress',
           accessor: 'progress',
           Filter: SliderColumnFilter,
           filter: filterGreaterThan,
