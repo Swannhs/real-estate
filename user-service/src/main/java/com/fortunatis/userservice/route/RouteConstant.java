@@ -7,8 +7,12 @@ public class RouteConstant {
             "/actuator/**",
             "/public/**",
     };
-    public static final String[] USER_ROUTES = {};
+    public static final String[] USER_ROUTES = {
+            "/api/v1/user-info/**"
+    };
     public static final String[] ADMIN_ROUTES = {
-            "/api/v1/user/**",
+            "/api/v1/users/**",
+            "/api/v1/roles/**",
+            "/api/v1/payment/**",
     };
 }

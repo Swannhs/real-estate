@@ -1,7 +1,6 @@
 package com.fortunatis.staticservice.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.BeanClassLoaderAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -35,7 +34,7 @@ public class SessionConfig implements BeanClassLoaderAware {
      * .ClassLoader)
      */
     @Override
-    public void setBeanClassLoader(@NotNull ClassLoader classLoader) {
+    public void setBeanClassLoader(ClassLoader classLoader) {
         this.loader = classLoader;
     }
 

@@ -5,7 +5,6 @@ import com.fortunatis.estateservice.service.EstateService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,8 +13,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/v1/estates")
 @RequiredArgsConstructor
-@Tag(name = "Estate Controller", description = "estate controller")
-@Slf4j
+@Tag(name = "Estate Controller", description = "Rest Resource for Estate")
 public class EstateController {
     private final EstateService estateService;
 
@@ -27,7 +25,13 @@ public class EstateController {
             @RequestParam(name = "orderBy", required = false, defaultValue = "createdAt") String orderBy,
             @RequestParam(name = "desc", required = false, defaultValue = "desc") String desc
     ) {
-        return ResponseEntity.ok(estateService.getAllEstatesByUser(page, size > 50 ? 50 : size, orderBy, desc));
+        return ResponseEntity.ok(estateService.getAllEstatesByUser(page, size, orderBy, desc));
+    }
+
+    @GetMapping(value = "/{id}")
+    @Operation(summary = "Get estate by id")
+    public ResponseEntity<?> getEstateById(@PathVariable UUID id) {
+        return ResponseEntity.ok(estateService.getEstateById(id));
     }
 
     @PostMapping

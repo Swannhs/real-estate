@@ -10,12 +10,12 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
 
-import static com.fortunatis.estateservice.util.ApplicationConstants.PUBLIC_URL_PREFIX;
+import static com.fortunatis.estateservice.utils.ApplicationConstants.PUBLIC_URL_PREFIX;
 
 @RestController
 @RequestMapping(PUBLIC_URL_PREFIX + "/v1/estates")
 @RequiredArgsConstructor
-@Tag(name = "Public Estate Controller", description = "Public estate controller")
+@Tag(name = "Public Estate Controller", description = "Public Rest API for Estate")
 public class PublicEstateController {
     private final EstateService estateService;
 
@@ -25,7 +25,7 @@ public class PublicEstateController {
         return ResponseEntity.ok(estateService.getEstateById(id));
     }
 
-    @PostMapping("/search")
+    @GetMapping("/search")
     @Operation(summary = "Search estate")
     public ResponseEntity<?> searchEstate(@RequestBody EstateSearchDto estateSearchDto) {
         return ResponseEntity.ok(estateService.searchEstateProperties(estateSearchDto));

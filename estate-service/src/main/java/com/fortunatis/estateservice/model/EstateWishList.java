@@ -1,6 +1,5 @@
 package com.fortunatis.estateservice.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fortunatis.estateservice.entity.TimestampEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -9,8 +8,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -29,7 +26,7 @@ public class EstateWishList extends TimestampEntity {
     @Column(name = "id", updatable = false, nullable = false, columnDefinition = "uuid default uuid_generate_v4()")
     private UUID id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "estate_id")
     private Estate estate;
 

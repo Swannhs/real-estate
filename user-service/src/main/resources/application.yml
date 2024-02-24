@@ -3,21 +3,6 @@ server:
 spring:
   application:
     name: user-service
-  config:
-    import: "optional:consul:${spring.cloud.consul.host}:${spring.cloud.consul.port}/"
-  cloud:
-    consul:
-      host: localhost
-      port: 8500
-      discovery:
-        prefer-ip-address: true
-        instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
-        service-name: ${spring.application.name}
-        health-check-path: /actuator/health
-        health-check-interval: 10s
-        health-check-timeout: 5s
-      config:
-        enabled: true
   profiles:
     active: dev
   datasource:
@@ -26,6 +11,14 @@ spring:
     password: root
   jpa:
     show-sql: true
+  liquibase:
+    change-log: classpath:/db/changelog/db.changelog-master.yaml
+    enabled: true
+    default-schema: public
+    url: jdbc:postgresql://localhost:5432/user-service
+    user: root
+    password: root
+    drop-first: false
   security:
     oauth2:
       resourceserver:
@@ -46,7 +39,9 @@ springfox:
     enabled: true  # Set false to disable
   swagger-ui:
     base-url: /swagger-ui/  # URL to access swagger UI
-
+stripe:
+  key:
+    secret: sk_test_51MLhApA4Ym4lDK6RzszOPSgfGlecEa0FMLOKGqpx1viirNSdRlf7lp0LaPGmhR1kuY3oxBEc8n6UFxw0xjgWbFqr00e6Yxo35v
 
 logging:
   level:

@@ -1,6 +1,5 @@
 package com.fortunatis.userservice.pojo.request;
 
-import io.swagger.v3.oas.annotations.Hidden;
 import lombok.Getter;
 import lombok.Setter;
 

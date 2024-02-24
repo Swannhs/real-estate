@@ -41,6 +41,3 @@ CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
 \c "user-service"
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
-
-\c "auth-service"
-CREATE EXTENSION IF NOT EXISTS "uuid-ossp";

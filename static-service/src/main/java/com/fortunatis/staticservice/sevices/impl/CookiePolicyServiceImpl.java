@@ -12,6 +12,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.ObjectUtils;
 import org.modelmapper.ModelMapper;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -36,6 +38,8 @@ public class CookiePolicyServiceImpl implements CookiePolicyService {
     }
 
     @Override
+    @CacheEvict(value = "cookie_policy", key = "'cookie_policy'")
+    @CachePut(value = "cookie_policy", key = "'cookie_policy'")
     public CookiePolicyResponseDto updateCookiePolicy(CookiePolicyRequestDto cookiePolicyRequestDto) {
         StaticData staticData = staticDataRepository.findFirstByDataTypeAndIsDeletedFalse(StaticDataType.COOKIE_POLICY);
         if (ObjectUtils.isEmpty(staticData)) {

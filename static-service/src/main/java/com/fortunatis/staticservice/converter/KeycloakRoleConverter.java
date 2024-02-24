@@ -15,7 +15,6 @@ import java.util.stream.Stream;
 
 @Component
 public class KeycloakRoleConverter implements Converter<Jwt, Collection<GrantedAuthority>> {
-
     @Override
     public Collection<GrantedAuthority> convert(Jwt jwt) {
         Map<String, Object> realmAccess = jwt.getClaim("realm_access");

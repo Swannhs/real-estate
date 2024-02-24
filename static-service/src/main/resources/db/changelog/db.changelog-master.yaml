@@ -11,3 +11,5 @@ databaseChangeLog:
       file: db/changelog/changes/city_data.sql
   - include:
       file: db/changelog/changes/currency_data.sql
+  - include:
+      file: db/changelog/changes/sticker_data.sql

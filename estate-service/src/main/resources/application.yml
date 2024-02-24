@@ -1,21 +1,6 @@
 spring:
   application:
     name: estate-service
-  config:
-    import: "optional:consul:${spring.cloud.consul.host}:${spring.cloud.consul.port}/"
-  cloud:
-    consul:
-      host: localhost
-      port: 8500
-      discovery:
-        prefer-ip-address: true
-        instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
-        service-name: ${spring.application.name}
-        health-check-path: /actuator/health
-        health-check-interval: 10s
-        health-check-timeout: 5s
-      config:
-        enabled: true
   profiles:
     active: dev
   datasource:
@@ -24,6 +9,14 @@ spring:
     password: root
   jpa:
     show-sql: true
+  liquibase:
+    change-log: classpath:/db/changelog/db.changelog-master.yaml
+    enabled: true
+    default-schema: public
+    url: jdbc:postgresql://localhost:5432/estate-service
+    user: root
+    password: root
+    drop-first: false
   security:
     oauth2:
       resourceserver:
@@ -34,9 +27,34 @@ server:
 
 service:
   param:
+    keycloak-service:
+      token-url: http://localhost:8080/realms/fortunatishomes/protocol/openid-connect/token
+      client-id: static-service
+      client-secret: XuCIzeFc43F3NqBYqpaAYoab7NBD08et
     static-service:
       base-url: http://localhost:8181
-      enpoint-prefix: ${service.param.static-service.base-url}/public/api/v1/static
+      public-prefix: /public
+      endpoint-prefix: /api/v1
+    user-service:
+      base-url: http://localhost:8183
+    email-service:
+      base-url: http://localhost:8184
+      endpoint-prefix: /api/v1
+    file-storage:
+      dir: https://fotunatishome.s3.amazonaws.com/
+      users-dir: fortunatis-real-estate/uploads/users/
+      admin-dir: fortunatis-real-estate/uploads/admin/
+cloud:
+  aws:
+    s3:
+      bucket: fotunatishome
+    region:
+      static: us-east-1
+    stack:
+      auto: false
+    credentials:
+      accessKey: AKIA6BSS4IPSO3FL5LDX
+      secretKey: 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
 
 springfox:
   documentation:

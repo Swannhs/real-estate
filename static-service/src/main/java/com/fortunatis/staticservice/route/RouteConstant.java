@@ -9,6 +9,6 @@ public class RouteConstant {
     };
     public static final String[] USER_ROUTES = {};
     public static final String[] ADMIN_ROUTES = {
-            "/api/v1/static/**",
+            "/api/v1/**",
     };
 }

@@ -18,4 +18,6 @@ public interface StaticDataService {
     NoticeResponseDto getPrivacyPolicy();
     NoticeResponseDto getLegalNotice();
     NoticeResponseDto getGeneralTermsAndConditions();
+    EstateStickerResponseDto getStickerById(UUID id);
+    List<EstateStickerResponseDto> getStickers();
 }

@@ -1,0 +1,18 @@
+services:
+  client-ui:
+    container_name: client-ui
+    build:
+      context: ./client-ui
+      dockerfile: Dockerfile
+    volumes:
+      - ./client-ui:/app
+    network_mode: "host"
+
+  admin-ui:
+    container_name: admin-ui
+    build:
+      context: ./admin-ui
+      dockerfile: Dockerfile
+    volumes:
+      - ./admin-ui:/app
+    network_mode: "host"

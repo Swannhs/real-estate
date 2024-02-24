@@ -1,23 +1,19 @@
 package com.fortunatis.estateservice.client;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
-
-import static com.fortunatis.estateservice.util.ApplicationConstants.STATIC_API_URL;
 
 @Component
 @RequiredArgsConstructor
 public class StaticApiClient {
-    private final WebClient webClient;
-
-    public StaticApiClient() {
-        this.webClient = WebClient.builder()
-                .baseUrl(STATIC_API_URL)
-                .build();
-    }
+    @Value("${service.param.static-service.base-url}")
+    private String staticServiceBaseUrl;
 
     public WebClient getClient() {
-        return webClient;
+        return WebClient.builder()
+                .baseUrl(staticServiceBaseUrl)
+                .build();
     }
 }

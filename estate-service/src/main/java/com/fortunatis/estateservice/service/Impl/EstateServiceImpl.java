@@ -7,14 +7,15 @@ import com.fortunatis.estateservice.pojo.request.EstateAddGalleryDto;
 import com.fortunatis.estateservice.pojo.request.EstateSearchDto;
 import com.fortunatis.estateservice.pojo.response.EstateResponseDto;
 import com.fortunatis.estateservice.pojo.response.EstateSingleResponseDto;
-import com.fortunatis.estateservice.pojo.response.staticService.FeaturesResponseDto;
 import com.fortunatis.estateservice.repository.CantonNameVariationsRepository;
 import com.fortunatis.estateservice.repository.EstateRepository;
 import com.fortunatis.estateservice.service.CustomDAOService;
 import com.fortunatis.estateservice.service.EstateService;
 import com.fortunatis.estateservice.service.StaticApiService;
 import com.fortunatis.estateservice.service.UserService;
-import com.fortunatis.estateservice.util.UtilityService;
+import com.fortunatis.estateservice.utils.EstateUtils;
+import com.fortunatis.estateservice.utils.UtilityService;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,11 +24,12 @@ import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
+import org.springframework.util.ObjectUtils;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static com.fortunatis.estateservice.util.ApplicationConstants.ENTRIES_PER_PAGE;
+import static com.fortunatis.estateservice.utils.ApplicationConstants.ENTRIES_PER_PAGE;
 
 @Service
 @RequiredArgsConstructor
@@ -43,6 +45,10 @@ public class EstateServiceImpl implements EstateService {
     @Override
     public EstateResponseDto createEstate(EstateAddDto estateAddDto) {
         Estate estate = modelMapper.map(estateAddDto, Estate.class);
+        if (ObjectUtils.isEmpty(userService.getUserId())) {
+            throw new RuntimeException("Invalid user");
+        }
+        estate.setUserId(userService.getUserId());
 
         EstateContact estateContact = modelMapper.map(estateAddDto.getContact(), EstateContact.class);
         estate.setContact(estateContact);
@@ -73,8 +79,8 @@ public class EstateServiceImpl implements EstateService {
     @Transactional
     public EstateResponseDto updateEstate(EstateAddDto estateAddDto, UUID id) {
         Estate estate = estateRepository.findByIdAndUserId(id, userService.getUserId());
-        if (Objects.isNull(estate)) {
-            throw new RuntimeException("Estate not found");
+        if (ObjectUtils.isEmpty(estate)) {
+            throw new EntityNotFoundException("Estate not found");
         }
 
         modelMapper.map(estateAddDto, estate);
@@ -133,28 +139,14 @@ public class EstateServiceImpl implements EstateService {
     @Override
     public EstateSingleResponseDto getEstateById(UUID id) {
         Estate estate = estateRepository.findById(id).orElseThrow(() -> new RuntimeException("Estate not found"));
-        EstateSingleResponseDto estateResponseDto = modelMapper.map(estate, EstateSingleResponseDto.class);
-        if (!estate.getEstateFeatures().isEmpty()) {
-            List<FeaturesResponseDto> featuresResponseDtos = staticApiService.getEstateFeatures();
-            List<FeaturesResponseDto> estateFeatures = estate.getEstateFeatures().stream()
-                    .map(estateFeatureId -> featuresResponseDtos.stream()
-                            .filter(featuresResponseDto -> featuresResponseDto.getId().equals(estateFeatureId))
-                            .findFirst().orElse(null))
-                    .collect(Collectors.toList());
-            estateResponseDto.setEstateFeatures(estateFeatures);
-        }
-        return estateResponseDto;
+        return EstateUtils.getEstateSingleResponseDto(estate, modelMapper, staticApiService);
     }
 
     @Override
     public Page<EstateResponseDto> getAllEstatesByUser(Integer page, Integer size, String orderBy, String desc) {
-        Pageable pageable = PageRequest.of(page, size, Sort.Direction.fromString(desc), orderBy);
+        Pageable pageable = PageRequest.of(page, UtilityService.preventEntitySize(size), Sort.Direction.fromString(desc), orderBy);
         Page<Estate> estatePage = estateRepository.findAllByUserId(userService.getUserId(), pageable);
-        List<Estate> estates = estatePage.getContent();
-        if (!estates.isEmpty()) {
-            return new PageImpl<>(estates.stream().map(estate -> modelMapper.map(estate, EstateResponseDto.class)).collect(Collectors.toList()), pageable, estatePage.getTotalElements());
-        }
-        return new PageImpl<>(new ArrayList<>(), pageable, 0);
+        return estatePage.map(estate -> modelMapper.map(estate, EstateResponseDto.class));
     }
 
     @Override
@@ -165,6 +157,20 @@ public class EstateServiceImpl implements EstateService {
             return estates.stream().map(estate -> modelMapper.map(estate, EstateResponseDto.class)).collect(Collectors.toList());
         }
         return new ArrayList<>();
+    }
+
+    @Override
+    public Estate getEstateByEstateId(UUID id) {
+        return estateRepository.findById(id).orElseThrow(() -> new RuntimeException("Estate not found"));
+    }
+
+    @Override
+    public EstateSingleResponseDto getUserEstateById(UUID id) {
+        Estate estate = estateRepository.findByIdAndUserId(id, userService.getUserId());
+        if (Objects.isNull(estate)) {
+            throw new RuntimeException("Estate not found");
+        }
+        return EstateUtils.getEstateSingleResponseDto(estate, modelMapper, staticApiService);
     }
 
     @Override
@@ -207,17 +213,17 @@ public class EstateServiceImpl implements EstateService {
         StringBuilder resultKeywords = new StringBuilder();
         List<String> keywords = Arrays.asList(searchKeywords.split(","));
         if (keywords.size() == 1) {
-            List<CantonNameVariationsModel> cantonNameVariationsModelList = cantonNameVariationsRepository.findByCantonsLike(searchKeywords);
-            if (!CollectionUtils.isEmpty(cantonNameVariationsModelList)) {
-                resultKeywords.append(cantonNameVariationsModelList.get(0).getCantons());
+            List<CantonNameVariations> cantonNameVariationsList = cantonNameVariationsRepository.findByCantonsLike(searchKeywords);
+            if (!CollectionUtils.isEmpty(cantonNameVariationsList)) {
+                resultKeywords.append(cantonNameVariationsList.get(0).getCantons());
             } else {
                 return searchKeywords;
             }
         } else {
             String cantons = keywords.stream().map(keyword -> {
-                List<CantonNameVariationsModel> cantonNameVariationsModelList = cantonNameVariationsRepository.findByCantonsLike(keyword.trim());
-                if (!CollectionUtils.isEmpty(cantonNameVariationsModelList)) {
-                    return cantonNameVariationsModelList.get(0).getCantons();
+                List<CantonNameVariations> cantonNameVariationsList = cantonNameVariationsRepository.findByCantonsLike(keyword.trim());
+                if (!CollectionUtils.isEmpty(cantonNameVariationsList)) {
+                    return cantonNameVariationsList.get(0).getCantons();
                 }
                 return keyword.trim();
             }).collect(Collectors.joining(","));

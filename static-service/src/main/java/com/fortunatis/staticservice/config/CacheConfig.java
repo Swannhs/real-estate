@@ -20,10 +20,9 @@ public class CacheConfig implements CachingConfigurer {
     public RedisCacheManager redisCacheManager(LettuceConnectionFactory lettuceConnectionFactory) {
         JdkSerializationRedisSerializer redisSerializer = new JdkSerializationRedisSerializer(getClass().getClassLoader());
 
-        int redisDataTTL = 1;
         RedisCacheConfiguration redisCacheConfiguration = RedisCacheConfiguration.defaultCacheConfig()
                 .disableCachingNullValues()
-                .entryTtl(Duration.ofHours(redisDataTTL))
+                .entryTtl(Duration.ofHours(-1)) // WIth -1 redis will cache forever
                 .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(redisSerializer));
 
         redisCacheConfiguration.usePrefix();

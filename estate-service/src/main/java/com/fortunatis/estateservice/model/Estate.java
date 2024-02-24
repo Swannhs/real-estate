@@ -114,9 +114,8 @@ public class Estate extends TimestampEntity {
     @ToString.Exclude
     private EstateLocation location;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "estate_search_property_id", referencedColumnName = "id")
-    private EstateSearchPriority estateSearchPriority;
+    @Column(name = "estate_search_priority_id")
+    private UUID estateSearchPriorityId;
 
     @Column(name = "country")
     private String country;
@@ -139,11 +138,8 @@ public class Estate extends TimestampEntity {
     @Column(name = "feature_id")
     private Set<UUID> estateFeatures = new HashSet<>();
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "estate_search_property",
-            joinColumns = @JoinColumn(name = "estate_id"),
-            inverseJoinColumns = @JoinColumn(name = "search_property_id"))
-    private Set<EstateSticker> estateStickers = new HashSet<>();
+    @Column(name = "estate_sticker_id")
+    private UUID estateStickerId;
 
     @PrePersist
     public void prePersist() {
