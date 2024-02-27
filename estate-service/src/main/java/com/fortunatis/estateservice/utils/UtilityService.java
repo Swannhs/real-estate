@@ -13,8 +13,6 @@ import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static com.fortunatis.estateservice.utils.ApplicationConstants.ENTRIES_PER_PAGE;
-
 @Component
 @RequiredArgsConstructor
 @Slf4j
@@ -44,36 +42,29 @@ public class UtilityService {
     public static String buildSearchQueryForPublicEstateSearch(EstateSearchDto searchEstateDTO) {
         StringBuilder query = new StringBuilder();
 
-        query.append("SELECT e.id AS estate_id, e.estate_advertiser, e.estate_type, e.estate_advertise_purpose, ");
+        query.append("SELECT e.id, e.estate_advertiser, e.estate_type, e.estate_advertise_purpose, ");
         query.append("e.rooms, e.living_area, e.estate_availability_policy, e.estate_will_be_available, ");
         query.append("e.estate_will_be_available_to, e.estate_price_currency, e.estate_price, ");
         query.append("e.estate_additional_price, e.estate_floor, e.estate_number_of_floor, e.estate_lot_area, ");
         query.append("e.estate_floor_space, e.estate_room_height, e.estate_year_of_building, e.estate_year_of_renovation, ");
         query.append("e.video_url, e.title, e.description, e.is_active, e.is_published, e.user_id, ");
-        query.append("e.estate_contact_id, e.location_id, e.estate_search_priority_id, e.country, ");
-        query.append("el.address_line_1, el.address_line_2, el.city, el.state, el.postal_code, el.country_code ");
+        query.append("e.estate_sticker_id, e.created_at, e.updated_at, ");
+        query.append("e.estate_contact_id AS estate_contact_id, e.location_id, e.estate_search_priority_id, e.country, el.address_line_1 ");
+        query.append("FROM estate e ");
         query.append(" JOIN estate_location el ON e.location_id = el.id");
 //        query.append(" LEFT JOIN estate_search_priority ON estate_search_priority.id = estate.estate_search_priority_id");
         query.append(" WHERE is_active = true");
 
         if (searchEstateDTO.getEstateIds() != null && !searchEstateDTO.getEstateIds().isEmpty()) {
             String ids = searchEstateDTO.getEstateIds().stream()
-                    .map(String::valueOf)
+                    .map(UUID::toString)
+                    .map(id -> "'" + id + "'")
                     .collect(Collectors.joining(","));
-            query.append(" AND estate.id IN (").append(ids).append(")");
+            query.append(" AND e.id IN (").append(ids).append(")");
         }
 
         query.append(bindForFeaturesFilterHeader(searchEstateDTO));
         query.append(buildQuery(searchEstateDTO));
-
-        if (!ObjectUtils.isEmpty(searchEstateDTO.getOrderBy())) {
-            query.append(" ORDER BY ").append(searchEstateDTO.getOrderBy());
-        }
-
-        query.append(" LIMIT ").append(ENTRIES_PER_PAGE).append(" OFFSET ")
-                .append(searchEstateDTO.getPage() * ENTRIES_PER_PAGE);
-
-//        log.info("Generated SQL: {}", query);
         return query.toString();
     }
 

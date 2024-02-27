@@ -21,21 +21,21 @@ import java.util.List;
 public class TestController {
     private final KeycloakService keycloakService;
 
-//    @GetMapping
-//    @Operation(summary = "Test endpoint")
-//    public ResponseEntity<?> test() {
-//        List<KeycloakUserDetailsResponseDto> allUsers = keycloakService.getAllUsers();
-//        List<String> userIds = allUsers.stream().map(KeycloakUserDetailsResponseDto::getId).toList();
-//        return ResponseEntity.ok(userIds);
-//    }
-
     @GetMapping
-    @Operation(summary = "Test payment endpoint")
-    public ResponseEntity<?> testPayment() throws StripeException {
-//        PaymentRequestDto paymentRequestDto = new PaymentRequestDto();
-//        paymentRequestDto.setAmount(100L);
-//        paymentRequestDto.setCurrency("CHF");
-////        PaymentIntent paymentIntent = paymentService.createPaymentIntent(paymentRequestDto);
-        return ResponseEntity.ok("success");
+    @Operation(summary = "Test endpoint")
+    public ResponseEntity<?> test() {
+        List<KeycloakUserDetailsResponseDto> allUsers = keycloakService.getAllUsers();
+        List<String> userIds = allUsers.stream().map(KeycloakUserDetailsResponseDto::getId).toList();
+        return ResponseEntity.ok(userIds);
     }
+
+//    @GetMapping
+//    @Operation(summary = "Test payment endpoint")
+//    public ResponseEntity<?> testPayment() throws StripeException {
+////        PaymentRequestDto paymentRequestDto = new PaymentRequestDto();
+////        paymentRequestDto.setAmount(100L);
+////        paymentRequestDto.setCurrency("CHF");
+//////        PaymentIntent paymentIntent = paymentService.createPaymentIntent(paymentRequestDto);
+//        return ResponseEntity.ok("success");
+//    }
 }

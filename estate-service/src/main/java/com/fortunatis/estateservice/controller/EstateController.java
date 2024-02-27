@@ -20,7 +20,7 @@ public class EstateController {
     @GetMapping
     @Operation(summary = "Get all estates by user")
     public ResponseEntity<?> getAllEstatesByUser(
-            @RequestParam(name = "page", required = false, defaultValue = "1") Integer page,
+            @RequestParam(name = "page", required = false, defaultValue = "0") Integer page,
             @RequestParam(name = "size", required = false, defaultValue = "10") Integer size,
             @RequestParam(name = "orderBy", required = false, defaultValue = "createdAt") String orderBy,
             @RequestParam(name = "desc", required = false, defaultValue = "desc") String desc

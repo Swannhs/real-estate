@@ -68,19 +68,19 @@ public class StaticDataServiceImpl implements StaticDataService {
     }
 
     @Override
-    @Cacheable(value = "static_data", key = "'static_data'")
+    @Cacheable(value = "advertisers", key = "'advertisers'")
     public List<StaticDataResponseDto> getPublicEstateAdvertisers() {
         return modelMapper.map(staticDataRepository.findAllByDataType(StaticDataType.ADVERTISER), new TypeToken<List<StaticDataResponseDto>>() {}.getType());
     }
 
     @Override
-    @Cacheable(value = "static_data", key = "'static_data'")
+    @Cacheable(value = "advertise_purpose", key = "'advertise_purpose'")
     public List<StaticDataResponseDto> getPublicEstateAdvertisePurpose() {
         return modelMapper.map(staticDataRepository.findAllByDataType(StaticDataType.ESTATE_ADVERTISE_PURPOSE), new TypeToken<List<StaticDataResponseDto>>() {}.getType());
     }
 
     @Override
-    @Cacheable(value = "static_data", key = "'static_data'")
+    @Cacheable(value = "estate_category", key = "'estate_category'")
     public List<StaticDataResponseDto> getPublicEstateCategoryTypes() {
         return modelMapper.map(staticDataRepository.findAllByDataType(StaticDataType.ESTATE_TYPE), new TypeToken<List<StaticDataResponseDto>>() {}.getType());
     }

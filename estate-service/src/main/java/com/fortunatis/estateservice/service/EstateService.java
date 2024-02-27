@@ -15,7 +15,7 @@ public interface EstateService {
     EstateResponseDto updateEstate(EstateAddDto estateAddDto, UUID id);
     EstateResponseDto deleteEstate(UUID id);
     EstateSingleResponseDto getEstateById(UUID id);
-    List<EstateResponseDto> searchEstateProperties(EstateSearchDto estateSearchDto);
+    Page<EstateResponseDto> searchEstateProperties(Integer page, Integer size, EstateSearchDto estateSearchDto);
     Page<EstateResponseDto> getAllEstatesByUser(Integer page, Integer size, String orderBy, String desc);
     List<EstateResponseDto> getRecentListings(Integer limit);
     Estate getEstateByEstateId(UUID id);

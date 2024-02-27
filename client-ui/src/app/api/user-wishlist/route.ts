@@ -12,7 +12,7 @@ export async function GET(req: NextRequest) {
     const paginationData = req.nextUrl.searchParams;
     if (session) {
         let accessToken = await getAccessToken();
-        const res = await fetch(`${baseUrl}/${estatePrefix}/v1/estates?page=${paginationData.get("page")}&size=${paginationData.get("size")}&orderBy=${paginationData.get("orderBy")}&desc=${paginationData.get("desc")}`, {
+        const res = await fetch(`${baseUrl}/${estatePrefix}/v1/wishlist?page=${paginationData.get("page")}&size=${paginationData.get("size")}&orderBy=${paginationData.get("orderBy")}&desc=${paginationData.get("desc")}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -21,9 +21,9 @@ export async function GET(req: NextRequest) {
         });
         if (res.ok) {
             const data = await res.json();
-            return NextResponse.json({message: "User wishlist fetched", status: res.status, data: data});
+            return NextResponse.json({message: "User estate fetched", status: res.status, data: data});
         }
-        return NextResponse.json({message: "User wishlist fetch failed", status: res.status});
+        return NextResponse.json({message: "User estate fetch failed", status: res.status});
     }
     return NextResponse.json({message: "Unauthorized", status: 401});
 }

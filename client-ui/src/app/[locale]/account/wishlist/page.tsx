@@ -1,15 +1,15 @@
 "use client";
 
 import React, {useEffect, useMemo, useState} from "react";
-import {getUserEstate} from "@/api/userPrivateApi";
-import {toast} from "react-toastify";
-import PropertyCard from "@/app/[locale]/account/(components)/properties/PropertyCard";
 import {UserEstateInterface, UserEstatesResponseInterface} from "@/types/property";
-import PropertyCardSkeleton from "@/app/[locale]/account/(components)/properties/PropertyCardSkeleton";
 import {PaginationType} from "@/types/common";
+import PropertyCardSkeleton from "@/app/[locale]/account/(components)/properties/PropertyCardSkeleton";
+import {toast} from "react-toastify";
+import {getUserWishlist} from "@/api/userPrivateApi";
+import PropertyCard from "@/app/[locale]/account/(components)/properties/PropertyCard";
 import InfiniteScroll from "react-infinite-scroll-component";
 
-const AccountProperties = () => {
+export default async function WishListPage() {
     const [isLoading, setIsLoading] = useState<Boolean>(true);
     const [userEstates, setUserEstates] = useState<UserEstateInterface[]>([]);
     const [totalEstates, setTotalEstates] = useState<Number>(0);
@@ -29,20 +29,20 @@ const AccountProperties = () => {
     }, []);
 
     useEffect(() => {
-        fetchUserEstate(pagination)
-          .then((estate) => {
-              if (pagination.page === 1) {
-                  setUserEstates(estate);
-              } else {
-                  setUserEstates(userEstates.concat(estate));
-              }
-              setIsLoading(false);
-          })
-          .finally(() => setIsLoading(false));
+        fetchUserWishList(pagination)
+            .then((estate) => {
+                if (pagination.page === 1) {
+                    setUserEstates(estate);
+                } else {
+                    setUserEstates(userEstates.concat(estate));
+                }
+                setIsLoading(false);
+            })
+            .finally(() => setIsLoading(false));
     }, [pagination]);
 
-    const fetchUserEstate = async (pagination) => {
-        const response = await getUserEstate(pagination);
+    const fetchUserWishList = async (pagination) => {
+        const response = await getUserWishlist(pagination);
         if (response.status === 200) {
             const {data}: { data: UserEstatesResponseInterface } = await response.json();
             setTotalEstates(data.totalPages);
@@ -63,8 +63,8 @@ const AccountProperties = () => {
 
     const PropertySection = () => (
         <div className="grid grid-cols-1 gap-6 md:gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            {userEstates.map((userEstate) => (
-                <PropertyCard key={userEstate.id} data={userEstate}/>
+            {userEstates.map((estate) => (
+                <PropertyCard key={estate.id} data={estate}/>
             ))}
             {isLoading && loader}
         </div>
@@ -73,7 +73,7 @@ const AccountProperties = () => {
     return (
         <div className="space-y-6 sm:space-y-8">
             <div>
-                <h2 className="text-3xl font-semibold">Save lists</h2>
+                <h2 className="text-3xl font-semibold">Wish List</h2>
             </div>
             <div className="w-14 border-b border-neutral-200 dark:border-neutral-700"></div>
             <InfiniteScroll
@@ -86,6 +86,4 @@ const AccountProperties = () => {
             </InfiniteScroll>
         </div>
     );
-};
-
-export default AccountProperties;
+}
