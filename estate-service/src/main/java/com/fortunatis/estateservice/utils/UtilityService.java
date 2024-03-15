@@ -245,16 +245,6 @@ public class UtilityService {
         return query.toString();
     }
 
-    public static String countSearchResult(String generatedSql) {
-        StringBuilder query = new StringBuilder();
-
-        query.append(generatedSql);
-        query.replace(query.indexOf("SELECT"), query.indexOf("FROM"), "SELECT COUNT(*)");
-        query.delete(query.indexOf("GROUP"), query.length());
-
-        return query.toString();
-    }
-
     public static Integer preventEntitySize(Integer size) {
         return size > 50 ? 50 : size;
     }

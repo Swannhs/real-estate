@@ -1,36 +1,36 @@
 server:
-  port: 8183
+  port: ${SPRING_APPLICATION_PORT:8183}
 spring:
   application:
     name: user-service
   profiles:
-    active: dev
+    active: ${SPRING_PROFILES_ACTIVE:dev}
   datasource:
-    url: jdbc:postgresql://localhost:5432/user-service
-    username: root
-    password: root
+    url: ${SPRING_DATABASE_URL:jdbc:postgresql://localhost:5432/user-service}
+    username: ${SPRING_DATASOURCE_USERNAME:root}
+    password: ${SPRING_DATASOURCE_PASSWORD:root}
   jpa:
     show-sql: true
   liquibase:
     change-log: classpath:/db/changelog/db.changelog-master.yaml
     enabled: true
     default-schema: public
-    url: jdbc:postgresql://localhost:5432/user-service
-    user: root
-    password: root
+    url: ${SPRING_DATABASE_URL:jdbc:postgresql://localhost:5432/user-service}
+    user: ${SPRING_DATASOURCE_USERNAME:root}
+    password: ${SPRING_DATASOURCE_PASSWORD:root}
     drop-first: false
   security:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: http://localhost:8080/realms/fortunatishomes
+          issuer-uri: ${KEYCLOAK_ISSUER_URI:http://localhost:8080/realms/fortunatishomes}
 service:
   param:
     keycloak:
-      base-url: http://localhost:8181
-      realm: fortunatishomes
-      client-id: static-service
-      client-secret: XuCIzeFc43F3NqBYqpaAYoab7NBD08et
+      base-url: ${KEYCLOAK_BASE_URI:http://localhost:8181}
+      realm: ${KEYCLOAK_REALM_NAME:fortunatishomes}
+      client-id: ${KEYCLOAK_CLIENT_ID:static-service}
+      client-secret: ${KEYCLOAK_CLIENT_SECRET:XuCIzeFc43F3NqBYqpaAYoab7NBD08et}
       grant-type: client_credentials
 
 springfox:

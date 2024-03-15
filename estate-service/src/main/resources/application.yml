@@ -2,20 +2,20 @@ spring:
   application:
     name: estate-service
   profiles:
-    active: dev
+    active: ${SPRING_PROFILES_ACTIVE:dev}
   datasource:
-    url: jdbc:postgresql://localhost:5432/estate-service
-    username: root
-    password: root
+    url: ${SPRING_DATABASE_URL:jdbc:postgresql://localhost:5432/estate-service}
+    username: ${SPRING_DATASOURCE_USERNAME:root}
+    password: ${SPRING_DATASOURCE_PASSWORD:root}
   jpa:
     show-sql: true
   liquibase:
     change-log: classpath:/db/changelog/db.changelog-master.yaml
     enabled: true
     default-schema: public
-    url: jdbc:postgresql://localhost:5432/estate-service
-    user: root
-    password: root
+    url: ${SPRING_DATABASE_URL:jdbc:postgresql://localhost:5432/estate-service}
+    user: ${SPRING_DATASOURCE_USERNAME:root}
+    password: ${SPRING_DATASOURCE_PASSWORD:root}
     drop-first: false
   security:
     oauth2:
@@ -23,22 +23,22 @@ spring:
         jwt:
           issuer-uri: http://localhost:8080/realms/fortunatishomes
 server:
-  port: 8182
+  port: ${SPRING_APPLICATION_PORT:8182}
 
 service:
   param:
     keycloak-service:
-      token-url: http://localhost:8080/realms/fortunatishomes/protocol/openid-connect/token
-      client-id: static-service
-      client-secret: XuCIzeFc43F3NqBYqpaAYoab7NBD08et
+      token-url: ${KEYCLOAK_ISSUER_URI:http://localhost:8080/realms/fortunatishomes}/protocol/openid-connect/token
+      client-id: ${KEYCLOAK_CLIENT_ID:static-service}
+      client-secret: ${KEYCLOAK_CLIENT_SECRET:XuCIzeFc43F3NqBYqpaAYoab7NBD08et}
     static-service:
-      base-url: http://localhost:8181
+      base-url: ${STATIC_SERVICE_URL:http://localhost:8181}
       public-prefix: /public
       endpoint-prefix: /api/v1
     user-service:
-      base-url: http://localhost:8183
+      base-url: ${USER_SERVICE_URL:http://localhost:8183}
     email-service:
-      base-url: http://localhost:8184
+      base-url: ${EMAIL_SERVICE_URL:http://localhost:8184}
       endpoint-prefix: /api/v1
     file-storage:
       dir: https://fotunatishome.s3.amazonaws.com/
