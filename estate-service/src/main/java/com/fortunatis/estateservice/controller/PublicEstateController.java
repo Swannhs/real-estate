@@ -27,8 +27,12 @@ public class PublicEstateController {
 
     @GetMapping("/search")
     @Operation(summary = "Search estate")
-    public ResponseEntity<?> searchEstate(@RequestBody EstateSearchDto estateSearchDto) {
-        return ResponseEntity.ok(estateService.searchEstateProperties(estateSearchDto));
+    public ResponseEntity<?> searchEstate(
+            @RequestParam(name = "page", required = false, defaultValue = "0") Integer page,
+            @RequestParam(name = "size", required = false, defaultValue = "10") Integer size,
+            @RequestBody EstateSearchDto estateSearchDto
+    ) {
+        return ResponseEntity.ok(estateService.searchEstateProperties(page, size, estateSearchDto));
     }
 
     @GetMapping("/recent-listings")

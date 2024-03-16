@@ -9,6 +9,7 @@ import com.stripe.model.PaymentIntent;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,22 +21,30 @@ import java.util.List;
 @Tag(name = "Test", description = "Test controller")
 public class TestController {
     private final KeycloakService keycloakService;
-
-//    @GetMapping
-//    @Operation(summary = "Test endpoint")
-//    public ResponseEntity<?> test() {
-//        List<KeycloakUserDetailsResponseDto> allUsers = keycloakService.getAllUsers();
-//        List<String> userIds = allUsers.stream().map(KeycloakUserDetailsResponseDto::getId).toList();
-//        return ResponseEntity.ok(userIds);
-//    }
+    @Value("${spring.profiles.active}")
+    private String profile;
 
     @GetMapping
-    @Operation(summary = "Test payment endpoint")
-    public ResponseEntity<?> testPayment() throws StripeException {
-//        PaymentRequestDto paymentRequestDto = new PaymentRequestDto();
-//        paymentRequestDto.setAmount(100L);
-//        paymentRequestDto.setCurrency("CHF");
-////        PaymentIntent paymentIntent = paymentService.createPaymentIntent(paymentRequestDto);
-        return ResponseEntity.ok("success");
+    @Operation(summary = "Test endpoint")
+    public ResponseEntity<?> test() {
+        List<KeycloakUserDetailsResponseDto> allUsers = keycloakService.getAllUsers();
+        List<String> userIds = allUsers.stream().map(KeycloakUserDetailsResponseDto::getId).toList();
+        return ResponseEntity.ok(userIds);
     }
+
+    @GetMapping("/env")
+    @Operation(summary = "Test endpoint")
+    public ResponseEntity<?> testEnv() {
+        return ResponseEntity.ok(profile);
+    }
+
+//    @GetMapping
+//    @Operation(summary = "Test payment endpoint")
+//    public ResponseEntity<?> testPayment() throws StripeException {
+////        PaymentRequestDto paymentRequestDto = new PaymentRequestDto();
+////        paymentRequestDto.setAmount(100L);
+////        paymentRequestDto.setCurrency("CHF");
+//////        PaymentIntent paymentIntent = paymentService.createPaymentIntent(paymentRequestDto);
+//        return ResponseEntity.ok("success");
+//    }
 }

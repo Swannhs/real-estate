@@ -13,6 +13,7 @@ export const Nav = () => {
                 {[
                     {href: "/account/profile", label: "Account"},
                     {href: "/account/properties", label: "Properties"},
+                    {href: "/account/wishlist", label: "Wishlist"},
                     {href: "/account/password", label: "password"},
                     {href: "/account/billing", label: "billing"}
                 ].map((item) => {

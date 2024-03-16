@@ -174,33 +174,20 @@ public class EstateServiceImpl implements EstateService {
     }
 
     @Override
-    public List<EstateResponseDto> searchEstateProperties(EstateSearchDto estateSearchDto) {
+    public Page<EstateResponseDto> searchEstateProperties(Integer page, Integer size, EstateSearchDto estateSearchDto) {
         if (!UtilityService.hasValidEstateFilter(estateSearchDto)) {
             throw new RuntimeException("Invalid filter");
         }
-        Meta meta = new Meta();
         if (!StringUtils.isEmpty(estateSearchDto.getSearchKeywords())) {
             estateSearchDto.setSearchKeywords(getCantonVariationsFromSearchKeywords(estateSearchDto.getSearchKeywords()));
         }
         String generatedSql = UtilityService.buildSearchQueryForPublicEstateSearch(estateSearchDto);
         if (StringUtils.isNotBlank(generatedSql)) {
-            List<Estate> estates = customDAOService.searchEstates(generatedSql);
-
-            if (CollectionUtils.isEmpty(estates)) {
-                return new ArrayList<>();
-            }
-            List<EstateResponseDto> estateDTOList = estates.stream().map(estate -> modelMapper.map(estate, EstateResponseDto.class)).collect(Collectors.toList());
-
-            meta.setTotal(customDAOService.countSearchEstateResults(UtilityService.countSearchResult(generatedSql)));
-            meta.setPerPage(ENTRIES_PER_PAGE);
-            meta.setCurrentPage(estateSearchDto.getPage());
-            meta.setTotalPage((int) Math.ceil(Double.parseDouble(String.valueOf(meta.getTotal())) / ENTRIES_PER_PAGE));
-            meta.setNextPage(meta.getCurrentPage() + 1);
-            meta.setPreviousPage(meta.getCurrentPage() > 0 ? meta.getCurrentPage() - 1 : 0);
-
-            return estateDTOList;
+            Pageable pageable = PageRequest.of(page, UtilityService.preventEntitySize(size));
+            Page<Estate> estates = customDAOService.searchEstates(generatedSql, pageable);
+            return estates.map(estate -> modelMapper.map(estate, EstateResponseDto.class));
         }
-        return new ArrayList<>();
+        return new PageImpl<>(new ArrayList<>());
     }
 
     /**

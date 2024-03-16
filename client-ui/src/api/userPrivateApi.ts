@@ -28,7 +28,16 @@ export async function updateUserInfo(userInfo: UserInfoInterface) {
 }
 
 export async function getUserEstate(pagination: PaginationType) {
-    return fetch(`/api/user-estate`, {
+    return fetch(`/api/user-estate?page=${pagination.page}&size=${pagination.size}&orderBy=${pagination.orderBy}&desc=${pagination.desc}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    });
+}
+
+export async function getUserWishlist(pagination: PaginationType) {
+    return fetch(`/api/user-wishlist?page=${pagination.page}&size=${pagination.size}&orderBy=${pagination.orderBy}&desc=${pagination.desc}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
