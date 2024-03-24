@@ -38,6 +38,13 @@ public class TestController {
         return ResponseEntity.ok(profile);
     }
 
+    @GetMapping("/test/keycloak")
+    @Operation(summary = "Test keycloak endpoint")
+    public ResponseEntity<?> testKeycloak() {
+        return ResponseEntity.ok(keycloakService.getAllUsers());
+    }
+
+
 //    @GetMapping
 //    @Operation(summary = "Test payment endpoint")
 //    public ResponseEntity<?> testPayment() throws StripeException {

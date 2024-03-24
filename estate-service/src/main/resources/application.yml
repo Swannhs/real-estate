@@ -29,8 +29,8 @@ service:
   param:
     keycloak-service:
       token-url: ${KEYCLOAK_ISSUER_URI:http://localhost:8080/realms/fortunatishomes}/protocol/openid-connect/token
-      client-id: ${KEYCLOAK_CLIENT_ID:static-service}
-      client-secret: ${KEYCLOAK_CLIENT_SECRET:XuCIzeFc43F3NqBYqpaAYoab7NBD08et}
+      client-id: ${KEYCLOAK_CLIENT_ID:estate-api}
+      client-secret: ${KEYCLOAK_CLIENT_SECRET:**********}
     static-service:
       base-url: ${STATIC_SERVICE_URL:http://localhost:8181}
       public-prefix: /public

@@ -29,8 +29,8 @@ service:
     keycloak:
       base-url: ${KEYCLOAK_BASE_URI:http://localhost:8181}
       realm: ${KEYCLOAK_REALM_NAME:fortunatishomes}
-      client-id: ${KEYCLOAK_CLIENT_ID:static-service}
-      client-secret: ${KEYCLOAK_CLIENT_SECRET:XuCIzeFc43F3NqBYqpaAYoab7NBD08et}
+      client-id: ${KEYCLOAK_CLIENT_ID:user-api}
+      client-secret: ${KEYCLOAK_CLIENT_SECRET:**********}
       grant-type: client_credentials
 
 springfox:
