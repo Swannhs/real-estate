@@ -19,6 +19,6 @@ public class UserRoleController {
     @GetMapping
     @Operation(summary = "Get user roles")
     public ResponseEntity<?> getUserRoles() {
-        return ResponseEntity.ok(keycloakService.getUserRoles());
+        return ResponseEntity.ok(keycloakService.getKeycloakUserRoles());
     }
 }

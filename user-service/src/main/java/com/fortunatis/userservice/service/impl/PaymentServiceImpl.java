@@ -1,8 +1,6 @@
 package com.fortunatis.userservice.service.impl;
 
-import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fortunatis.userservice.model.PaymentSetting;
@@ -46,7 +44,7 @@ public class PaymentServiceImpl implements PaymentService {
     public PaymentAccountCreatedResponseDto createConnectAccount() {
         try {
             UUID userId = userService.getUserId();
-            Account account = stripeConnectService.createConnectAccount(keycloakService.getUserById(userId).getEmail());
+            Account account = stripeConnectService.createConnectAccount(keycloakService.getKeycloakUserById(userId).getEmail());
             PaymentSetting paymentSetting = new PaymentSetting();
             paymentSetting.setUserId(userId);
 

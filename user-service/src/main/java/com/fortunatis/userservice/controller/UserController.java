@@ -19,12 +19,12 @@ public class UserController {
     @GetMapping
     @Operation(summary = "Get all users")
     public ResponseEntity<?> getAllUsers() {
-        return ResponseEntity.ok(keycloakService.getAllUsers());
+        return ResponseEntity.ok(keycloakService.getAllKeycloakUsers());
     }
 
     @GetMapping("/{id}")
     @Operation(summary = "Get user by id")
     public ResponseEntity<?> getUserById(@PathVariable UUID id) {
-        return ResponseEntity.ok(keycloakService.getUserById(id));
+        return ResponseEntity.ok(keycloakService.getKeycloakUserById(id));
     }
 }

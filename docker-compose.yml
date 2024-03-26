@@ -46,7 +46,7 @@ services:
       KC_DB_PASSWORD: keycloak
       KC_HOSTNAME: localhost
       KC_HTTP_ENABLED: "true"
-    entrypoint: [ "/opt/keycloak/bin/kc.sh", "start-dev", "--import-realm" ]
+    entrypoint: [ "/opt/keycloak/bin/kc.sh", "start-dev", "--import-realm", "--verbose" ]
     depends_on:
       - mysql
     network_mode: "host"

@@ -32,7 +32,7 @@ public class UserInfoServiceImpl implements UserInfoService {
         }
         UserInfo userInfo = userInfoRepository.findByUserId(userId)
                 .orElseThrow(() -> new EntityNotFoundException("User not found"));
-        KeycloakUserDetailsResponseDto keycloakUserDetailsResponseDto = keycloakService.getUserById(userId);
+        KeycloakUserDetailsResponseDto keycloakUserDetailsResponseDto = keycloakService.getKeycloakUserById(userId);
         UserInfoResponseDto userInfoResponseDto = modelMapper.map(userInfo, UserInfoResponseDto.class);
         userInfoResponseDto.setFirstName(keycloakUserDetailsResponseDto.getFirstName());
         userInfoResponseDto.setLastName(keycloakUserDetailsResponseDto.getLastName());
@@ -48,7 +48,7 @@ public class UserInfoServiceImpl implements UserInfoService {
         KeycloakUpdateUserRequestDto keycloakUpdateUserRequestDto = new KeycloakUpdateUserRequestDto();
         keycloakUpdateUserRequestDto.setFirstName(userInfoRequestDto.getFirstName());
         keycloakUpdateUserRequestDto.setLastName(userInfoRequestDto.getLastName());
-        keycloakService.updateUser(userId, keycloakUpdateUserRequestDto);
+        keycloakService.updateKeycloakUser(userId, keycloakUpdateUserRequestDto);
         UserInfoResponseDto responseDto = modelMapper.map(userInfoRepository.save(userInfo), UserInfoResponseDto.class);
         responseDto.setFirstName(keycloakUpdateUserRequestDto.getFirstName());
         responseDto.setLastName(keycloakUpdateUserRequestDto.getLastName());

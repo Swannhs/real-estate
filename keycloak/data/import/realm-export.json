@@ -27,13 +27,13 @@
   "oauth2DevicePollingInterval": 5,
   "enabled": true,
   "sslRequired": "external",
-  "registrationAllowed": false,
-  "registrationEmailAsUsername": false,
-  "rememberMe": false,
+  "registrationAllowed": true,
+  "registrationEmailAsUsername": true,
+  "rememberMe": true,
   "verifyEmail": false,
   "loginWithEmailAllowed": true,
   "duplicateEmailsAllowed": false,
-  "resetPasswordAllowed": false,
+  "resetPasswordAllowed": true,
   "editUsernameAllowed": false,
   "bruteForceProtected": false,
   "permanentLockout": false,
@@ -618,18 +618,17 @@
       ],
       "clientRoles": {
         "realm-management": [
-          "query-groups",
           "view-users",
-          "manage-realm",
-          "query-realms",
+          "view-clients",
           "query-users",
-          "manage-users"
+          "manage-users",
+          "manage-authorization"
         ],
         "user-api": [
           "uma_protection"
         ],
         "account": [
-          "view-profile"
+          "manage-account"
         ]
       },
       "notBefore": 0,
@@ -794,9 +793,10 @@
       "protocol": "openid-connect",
       "attributes": {
         "oidc.ciba.grant.enabled": "false",
-        "oauth2.device.authorization.grant.enabled": "false",
         "client.secret.creation.time": "1711222017",
         "backchannel.logout.session.required": "true",
+        "post.logout.redirect.uris": "+",
+        "oauth2.device.authorization.grant.enabled": "false",
         "backchannel.logout.revoke.offline.tokens": "false"
       },
       "authenticationFlowBindingOverrides": {},
@@ -812,6 +812,7 @@
           "config": {
             "user.session.note": "clientAddress",
             "introspection.token.claim": "true",
+            "userinfo.token.claim": "true",
             "id.token.claim": "true",
             "access.token.claim": "true",
             "claim.name": "clientAddress",
@@ -827,6 +828,7 @@
           "config": {
             "user.session.note": "clientHost",
             "introspection.token.claim": "true",
+            "userinfo.token.claim": "true",
             "id.token.claim": "true",
             "access.token.claim": "true",
             "claim.name": "clientHost",
@@ -842,6 +844,7 @@
           "config": {
             "user.session.note": "client_id",
             "introspection.token.claim": "true",
+            "userinfo.token.claim": "true",
             "id.token.claim": "true",
             "access.token.claim": "true",
             "claim.name": "client_id",
@@ -944,6 +947,7 @@
           "config": {
             "user.session.note": "clientHost",
             "introspection.token.claim": "true",
+            "userinfo.token.claim": "true",
             "id.token.claim": "true",
             "access.token.claim": "true",
             "claim.name": "clientHost",
@@ -959,6 +963,7 @@
           "config": {
             "user.session.note": "client_id",
             "introspection.token.claim": "true",
+            "userinfo.token.claim": "true",
             "id.token.claim": "true",
             "access.token.claim": "true",
             "claim.name": "client_id",
@@ -974,6 +979,7 @@
           "config": {
             "user.session.note": "clientAddress",
             "introspection.token.claim": "true",
+            "userinfo.token.claim": "true",
             "id.token.claim": "true",
             "access.token.claim": "true",
             "claim.name": "clientAddress",
@@ -1321,9 +1327,10 @@
       "protocol": "openid-connect",
       "attributes": {
         "oidc.ciba.grant.enabled": "true",
-        "oauth2.device.authorization.grant.enabled": "false",
         "client.secret.creation.time": "1711225679",
         "backchannel.logout.session.required": "true",
+        "post.logout.redirect.uris": "+",
+        "oauth2.device.authorization.grant.enabled": "false",
         "backchannel.logout.revoke.offline.tokens": "false"
       },
       "authenticationFlowBindingOverrides": {},
@@ -1339,6 +1346,7 @@
           "config": {
             "user.session.note": "client_id",
             "introspection.token.claim": "true",
+            "userinfo.token.claim": "true",
             "id.token.claim": "true",
             "access.token.claim": "true",
             "claim.name": "client_id",
@@ -1354,6 +1362,7 @@
           "config": {
             "user.session.note": "clientHost",
             "introspection.token.claim": "true",
+            "userinfo.token.claim": "true",
             "id.token.claim": "true",
             "access.token.claim": "true",
             "claim.name": "clientHost",
@@ -1369,6 +1378,7 @@
           "config": {
             "user.session.note": "clientAddress",
             "introspection.token.claim": "true",
+            "userinfo.token.claim": "true",
             "id.token.claim": "true",
             "access.token.claim": "true",
             "claim.name": "clientAddress",
@@ -1501,7 +1511,15 @@
         "phone",
         "offline_access",
         "microprofile-jwt"
-      ]
+      ],
+      "authorizationSettings": {
+        "allowRemoteResourceManagement": true,
+        "policyEnforcementMode": "ENFORCING",
+        "resources": [],
+        "policies": [],
+        "scopes": [],
+        "decisionStrategy": "UNANIMOUS"
+      }
     }
   ],
   "clientScopes": [
@@ -2096,14 +2114,14 @@
         "subComponents": {},
         "config": {
           "allowed-protocol-mapper-types": [
-            "oidc-sha256-pairwise-sub-mapper",
             "oidc-address-mapper",
-            "oidc-full-name-mapper",
-            "saml-role-list-mapper",
-            "saml-user-attribute-mapper",
-            "saml-user-property-mapper",
             "oidc-usermodel-attribute-mapper",
-            "oidc-usermodel-property-mapper"
+            "saml-user-attribute-mapper",
+            "saml-role-list-mapper",
+            "oidc-full-name-mapper",
+            "oidc-usermodel-property-mapper",
+            "saml-user-property-mapper",
+            "oidc-sha256-pairwise-sub-mapper"
           ]
         }
       },
@@ -2151,14 +2169,14 @@
         "subComponents": {},
         "config": {
           "allowed-protocol-mapper-types": [
-            "oidc-usermodel-attribute-mapper",
             "oidc-address-mapper",
             "saml-user-attribute-mapper",
+            "saml-user-property-mapper",
             "saml-role-list-mapper",
             "oidc-sha256-pairwise-sub-mapper",
+            "oidc-usermodel-attribute-mapper",
             "oidc-usermodel-property-mapper",
-            "oidc-full-name-mapper",
-            "saml-user-property-mapper"
+            "oidc-full-name-mapper"
           ]
         }
       },
