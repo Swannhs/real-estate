@@ -1,5 +1,5 @@
 # Use Maven with Java 18 as a base image
-FROM maven:3.8.7-openjdk-18-slim
+FROM maven:3.9.6-amazoncorretto-21
 
 WORKDIR /app
 
