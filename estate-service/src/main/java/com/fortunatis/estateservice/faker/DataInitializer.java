@@ -17,6 +17,9 @@ public class DataInitializer implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
+        if (!activeProfile.equals("dev")) {
+            return;
+        }
         estateSeeder.run(0, false);
         wishListSeeder.run(0, false);
     }

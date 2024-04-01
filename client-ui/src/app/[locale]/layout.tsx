@@ -8,6 +8,7 @@ import {NextIntlClientProvider, useMessages} from "next-intl";
 import Footer from "@/components/Footer";
 import SessionProviderWrapper from "@/hooks/sessionProviderWrapper";
 import {ToastContainer} from "react-toastify";
+import ReduxProvider from "@/hooks/ReduxProvider";
 
 export default function RootLayout({children, params: {locale}}: {
     children: React.ReactNode;
@@ -16,24 +17,27 @@ export default function RootLayout({children, params: {locale}}: {
     const messages = useMessages();
     return (
         <SessionProviderWrapper>
-            <html lang={locale}>
-            <head>
-                <title>Fortunatis Homes</title>
-            </head>
-            <body className="bg-white text-base dark:bg-neutral-900 text-neutral-900 dark:text-neutral-200">
-            <NextIntlClientProvider locale={locale} messages={messages}>
-                <ToastContainer/>
-                {/*<ClientCommons />*/}
-                {/*<SiteHeader />*/}
-                <MainNav2/>
+            <ReduxProvider>
+                <html lang={locale}>
+                <head>
+                    <title>Fortunatis Homes</title>
+                </head>
+                <body className="bg-white text-base dark:bg-neutral-900 text-neutral-900 dark:text-neutral-200">
+                <NextIntlClientProvider locale={locale} messages={messages}>
+                    <ToastContainer/>
+                    {/*<ClientCommons />*/}
+                    {/*<SiteHeader />*/}
+                    <MainNav2/>
 
-                {children}
+                    {children}
 
-                {/*<FooterNav />*/}
-                <Footer/>
-            </NextIntlClientProvider>
-            </body>
-            </html>
+                    {/*<FooterNav />*/}
+                    <Footer/>
+                </NextIntlClientProvider>
+                </body>
+                </html>
+            </ReduxProvider>
+
         </SessionProviderWrapper>
     );
 }

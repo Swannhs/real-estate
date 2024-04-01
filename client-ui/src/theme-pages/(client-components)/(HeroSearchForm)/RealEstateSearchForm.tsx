@@ -4,6 +4,8 @@ import LocationInput from "./LocationInput";
 import PropertyTypeSelect from "./PropertyTypeSelect";
 import PriceRangeInput from "./PriceRangeInput";
 import {PropertyType} from "../(HeroSearchForm2Mobile)/PropertyTypeSelect";
+import {useTranslations} from "next-intl";
+import PropertyTypeIcon from "@/shared/icons/PropertyTypeIcon";
 
 export interface RealEstateSearchFormProps {
     haveDefaultValue?: boolean;
@@ -36,8 +38,10 @@ const defaultPropertyType: PropertyType[] = [
 ];
 
 const RealEstateSearchForm: FC<RealEstateSearchFormProps> = ({haveDefaultValue = false}) => {
+    const t = useTranslations('Index');
     const [locationInputValue, setLocationInputValue] = useState("");
     const [typeOfProperty, setTypeOfProperty] = useState<PropertyType[]>(defaultPropertyType);
+
     useEffect(() => {
         if (haveDefaultValue) {
             setLocationInputValue(defaultLocationValue);
@@ -50,6 +54,7 @@ const RealEstateSearchForm: FC<RealEstateSearchFormProps> = ({haveDefaultValue =
             <LocationInput
                 defaultValue={locationInputValue}
                 onChange={(e) => setLocationInputValue(e)}
+                placeHolder='Location'
                 className="flex-[1.5]"
             />
 
@@ -57,6 +62,7 @@ const RealEstateSearchForm: FC<RealEstateSearchFormProps> = ({haveDefaultValue =
                 defaultValue={typeOfProperty}
                 onChange={setTypeOfProperty}
             />
+                <PropertyTypeIcon/>
             <PriceRangeInput/>
         </form>
     )

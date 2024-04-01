@@ -123,12 +123,12 @@ export default async function PropertyDetailPage({params}: { params: { propertyI
                 propertyDetails.property.video
             </h2>
             <div className="w-14 border-b border-neutral-200 dark:border-neutral-700"></div>
-            <iframe
-                className="w-full h-96 mt-4"
-                src={`${property?.videoUrl as string}`}
-                title="YouTube video player"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen></iframe>
+            {/*<iframe*/}
+            {/*    className="w-full h-96 mt-4"*/}
+            {/*    src={`${property?.videoUrl as string}`}*/}
+            {/*    title="YouTube video player"*/}
+            {/*    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"*/}
+            {/*    allowFullScreen></iframe>*/}
         </div>
     )
 
@@ -138,7 +138,7 @@ export default async function PropertyDetailPage({params}: { params: { propertyI
                 <h2 className="text-2xl font-semibold">{property?.title}</h2>
                 <div className="w-14 border-b border-neutral-200 dark:border-neutral-700"></div>
                 <div className="text-neutral-6000 dark:text-neutral-300">
-                    <div dangerouslySetInnerHTML={{__html: property?.description as string}}/>
+                    {/*<div dangerouslySetInnerHTML={{__html: property?.description as string}}/>*/}
                 </div>
             </div>
         );

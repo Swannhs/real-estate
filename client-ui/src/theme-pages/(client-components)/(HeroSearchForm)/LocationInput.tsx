@@ -23,14 +23,14 @@ export interface LocationInputProps {
 }
 
 const LocationInput: FC<LocationInputProps> = ({
-                                                   defaultValue,
-                                                   autoFocus = false,
-                                                   onChange,
-                                                   onInputDone,
-                                                   placeHolder = "Location",
-                                                   desc = "Where are you going?",
-                                                   className = "nc-flex-1.5"
-                                               }) => {
+    defaultValue,
+    autoFocus = false,
+    onChange,
+    onInputDone,
+    placeHolder = "Location",
+    desc = "Where are you going?",
+    className = "nc-flex-1.5"
+}) => {
     const t = useTranslations('Index');
     const containerRef = useRef<HTMLDivElement>(null);
     const inputRef = useRef<HTMLInputElement>(null);

@@ -70,20 +70,20 @@ const PriceRangeInput: FC<PriceRangeInputProps> = ({
                                 </svg>
                             </div>
                             <div className="flex-grow">
-                <span className="block xl:text-lg font-semibold truncate">
-                  {`$${convertNumbThousand(
-                      rangePrices[0] / 1000
-                  )}k ~ $${convertNumbThousand(rangePrices[1] / 1000)}k`}
-                </span>
-                                <span className="block mt-1 text-sm text-neutral-400 leading-none font-light ">
-                  Choose price range
-                </span>
+                                <p className="block xl:text-lg font-semibold truncate">
+                                    {`$${convertNumbThousand(
+                                        rangePrices[0] / 1000
+                                    )}k ~ $${convertNumbThousand(rangePrices[1] / 1000)}k`}
+                                </p>
+                                <p className="block mt-1 text-sm text-neutral-400 leading-none font-light ">
+                                    Choose price range
+                                </p>
                             </div>
                         </Popover.Button>
 
                         {/* BUTTON SUBMIT OF FORM */}
                         <div className="pr-2 xl:pr-4">
-                            <ButtonSubmit href="/listing-real-estate"/>
+                            <ButtonSubmit href="/search"/>
                         </div>
                     </div>
 

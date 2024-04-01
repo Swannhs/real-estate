@@ -9,7 +9,6 @@ import LangDropdown from "@/theme-pages/(client-components)/(Header)/LangDropdow
 import SwitchDarkMode from "@/shared/SwitchDarkMode";
 import {useTranslations} from 'next-intl';
 import AvatarDropdown from "@/theme-pages/(client-components)/(Header)/AvatarDropdown";
-import {SessionInterface} from "@/types/user";
 
 export interface MainNav2Props {
     className?: string;
@@ -17,7 +16,8 @@ export interface MainNav2Props {
 
 const MainNav2: FC<MainNav2Props> = ({className = ""}) => {
     const t = useTranslations("Index");
-    const {status, data: session}: { data: SessionInterface } = useSession();
+    const {status, data} = useSession();
+    const session: any = data;
     // const location = useLocation();
 
     useEffect(() => {

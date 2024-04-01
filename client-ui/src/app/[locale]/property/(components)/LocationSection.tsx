@@ -24,7 +24,7 @@ const LocationSection = () => {
     );
 
     const {isLoaded} = useLoadScript({
-        googleMapsApiKey: GOOGLE_MAPS_API_KEY,
+        googleMapsApiKey: GOOGLE_MAPS_API_KEY as string,
         libraries: libraries as any,
     });
 

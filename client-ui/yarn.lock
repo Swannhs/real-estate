@@ -16,6 +16,13 @@
   dependencies:
     regenerator-runtime "^0.14.0"
 
+"@babel/runtime@^7.9.2":
+  version "7.24.1"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.24.1.tgz#431f9a794d173b53720e69a6464abc6f0e2a5c57"
+  integrity sha512-+BIznRzyqBf+2wCTxcKE3wDjfGeCoVE61KSHGpkzqrLi8qxqFwBeUFyId2cxkTmm55fzDGnm0+yCxaxygrLUnQ==
+  dependencies:
+    regenerator-runtime "^0.14.0"
+
 "@emotion/is-prop-valid@^0.8.2":
   version "0.8.8"
   resolved "https://registry.yarnpkg.com/@emotion/is-prop-valid/-/is-prop-valid-0.8.8.tgz#db28b1c4368a259b60a97311d6a952d4fd01ac1a"
@@ -332,6 +339,16 @@
   resolved "https://registry.yarnpkg.com/@react-google-maps/marker-clusterer/-/marker-clusterer-2.19.2.tgz#24d9fb9aa555bb063ba5fe82f80fcd7d48662184"
   integrity sha512-x9ibmsP0ZVqzyCo1Pitbw+4b6iEXRw/r1TCy3vOUR3eKrzWLnHYZMR325BkZW2r8fnuWE/V3Fp4QZOP9qYORCw==
 
+"@reduxjs/toolkit@^2.2.2":
+  version "2.2.2"
+  resolved "https://registry.yarnpkg.com/@reduxjs/toolkit/-/toolkit-2.2.2.tgz#952fc8f8315d7274e28f6e4608b7ec66fce7e94e"
+  integrity sha512-454GZrEx3G6QSYwIx9ROaso1HR6sTH8qyZBe3KEsdWVGU3ayV8jYCwdaEJV3vl9V6+pi3GRl+7Xl7AeDna6qwQ==
+  dependencies:
+    immer "^10.0.3"
+    redux "^5.0.1"
+    redux-thunk "^3.1.0"
+    reselect "^5.0.1"
+
 "@rushstack/eslint-patch@^1.1.3":
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/@rushstack/eslint-patch/-/eslint-patch-1.2.0.tgz#8be36a1f66f3265389e90b5f9c9962146758f728"
@@ -395,6 +412,14 @@
   resolved "https://registry.yarnpkg.com/@types/google.maps/-/google.maps-3.53.5.tgz#0f3010ab4eabe46721f3604462196975b640aab9"
   integrity sha512-HoRq4Te8J6krH7hj+TfdYepqegoKZCj3kkaK5gf+ySFSHLvyqYkDvkrtbcVJXQ6QBphQ0h1TF7p4J6sOh4r/zg==
 
+"@types/hoist-non-react-statics@^3.3.0":
+  version "3.3.5"
+  resolved "https://registry.yarnpkg.com/@types/hoist-non-react-statics/-/hoist-non-react-statics-3.3.5.tgz#dab7867ef789d87e2b4b0003c9d65c49cc44a494"
+  integrity sha512-SbcrWzkKBw2cdwRTwQAswfpB9g9LJWfjtUeW/jvNwbhC8cpmmNYVePa+ncbUe0rGTQ7G3Ff6mYUN2VMfLVr+Sg==
+  dependencies:
+    "@types/react" "*"
+    hoist-non-react-statics "^3.3.0"
+
 "@types/js-cookie@^2.2.6":
   version "2.2.7"
   resolved "https://registry.yarnpkg.com/@types/js-cookie/-/js-cookie-2.2.7.tgz#226a9e31680835a6188e887f3988e60c04d3f6a3"
@@ -445,6 +470,16 @@
   dependencies:
     "@types/react" "*"
 
+"@types/react-redux@^7.1.33":
+  version "7.1.33"
+  resolved "https://registry.yarnpkg.com/@types/react-redux/-/react-redux-7.1.33.tgz#53c5564f03f1ded90904e3c90f77e4bd4dc20b15"
+  integrity sha512-NF8m5AjWCkert+fosDsN3hAlHzpjSiXlVy9EgQEmLoBhaNXbmyeGs/aj5dQzKuF+/q+S7JQagorGDW8pJ28Hmg==
+  dependencies:
+    "@types/hoist-non-react-statics" "^3.3.0"
+    "@types/react" "*"
+    hoist-non-react-statics "^3.3.0"
+    redux "^4.0.0"
+
 "@types/react@*":
   version "18.0.27"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-18.0.27.tgz#d9425abe187a00f8a5ec182b010d4fd9da703b71"
@@ -467,6 +502,11 @@
   version "0.16.2"
   resolved "https://registry.yarnpkg.com/@types/scheduler/-/scheduler-0.16.2.tgz#1a62f89525723dde24ba1b01b092bf5df8ad4d39"
   integrity sha512-hppQEBDmlwhFAXKJX2KnWLYu5yMfi91yazPb2l+lbJiwW+wdo1gNeRA+3RgNSO39WYX2euey41KEwnqesU2Jew==
+
+"@types/use-sync-external-store@^0.0.3":
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/@types/use-sync-external-store/-/use-sync-external-store-0.0.3.tgz#b6725d5f4af24ace33b36fafd295136e75509f43"
+  integrity sha512-EwmlvuaxPNej9+T4v5AuBPJa2x2UOJVdjCtDHgcDqitUeOtjnJKJ+apYjVcAoBEMjKW1VVFGZLUb5+qqa09XFA==
 
 "@typescript-eslint/parser@^5.42.0":
   version "5.50.0"
@@ -2277,7 +2317,7 @@ hoek@2.x.x:
   resolved "https://registry.yarnpkg.com/hoek/-/hoek-2.16.3.tgz#20bb7403d3cea398e91dc4710a8ff1b8274a25ed"
   integrity sha512-V6Yw1rIcYV/4JsnggjBU0l4Kr+EXhpwqXRusENU1Xx6ro00IHPHYNynCuBTOZAPlr3AAmLvchH9I7N/VUdvOwQ==
 
-hoist-non-react-statics@^3.2.1, hoist-non-react-statics@^3.3.2:
+hoist-non-react-statics@^3.2.1, hoist-non-react-statics@^3.3.0, hoist-non-react-statics@^3.3.2:
   version "3.3.2"
   resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-3.3.2.tgz#ece0acaf71d62c2969c2ec59feff42a4b1a85b45"
   integrity sha512-/gGivxi8JPKWNm/W0jSmzcMPpfpPLc3dY/6GxhX2hQ9iGj3aDfklV4ET7NjKpSinLpJ5vafa9iiGIEZg10SfBw==
@@ -2326,6 +2366,11 @@ ignore@^5.2.0:
   version "5.2.4"
   resolved "https://registry.yarnpkg.com/ignore/-/ignore-5.2.4.tgz#a291c0c6178ff1b960befe47fcdec301674a6324"
   integrity sha512-MAb38BcSbH0eHNBxn7ql2NH/kX33OkB3lZ1BNdh7ENeRChHTYsTvWrMubiIAMNS2llXEEgZ1MUOBtXChP3kaFQ==
+
+immer@^10.0.3:
+  version "10.0.4"
+  resolved "https://registry.yarnpkg.com/immer/-/immer-10.0.4.tgz#09af41477236b99449f9d705369a4daaf780362b"
+  integrity sha512-cuBuGK40P/sk5IzWa9QPUaAdvPHjkk1c+xYsd9oZw+YQQEV+10G0P5uMpGctZZKnyQ+ibRO08bD25nWLmYi2pw==
 
 immutable@^4.0.0:
   version "4.2.3"
@@ -3817,6 +3862,14 @@ react-portal@^4.2.0:
   dependencies:
     prop-types "^15.5.8"
 
+react-redux@^9.1.0:
+  version "9.1.0"
+  resolved "https://registry.yarnpkg.com/react-redux/-/react-redux-9.1.0.tgz#46a46d4cfed4e534ce5452bb39ba18e1d98a8197"
+  integrity sha512-6qoDzIO+gbrza8h3hjMA9aq4nwVFCKFtY2iLxCtVT38Swyy2C/dJCGBXHeHLtx6qlg/8qzc2MrhOeduf5K32wQ==
+  dependencies:
+    "@types/use-sync-external-store" "^0.0.3"
+    use-sync-external-store "^1.0.0"
+
 react-swipeable@^7.0.0:
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/react-swipeable/-/react-swipeable-7.0.0.tgz#7a12570ee435d35ac700511de338384aa78d12cd"
@@ -4014,6 +4067,23 @@ realize-package-specifier@~3.0.1:
     dezalgo "^1.0.1"
     npm-package-arg "^4.1.1"
 
+redux-thunk@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/redux-thunk/-/redux-thunk-3.1.0.tgz#94aa6e04977c30e14e892eae84978c1af6058ff3"
+  integrity sha512-NW2r5T6ksUKXCabzhL9z+h206HQw/NJkcLm1GPImRQ8IzfXwRGqjVhKJGauHirT0DAuyy6hjdnMZaRoAcy0Klw==
+
+redux@^4.0.0:
+  version "4.2.1"
+  resolved "https://registry.yarnpkg.com/redux/-/redux-4.2.1.tgz#c08f4306826c49b5e9dc901dee0452ea8fce6197"
+  integrity sha512-LAUYz4lc+Do8/g7aeRa8JkyDErK6ekstQaqWQrNRW//MY1TvCEpMtpTWvlQ+FPbWCx+Xixu/6SHt5N0HR+SB4w==
+  dependencies:
+    "@babel/runtime" "^7.9.2"
+
+redux@^5.0.1:
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/redux/-/redux-5.0.1.tgz#97fa26881ce5746500125585d5642c77b6e9447b"
+  integrity sha512-M9/ELqF6fy8FwmkpnF0S3YKOqMyoWJ4+CS5Efg2ct3oY9daQvd/Pc71FpGZsVsbl3Cpb+IIcjBDUnnyBdQbq4w==
+
 reflect.ownkeys@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/reflect.ownkeys/-/reflect.ownkeys-0.2.0.tgz#749aceec7f3fdf8b63f927a04809e90c5c0b3460"
@@ -4123,6 +4193,11 @@ request@~2.74.0:
     stringstream "~0.0.4"
     tough-cookie "~2.3.0"
     tunnel-agent "~0.4.1"
+
+reselect@^5.0.1:
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/reselect/-/reselect-5.1.0.tgz#c479139ab9dd91be4d9c764a7f3868210ef8cd21"
+  integrity sha512-aw7jcGLDpSgNDyWBQLv2cedml85qd95/iszJjN988zX1t7AVRJi19d9kto5+W7oCfQ94gyo40dVbT6g2k4/kXg==
 
 resize-observer-polyfill@^1.5.1:
   version "1.5.1"
@@ -4846,7 +4921,7 @@ use-places-autocomplete@^4.0.1:
   resolved "https://registry.yarnpkg.com/use-places-autocomplete/-/use-places-autocomplete-4.0.1.tgz#a4e24c4210474559cef5f8b47c73382942d1e34f"
   integrity sha512-AybOR/qzXcdaMCGSFveycfL3kztwseAOdagbYoJD8c3amll+gEiPmUkSNhYNUEBqbR+JmJG6/oBTRgihNbE+1A==
 
-use-sync-external-store@1.2.0:
+use-sync-external-store@1.2.0, use-sync-external-store@^1.0.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/use-sync-external-store/-/use-sync-external-store-1.2.0.tgz#7dbefd6ef3fe4e767a0cf5d7287aacfb5846928a"
   integrity sha512-eEgnFxGQ1Ife9bzYs6VLi8/4X6CObHMw9Qr9tPY43iKwsPw8xE8+EFsf/2cFZ5S3esXgpWgtSCtLNS41F+sKPA==

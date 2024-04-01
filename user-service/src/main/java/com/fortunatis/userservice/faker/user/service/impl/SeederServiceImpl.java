@@ -24,7 +24,7 @@ public class SeederServiceImpl implements SeederService {
         keycloakService.createKeycloakUser(keycloakCreateUserRequestDto);
         KeycloakUserDetailsResponseDto keycloakUser = keycloakService.getKeycloakUserByEmail(keycloakCreateUserRequestDto.getEmail());
         keycloakService.assignUserRoleByUserIdAndRoleId(keycloakUser.getId(), userRole);
-//        keycloakService.createKeycloakUserPassword(keycloakUserCredentialsRequestDto, keycloakUser.getId());
+        keycloakService.createKeycloakUserPassword(keycloakUserCredentialsRequestDto, keycloakUser.getId());
         log.info("User created email: {} and role: {}", keycloakCreateUserRequestDto.getEmail(), userRole);
     }
 }
