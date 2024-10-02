@@ -61,7 +61,7 @@
     "react-use": "^17.4.0",
     "redux": "^4.2.0",
     "redux-persist": "^6.0.0",
-    "sass": "^1.53.0",
+    "sass": "^1.79.0",
     "thunk": "^0.0.1",
     "typescript-cookie": "^1.0.4",
     "typewriter-effect": "^2.19.0",
