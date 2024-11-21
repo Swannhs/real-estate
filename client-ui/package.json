@@ -26,7 +26,7 @@
     "@types/react-dom": "^18.2.18",
     "client-only": "^0.0.1",
     "countries-list": "^3.0.6",
-    "eslint": "8.33.0",
+    "eslint": "9.15.0",
     "eslint-config-next": "13.1.6",
     "framer-motion": "^9.0.1",
     "google-map-react": "^2.2.0",
