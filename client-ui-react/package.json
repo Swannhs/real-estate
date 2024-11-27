@@ -30,7 +30,7 @@
     "@types/node": "^18.0.3",
     "@types/react": "^18.0.15",
     "@types/react-dom": "^18.0.6",
-    "axios": "^0.28.0",
+    "axios": "^1.7.8",
     "browser-image-compression": "^2.0.0",
     "countries-list": "^3.0.1",
     "gapi-script": "^1.2.0",
