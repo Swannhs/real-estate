@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: estate-service-config
+data:
+  SPRING_PROFILES_ACTIVE: "prod"
+  SPRING_APPLICATION_PORT: "8080"
+  STATIC_SERVICE_URL: "http://static-service:8080"
+  USER_SERVICE_URL: "http://user-service:8080"
