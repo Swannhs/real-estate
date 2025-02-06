@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: estate-service
+  labels:
+    app: estate-service
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: estate-service
+  template:
+    metadata:
+      labels:
+        app: estate-service
+    spec:
+      containers:
+        - name: estate-service
+          image: estate-service:latest
+          ports:
+            - containerPort: 8080
+          envFrom:
+            - configMapRef:
+                name: estate-service-config
+            - secretRef:
+                name: estate-service-secrets
