@@ -27,7 +27,7 @@
     "client-only": "^0.0.1",
     "countries-list": "^3.0.6",
     "eslint": "8.33.0",
-    "eslint-config-next": "13.1.6",
+    "eslint-config-next": "13.5.11",
     "framer-motion": "^9.0.1",
     "google-map-react": "^2.2.0",
     "jwt-decode": "^4.0.0",
