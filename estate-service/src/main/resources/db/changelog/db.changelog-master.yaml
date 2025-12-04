@@ -1,5 +1,7 @@
 databaseChangeLog:
   - include:
       file: db/changelog/changes/V1_master_schema.sql
+  - include:
+      file: db/changelog/changes/V2_inventory_schema.sql
 #  - includeAll:
 #      path: db/changelog/changes
