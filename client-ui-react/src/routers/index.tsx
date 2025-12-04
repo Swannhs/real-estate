@@ -29,6 +29,7 @@ import GeneralTermsAndConditions from "../containers/NoticePage/GeneralTermsAndC
 import PrivacyPolicy from "../containers/NoticePage/PrivacyPolicy";
 import LegalNotice from "../containers/NoticePage/LegalNotice";
 import AuthWishListPage from "../containers/AccountPage/AuthWishListPage";
+import AccountBilling from "../containers/AccountPage/AccountBilling";
 import SearchAlertPage from "../containers/AccountPage/SearchAlertPage";
 import SearchAlertEmailVerify from "../containers/SearchAlert/SearchAlertEmailVerify";
 import {useState} from "react";
@@ -36,6 +37,7 @@ import {useAuth} from "../hooks/contextApi/AuthContext";
 import PageForgotPassword from "../containers/PageForgotPassword/PageForgotPassword";
 import PageChangePassword from "../containers/PageForgotPassword/PageChangePassword";
 import PropertyPreview from "../containers/ListingDetailPage/PropertyPreview";
+import PageAbout from "../containers/PageAbout/PageAbout";
 import PublicWishListPage from "../containers/PageWishList/PublicWishListPage";
 import PrivacyPolicySetting from "../containers/SuperUserPage/PrivacyPolicySetting";
 import CookiePolicySetting from "../containers/SuperUserPage/CookiePolicySetting";
@@ -49,7 +51,7 @@ const privatePages: Page[] = [
     {path: "/account-password", component: AccountPass},
     {path: "/account-properties", component: AccountProperties},
     {path: "/wishlist", component: AuthWishListPage},
-    // {path: "/account-billing", component: AccountBilling},  // TODO: Will be added later
+    {path: "/account-billing", component: AccountBilling},
     {path: "/account-blogs", component: BlogsListPage},
     //
     {path: "/add-blog", component: AddBlogPage, exact: true},
@@ -79,7 +81,7 @@ const publicPages: Page[] = [
     //
     {path: "/contact", component: PageContact},
     {path: "/wish-list", component: PublicWishListPage},
-    // {path: "/about", component: PageAbout},  // TODO: Will be added later
+    {path: "/about", component: PageAbout},
     {path: "/signup", component: PageSignUp},
     {path: "/login", component: PageLogin},
     {path: "/forgot-pass", component: PageForgotPassword},
