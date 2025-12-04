@@ -31,6 +31,17 @@ ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL PRIVILEGES ON TABLES TO fort
 -- Create the "auth-service" database (errors if it already exists)
 CREATE DATABASE "auth-service";
 
+-- Create the "email-service" database
+CREATE DATABASE "email-service";
+GRANT ALL PRIVILEGES ON DATABASE "email-service" TO fortunatis;
+ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL PRIVILEGES ON TABLES TO fortunatis;
+
+-- Create the "keycloak" database
+CREATE DATABASE "keycloak";
+CREATE ROLE keycloak WITH LOGIN PASSWORD 'keycloak';
+GRANT ALL PRIVILEGES ON DATABASE "keycloak" TO keycloak;
+ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL PRIVILEGES ON TABLES TO keycloak;
+
 -- Connect to "static-data-service" and create the extension if it doesn't exist
 \c "static-data-service"
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
@@ -40,4 +51,7 @@ CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
 \c "user-service"
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+
+\c "email-service"
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";

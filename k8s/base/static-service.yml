@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: static-service
+  labels:
+    app: static-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: static-service
+  template:
+    metadata:
+      labels:
+        app: static-service
+    spec:
+      containers:
+        - name: static-service
+          image: static-service:latest
+          ports:
+            - containerPort: 8181
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: "dev"
+            - name: SPRING_DATABASE_URL
+              value: "jdbc:postgresql://postgres:5432/static-data-service"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: static-service
+  labels:
+    app: static-service
+spec:
+  ports:
+    - port: 8181
+      targetPort: 8181
+  selector:
+    app: static-service
+  type: ClusterIP
