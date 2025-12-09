@@ -1,5 +1,5 @@
 import {getServerSession} from "next-auth";
-import {authOptions} from "@/app/[locale]/auth/[...nextauth] /route";
+import {authOptions} from "@/app/[locale]/auth/[...nextauth]/route";
 import {getAccessToken} from "@/utils/sessionTokenAccessor";
 import process from "process";
 import {NextResponse} from "next/server";
