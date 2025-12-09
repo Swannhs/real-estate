@@ -1,9 +1,5 @@
-import { configureStore } from '@reduxjs/toolkit';
+import {configureStore} from '@reduxjs/toolkit';
 import {rootReducer} from "@/redux/rootReducer";
-
-// Define the shape of your root state object
-interface RootState {
-}
 
 const store = configureStore({
     reducer: rootReducer,
@@ -12,5 +8,8 @@ const store = configureStore({
         immutableCheck: false
     })
 });
+
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
 
 export default store;
