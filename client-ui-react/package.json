@@ -4,8 +4,7 @@
   "version": "1.0.0",
   "homepage": ".",
   "scripts": {
-    "start": "react-scripts start",
-    "dev": "vite",
+    "start": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview"
   },
@@ -50,6 +49,7 @@
     "react-facebook-login": "^4.1.1",
     "react-geocode": "^0.2.3",
     "react-google-login": "^5.2.2",
+    "react-google-map-picker": "^1.2.3",
     "react-helmet": "^6.1.0",
     "react-i18next": "^11.18.3",
     "react-infinite-scroll-component": "^6.1.0",
