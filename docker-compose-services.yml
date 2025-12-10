@@ -123,3 +123,31 @@ services:
       - keycloak
     restart: on-failure
     network_mode: "host"
+
+  booking-service:
+    container_name: booking-service
+    image: booking-service
+    build:
+      context: booking-service
+      dockerfile: Dockerfile
+    environment:
+      SPRING_PROFILES_ACTIVE: ${SPRING_PROFILES_ACTIVE}
+      SPRING_APPLICATION_PORT: ${BOOKING_SERVICE_PORT}
+      SPRING_DATABASE_URL: ${BOOKING_SERVICE_DATABASE_URL}
+      SPRING_DATASOURCE_USERNAME: ${BOOKING_SERVICE_DATABASE_USERNAME}
+      SPRING_DATASOURCE_PASSWORD: ${BOOKING_SERVICE_DATABASE_PASSWORD}
+      KEYCLOAK_CLIENT_ID: ${BOOKING_SERVICE_KEYCLOAK_CLIENT_ID}
+      KEYCLOAK_CLIENT_SECRET: ${BOOKING_SERVICE_KEYCLOAK_CLIENT_SECRET}
+      KEYCLOAK_REALM_NAME: ${KEYCLOAK_REALM_NAME}
+      KEYCLOAK_BASE_URI: ${KEYCLOAK_BASE_URI}
+      KEYCLOAK_ISSUER_URI: ${KEYCLOAK_ISSUER_URI}
+    env_file:
+      - .env
+    volumes:
+      - ./booking-service:/app
+      - ~/.m2:/root/.m2
+    depends_on:
+      - postgres
+      - keycloak
+    restart: on-failure
+    network_mode: "host"
