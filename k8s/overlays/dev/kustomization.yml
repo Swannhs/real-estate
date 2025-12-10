@@ -1,6 +1,4 @@
 resources:
-  - ../../base/deployment.yml
-  - ../../base/service.yml
-  - ../../base/ingress.yml
+  - ../../base/
 patchesStrategicMerge:
   - deployment-patch.yml

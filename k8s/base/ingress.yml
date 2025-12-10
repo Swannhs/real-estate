@@ -1,18 +1,59 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: estate-service-ingress
+  name: fortunatis-ingress
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
-    - host: estate-service.domain.com
+    - host: api.fortunatis.local
+      http:
+        paths:
+          - path: /user-api
+            pathType: Prefix
+            backend:
+              service:
+                name: user-service
+                port:
+                  number: 8183
+          - path: /email-api
+            pathType: Prefix
+            backend:
+              service:
+                name: email-service
+                port:
+                  number: 8184
+          - path: /static-api
+            pathType: Prefix
+            backend:
+              service:
+                name: static-service
+                port:
+                  number: 8181
+          - path: /booking-api
+            pathType: Prefix
+            backend:
+              service:
+                name: booking-service
+                port:
+                  number: 8185
+    - host: admin.fortunatis.local
       http:
         paths:
           - path: /
             pathType: Prefix
             backend:
               service:
-                name: estate-service
+                name: admin-ui
                 port:
                   number: 80
+    - host: fortunatis.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: client-ui
+                port:
+                  number: 3000

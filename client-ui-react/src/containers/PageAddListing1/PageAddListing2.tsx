@@ -13,13 +13,17 @@ import {LoadingSpinner} from "../../shared/Loader/LoadingSpinner";
 import {useJsApiLoader} from "@react-google-maps/api";
 import {useParams} from "react-router-dom";
 
-// // @ts-ignore
-// import Geocode from "react-geocode";
-// Geocode.setApiKey(import.meta.env.VITE_APP_GOOGLE_API_KEY as string);
-// Geocode.enableDebug();
-//
-// // TODO: Need to building accounts for this to work
-// // Get address from latitude & longitude.
+// @ts-ignore
+import Geocode from "react-geocode";
+
+// Ensure the API key is available before setting it
+const googleApiKey = import.meta.env.VITE_APP_GOOGLE_API_KEY as string;
+if (googleApiKey) {
+    Geocode.setApiKey(googleApiKey);
+    Geocode.enableDebug();
+}
+
+// Example usage of Geocode (commented out until accounts/billing for Google Maps API is set up)
 // Geocode.fromLatLng("48.8583701", "2.2922926").then(
 //     (response: { results: { formatted_address: any; }[]; }) => {
 //         const address = response.results[0].formatted_address;

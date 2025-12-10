@@ -1,0 +1,12 @@
+resources:
+  - ingress.yml
+  - user-service.yml
+  - email-service.yml
+  - static-service.yml
+  - admin-ui.yml
+  - client-ui.yml
+  - mysql-configmap.yml
+  - mysql.yml
+  - postgres.yml
+  - keycloak.yml
+  - booking-service.yml
