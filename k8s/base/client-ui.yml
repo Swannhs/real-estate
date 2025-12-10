@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: client-ui
-          image: client-ui:latest
+          image: client-ui-react:latest
           ports:
             - containerPort: 3000
 ---
