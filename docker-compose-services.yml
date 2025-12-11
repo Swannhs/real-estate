@@ -1,6 +1,7 @@
 services:
   estate-service:
     container_name: estate-service
+    image: estate-service
     build:
       context: estate-service
       dockerfile: Dockerfile
@@ -40,6 +41,7 @@ services:
 
   static-service:
     container_name: static-service
+    image: static-service
     build:
       context: static-service
       dockerfile: Dockerfile
@@ -71,6 +73,7 @@ services:
 
   user-service:
     container_name: user-service
+    image: user-service
     build:
       context: user-service
       dockerfile: Dockerfile

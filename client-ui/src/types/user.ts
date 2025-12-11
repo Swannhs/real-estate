@@ -15,12 +15,12 @@ export interface UserInfoInterface {
 
 export interface SessionInterface {
     access_token: string;
-    expires: string;
-    id_token: string;
+    expires: string,
+    id_token: string,
     user: {
-        name: string;
-        email: string;
-    };
-    roles: string[];
-    error: string;
+        name: string,
+        email: string
+    },
+    roles: string,
+    error: string
 }

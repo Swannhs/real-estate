@@ -7,4 +7,4 @@ FLUSH PRIVILEGES;
 
 CREATE USER IF NOT EXISTS 'fortunatis'@'%' IDENTIFIED BY 'fortunatis';
 GRANT ALL PRIVILEGES ON `email-service`.* TO 'fortunatis'@'%';
-FLUSH PRIVILEGES;
+FLUSH PRIVILEGES

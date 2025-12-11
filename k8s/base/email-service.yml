@@ -23,7 +23,7 @@ spec:
             - name: SPRING_PROFILES_ACTIVE
               value: "dev"
             - name: SPRING_DATABASE_URL
-              value: "jdbc:postgresql://postgres:5432/email-service"
+              value: "jdbc:mysql://mysql:3306/email-service"
 ---
 apiVersion: v1
 kind: Service
