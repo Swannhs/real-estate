@@ -49,12 +49,12 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-webflux</artifactId>
-            <version>3.1.2</version>
+            <version>4.0.0</version>
         </dependency>
         <dependency>
             <groupId>com.amazonaws</groupId>
             <artifactId>aws-java-sdk</artifactId>
-            <version>1.12.640</version>
+            <version>1.12.796</version>
         </dependency>
         <dependency>
             <groupId>org.modelmapper</groupId>
