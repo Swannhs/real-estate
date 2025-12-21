@@ -41,3 +41,8 @@ CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
 \c "user-service"
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+CREATE DATABASE "booking-service";
+GRANT ALL PRIVILEGES ON DATABASE "booking-service" TO fortunatis;
+ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL PRIVILEGES ON TABLES TO fortunatis;
+\c "booking-service"
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
