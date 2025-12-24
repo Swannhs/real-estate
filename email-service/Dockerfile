@@ -1,5 +1,5 @@
 # Use Maven with Java 18 as a base image
-FROM maven:3.9.6-amazoncorretto-21
+FROM maven:3.9.12-amazoncorretto-21
 
 WORKDIR /app
 
