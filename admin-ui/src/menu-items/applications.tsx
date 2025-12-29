@@ -43,6 +43,13 @@ const applications: NavItemType = {
       icon: icons.calendar
     },
     {
+      id: 'bookings',
+      title: <FormattedMessage id='bookings' />,
+      type: 'item',
+      url: '/apps/bookings/calendar',
+      icon: icons.calendar
+    },
+    {
       id: 'kanban',
       title: <FormattedMessage id='kanban' />,
       type: 'item',

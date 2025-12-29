@@ -18,6 +18,7 @@ const WidgetChart = Loadable(lazy(() => import('pages/widget/chart')));
 // render - applications
 const AppChat = Loadable(lazy(() => import('pages/apps/chat')));
 const AppCalendar = Loadable(lazy(() => import('pages/apps/calendar')));
+const AppBookingCalendar = Loadable(lazy(() => import('pages/apps/bookings/BookingCalendar')));
 
 const AppKanban = Loadable(lazy(() => import('pages/apps/kanban')));
 const AppKanbanBacklogs = Loadable(lazy(() => import('sections/apps/kanban/Backlogs')));
@@ -165,6 +166,15 @@ const MainRoutes = {
             {
               path: 'calendar',
               element: <AppCalendar />
+            },
+            {
+              path: 'bookings',
+              children: [
+                {
+                  path: 'calendar',
+                  element: <AppBookingCalendar />
+                }
+              ]
             },
             {
               path: 'kanban',
